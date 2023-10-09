@@ -1,0 +1,36 @@
+.dialogMessages {
+  z-index: 1000000;
+    position: fixed;
+    width: 70%;
+  height:50px;
+  left:15%;
+  top:10px;
+}
+
+.panel-container {
+/* 	background:#d9e0e7;  */
+	width: 100%;
+/* 	float:right; */
+}
+
+.panel-heading {
+	padding: 10px 15px;
+	background: #242a30;
+    border: none;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	color: #fff;
+/* 	width: 100%; */
+}
+
+.panel-body {
+	padding: 10px 15px;
+}
+
+.profileCvImages {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+
+

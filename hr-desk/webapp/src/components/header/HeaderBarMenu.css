@@ -1,0 +1,73 @@
+
+
+.navbar{
+	position: fixed; /* Set the navbar to fixed position */
+	top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    z-index:10000;
+    height:8vh;
+    min-height: 46px;
+    background-color: #fff;
+}
+
+
+.title{	
+    
+    font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	font-size: 1.4rem;
+	margin-top: 0.3rem;
+	text-shadow: 1px 1px 1px #aaa;
+}
+.logo {
+  height: 10vmin;
+  max-width: 93px;
+  max-height: 35px;
+  margin-left:5px;  
+}
+
+.rightMenu{
+	box-sizing: border-box;
+	list-style: none;
+	flex-direction: column;
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    float: right !important;
+}
+.rightMenuItem{
+	padding-right: 20px;
+	padding-top: 20px;
+    float: left !important;
+    color: #585663;
+    font-size: 12px;
+font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.rightHeadBarMenuItem {
+	text-align:right;
+	padding-right:10px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.buttonDropdown {
+	border:0px;
+	background-color: white;
+}
+
+.logoutIcon {
+	height:30px;
+	width:30px;
+}
+.navigationBarItem{
+	font-size: 12px;
+    font-family: 'Open Sans',"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.dropdown-menu {
+    top: 80%;
+}

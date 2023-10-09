@@ -1,0 +1,26 @@
+@import url("../../commons/tables.css");
+@import url("../../commons/pages.css");
+
+.filter-list-input {
+    display:inline-block;
+    float: right;
+  } 
+
+.candidates-list-input-filter {
+	display: inline;
+	float: right;
+}
+
+.candidateImg {
+    max-width: 85px;
+    max-height: 85px;
+    min-width: 85px;
+    min-height: 85px;
+    }
+
+.downloadIcon {
+    max-width: 42px;
+    max-height: 40px;
+    min-width: 42px;
+    min-height: 40px;
+}
