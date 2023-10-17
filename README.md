@@ -1,18 +1,18 @@
 <h1>RELEASES NOTES</h1>
-#0.3
+<h2>0.3</h2>
 Refactored database sql scripts.
 Changed default frontend logo and application image.
-#0.2
+<h2>0.2</h2>
 Substituted default mariadb development database, with single-file database with H2.
 Provided into sources download default dev, test and demo databases already created(and with just soe data)
 Added standalone/target folder that provides demo release files.
 From now give mvn package from project root and after packaging all modules, demo version file will produced also.
-#0.1
+<h2>0.1</h2>
 On the top of CeRePro project, entire sources are moved into this development trunk. Now CeRePro has moved to HrDesk.
 Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr.rjs.frontend have been moved into a Maven multi module project.
 
 <h1>DEVELOPMENT HOW-TO</h1>
-#COMPILE, PACKAGING AND EXECUTE FROM SOURCES
+<h2>COMPILE, PACKAGING AND EXECUTE FROM SOURCES</h2>
 from root execute the following:
 mvn package
 to execute compilation, test, packaging of all sub-modules and demo file build, into $project_dir/target/standalone
@@ -23,8 +23,7 @@ java -jar ./target/hr-desk.backend.jar
 Then you can point to frontend from the following url:
 http://localhost:8080/index.html
 
-
-#DEVELOPMENT ENVIRONMENT, EXECUTE FRONTEND AND BACKEND SERVERS SEPARATELY
+<h2>DEVELOPMENT ENVIRONMENT, EXECUTE FRONTEND AND BACKEND SERVERS SEPARATELY</h2>
 For development we suggest to startup separately backend and frontend servers.
 So for the frontend, move into webapp directory, and execute(after npm install):
 npm start
