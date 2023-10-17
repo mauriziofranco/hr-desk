@@ -1,1 +1,2 @@
 - nel dialog di modifica della posizione, la select dell'owner della posizione fallisce nel selezionare il valore di default in apertura
+- nella lista dei caandidati l'icona del cv deve apparire solo se il cv è presente in database

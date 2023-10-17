@@ -10,22 +10,22 @@ insert into roles(id, label, description, level) VALUES (8, 'company administrat
 
 
 insert into users (id, email,firstname,lastname, password, regdate, role, enabled) VALUES 
-(1,'admin@hr.desk','Marco','Rossi', '$2a$10$uYjO1vB8zora1rvqBD00c.vg4Gz6fTqPftlP9JtObq0oTt1QecRpG', '2022-12-31', 0, true),
-(2,'hr@hr.desk','Serena','Verdi', '$2a$10$uYjO1vB8zora1rvqBD00c.vg4Gz6fTqPftlP9JtObq0oTt1QecRpG', '2022-12-31', 50, true),
-(3,'account@hr.desk','Michela','Bianchi', '$2a$10$uYjO1vB8zora1rvqBD00c.vg4Gz6fTqPftlP9JtObq0oTt1QecRpG', '2022-12-31', 7, true),
-(4,'hr2@hr.desk','Giovanna','Bluetti', '$2a$10$uYjO1vB8zora1rvqBD00c.vg4Gz6fTqPftlP9JtObq0oTt1QecRpG', '2022-12-31', 50, true);
+(1,'admin@hr.desk','Marco','Rossi', '$2a$10$505kaO49Nbt/j41HKdwJcuPrIErm1XxEAYa9RDp3fD9dBBA0qMz5K', '2022-12-31', 0, true),
+(2,'hr@hr.desk','Serena','Verdi', '$2a$10$505kaO49Nbt/j41HKdwJcuPrIErm1XxEAYa9RDp3fD9dBBA0qMz5K', '2022-12-31', 50, true),
+(3,'account@hr.desk','Michela','Bianchi', '$2a$10$505kaO49Nbt/j41HKdwJcuPrIErm1XxEAYa9RDp3fD9dBBA0qMz5K', '2022-12-31', 7, true),
+(4,'hr2@hr.desk','Giovanna','Bluetti', '$2a$10$505kaO49Nbt/j41HKdwJcuPrIErm1XxEAYa9RDp3fD9dBBA0qMz5K', '2022-12-31', 50, true);
 
 
 INSERT INTO `candidate_states` VALUES 
-(1,4,1,'DA VALUTARE','entry appena effettuata. Stato: DA VALUTARE - DEFAULT','#f60000'),
-(2,4,2,'ha rinunciato','Ha rinunciato a proseguire iter di selezione','#f98742'),
-(3,4,3,'inadeguato standing/comportamentale','Scartato per inadeguatezza in termini di standing o criticità comportamentali','#f9c842'),
-(4,4,4,'inadeguato background','Scartato per inadeguatezza background','#f9ec14'),
-(5,4,5,'da tenere in considerazione a chiusura iter','inadeguat ma da tenere in considerazione a chiusura iter','#0e81ec'),
-(6,4,6,'background solo parzialmente adeguato, NON LAUREATO/NON LAUREANDO','background parzialmente adeguato. NON LAUREATO/NON LAUREANDO','#2585de'),
-(7,4,7,'background solo parzialmente adeguato, LAUREATO/LAUREANDO in materie inerenti la posizione','background parzialmente adeguato, LAUREATO/LAUREANDO in materie idonee la posizione','#25ded3'),
-(8,4,8,'OK. Background di prima scelta. NON LAUREATO/NON LAUREANDO. Buona motivazione e background','NO LAUREATO/NO LAUREANDO. Buona motivazione e background. OK già da subito.','#7af914'),
-(9,4,9,'OK. Background di prima scelta. LAUREATO/LAUREANDO. Buona motivazione e background','LAUREATO/LAUREANDO. Buona motivazione e background. OK già da subito.','#63b81e');
+(1,4,100,'DA VALUTARE','entry appena effettuata. Stato: DA VALUTARE - DEFAULT','#f60000'),
+(2,4,200,'ha rinunciato','Ha rinunciato a proseguire iter di selezione','#f98742'),
+(3,4,300,'inadeguato standing/comportamentale','Scartato per inadeguatezza in termini di standing o criticità comportamentali','#f9c842'),
+(4,4,400,'inadeguato background','Scartato per inadeguatezza background','#f9ec14'),
+(5,4,500,'da tenere in considerazione a chiusura iter','inadeguat ma da tenere in considerazione a chiusura iter','#0e81ec'),
+(6,4,600,'background solo parzialmente adeguato, NON LAUREATO/NON LAUREANDO','background parzialmente adeguato. NON LAUREATO/NON LAUREANDO','#2585de'),
+(7,4,700,'background solo parzialmente adeguato, LAUREATO/LAUREANDO in materie inerenti la posizione','background parzialmente adeguato, LAUREATO/LAUREANDO in materie idonee la posizione','#25ded3'),
+(8,4,800,'OK. Background di prima scelta. NON LAUREATO/NON LAUREANDO. Buona motivazione e background','NO LAUREATO/NO LAUREANDO. Buona motivazione e background. OK già da subito.','#7af914'),
+(9,4,900,'OK. Background di prima scelta. LAUREATO/LAUREANDO. Buona motivazione e background','LAUREATO/LAUREANDO. Buona motivazione e background. OK già da subito.','#63b81e');
 
 INSERT INTO `coursepage` (id, title, code, body_text, file_name, opened_by) VALUES 
 (1,'Candidatura generica Milano','MILAN01','Candidatura spontanea su sede di Milano',NULL, 1),

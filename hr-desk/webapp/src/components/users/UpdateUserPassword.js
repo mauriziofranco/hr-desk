@@ -57,11 +57,13 @@ class UpdateUserPassword extends React.Component {
     event.preventDefault();
     const { password } = this.state;
     Commons.executeFetch(
-      Constants.USER_API_URI + "updatepassword/" + this.props.idItemToUpdate,
+      //Constants.USER_API_URI + "updatepassword/" + this.props.idItemToUpdate,
+      Constants.USER_API_URI  + this.props.idItemToUpdate + "/" + password,
       "PATCH",
       this.handleSuccess,
       Commons.operationError,
-      password,
+      //{'password': password},
+      null,
       true
     );
   };

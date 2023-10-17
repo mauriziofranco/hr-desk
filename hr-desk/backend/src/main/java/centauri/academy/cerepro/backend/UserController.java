@@ -292,8 +292,9 @@ public class UserController {
 		
 	}
 	
-	@PatchMapping("/updatepassword/{id}")
-	public ResponseEntity<CeReProAbstractEntity> updatePasswordById(@PathVariable("id") final Long id, @RequestBody final Hashtable<String, String> passwordHashtable) {
+	
+	@PatchMapping("/{id}/{pwd}")
+	public ResponseEntity<CeReProAbstractEntity> updatePasswordById(@PathVariable("id") final Long id, @PathVariable("pwd") final String password) {
 		logger.info("updatePasswordById - START");
 		Optional<User> optUser = userService.getById(id);
 		logger.info("updatePasswordById - DEBUG - requesting update password for user id: {} ", id);
@@ -302,7 +303,7 @@ public class UserController {
 	    }
 	    try {
 	        User currentUser = optUser.get();
-	        String password = passwordHashtable.get("password");
+//	        String password = passwordHashtable.get("password");
 	        logger.info("updatePasswordById - DEBUG - requesting update password for user id {} with password {} to encode.", id, password);
 	        String encoded = new BCryptPasswordEncoder().encode(password);
 	        currentUser.setPassword(encoded);
@@ -313,5 +314,7 @@ public class UserController {
 	        return new ResponseEntity<>(new CustomErrorType(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
 	}
+	
+	
 
 }

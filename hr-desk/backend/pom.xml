@@ -11,10 +11,9 @@
 	</parent>
 	<groupId>franco.maurizio</groupId>
 	<artifactId>hr-desk.backend</artifactId>
-	<version>0.1</version>
+	<version>0.3</version>
 
-	<description>Backend module for CeRePro project designed by milan centauri
-		academy number 3, 4 and 5</description>
+	<description>CeRePro is now HrDesk....</description>
 
 	<packaging>jar</packaging>
 

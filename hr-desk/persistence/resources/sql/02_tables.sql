@@ -67,7 +67,6 @@ CREATE TABLE `candidate_states` (
 
 CREATE TABLE `candidates` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
   `domicile_city` varchar(100) DEFAULT NULL,
   `study_qualification` varchar(300) DEFAULT NULL,
   `graduate` tinyint(1) DEFAULT NULL,
@@ -89,11 +88,9 @@ CREATE TABLE `candidates` (
   `imgpath` varchar(255) DEFAULT NULL,
   `candidate_state_code` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  --KEY `user_id` (`user_id`),
   --KEY `course_code` (`course_code`),
   --KEY `inserted_by` (`inserted_by`),
   --KEY `candidate_state_code` (`candidate_state_code`),
-  CONSTRAINT `candidates_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `candidates_ibfk_2` FOREIGN KEY (`course_code`) REFERENCES `coursepage` (`code`),
   CONSTRAINT `candidates_ibfk_4` FOREIGN KEY (`inserted_by`) REFERENCES `users` (`id`),
   CONSTRAINT `candidates_ibfk_5` FOREIGN KEY (`candidate_state_code`) REFERENCES `candidate_states` (`status_code`)
