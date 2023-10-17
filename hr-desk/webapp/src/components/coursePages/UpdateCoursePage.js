@@ -41,15 +41,6 @@ class UpdateCoursePages extends React.Component {
     this.gridRef = React.createRef();
   }
 
-  // setCoursePages = (data) => {
-  //   this.setState({
-  //     title: data.title,
-  //     code: data.code,
-  //     bodyText: data.bodyText,
-  //     opened_by: data.opened_by,
-  //   });
-  // };
-
   handleChange = (event) => {
     this.setState(
       { [event.target.name]: event.target.value }
@@ -89,44 +80,15 @@ class UpdateCoursePages extends React.Component {
     this.setState({ isModalOpen: false });
   }
 
-  // updateCoursePage = () => {
-  //   const { title, code, bodyText,coursePageOwnerFirstname,coursePageOwnerLastname } = this.state;
-  //   const { coursePage } = this.props;
-
-  //   const updatedCoursePage = {
-  //     ...coursePage,
-  //     title,
-  //     code,
-  //     bodyText,
-  //     coursePageOwnerFirstname,
-  //     coursePageOwnerLastname
-  //   };
-
-  //   Commons.executeFetch(
-  //     Constants.FULL_COURSEPAGE_API_URI + updatedCoursePage.id,
-  //     "PUT",
-  //     this.updateSuccess,
-  //     Commons.operationError,
-  //     JSON.stringify(updatedCoursePage),
-  //     true
-  //   );
-  // };
-
   cancelSubmit = (event) => {
     event.preventDefault();
     this.setState({ isModalOpen: false });
   }
 
   initializeAndShow = () => {
+    console.log(this.props);
     console.log(this.props.idItemToUpdate);
-    // this.getItemById();
-    //this.gridRef.current.show();
   }
-
-
-  // getItemById = () => {
-  //   Commons.executeFetch(Constants.COURSEPAGE_CUSTOM_API + this.props.idItemToUpdate, "GET", this.setItemToUpdate);
-  // }
 
   componentDidMount = () => {
     this.fetchOwners();
@@ -191,8 +153,18 @@ class UpdateCoursePages extends React.Component {
               fullWidth
               label="Proprietario"
               name="proprietario"
-              value={this.state.selectedOwner}
-              onChange={(e) => this.setState({ selectedOwner: e.target.value,coursePageOwnerFirstname : e.target.value.firstname,coursePageOwnerLastname:e.target.value.lastname,userId:e.target.value.id })}
+              value={
+                  this.state.selectedOwner!==undefined&&this.state.selectedOwner!==''&&this.state.selectedOwner!=='undefined'&&this.state.selectedOwner.length>0
+                         ? this.state.selectedOwner
+                         : (this.state.owners.filter(owner => owner.id===this.state.userId)[0])
+              }
+              onChange={(e) => this.setState(
+                                { selectedOwner: e.target.value,
+                                  coursePageOwnerFirstname : e.target.value.firstname,
+                                  coursePageOwnerLastname : e.target.value.lastname,
+                                  userId:e.target.value.id 
+                                }
+                       )}
               style={styles.fieldBeforeButtons}
             >
               {this.state.owners.map((owner) => (
