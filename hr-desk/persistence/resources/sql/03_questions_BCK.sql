@@ -178,14 +178,13 @@ insert into questions (id,label, description, ansa, ansb, ansc, ansd, anse, ansf
 - Subsequent characters may also be numbers(beyond that letters, $ and _ character).
 - You cannot use the same name as a Java reserved word.');
                          
+insert into surveys(id, label, time, description) values (1, 'Questionario Java cap. 1', 20, 'Questionario Java OCA Capitolo 1');
+insert into surveys(id, label, time, description) values (2, 'Questionario Java cap. 2', 20, 'Questionario Java OCA Capitolo 2');
+insert into surveys(id, label, time, description) values (3, 'Questionario candidati corso Java+Web', 20, 'Questionario di valutazione per candidati corso Full Stack Develpment Java+Web');
+insert into surveys(id, label, time, description) values (4, 'Questionario candidati corso Java+Web 2', 20, 'Questionario di valutazione per candidati corso Full Stack Develpment Java+Web - contiene le stesse domande del questionario full stack java n.1 ma in ordine differente');
+insert into surveys(id, label, description, time) values (5, "Intervista per dipendenti/consulenti it", "Intervista per dipendenti/consulenti it", 30);
+insert into surveys(id, label, time, description) values (6, 'Questionario Java cap. 3', 20, 'Questionario Java OCA Capitolo 3');
 
-
-insert into surveys(id, label, time, description) values (1, 'Questionario Java 1', 20, 'Questionario Java N° 1');
-insert into surveys(id, label, time, description) values (2, 'Questionario Java 2', 20, 'Questionario Java N° 2');
-insert into surveys(id, label, time, description) values (3, 'Questionario candidati full stack Java+Web', 20, 'Questionario n° 1 di valutazione per candidati posizione Full Stack Java/Javascript.');
-insert into surveys(id, label, time, description) values (4, 'Questionario candidati full stack Java+Web 2', 20, 'Questionario n° 2 di valutazione per candidati posizione Full Stack Java/Javascript.');
-insert into surveys(id, label, time, description) values (5, 'Questionario Java 3', 20, 'Questionario Java N° 3');
-insert into surveys(id, label, time, description) values (6, 'Questionario Java 4', 20, 'Questionario Java N° 4');
 
 insert into surveyquestions(survey_id, question_id, position) values (1,3,2);
 insert into surveyquestions(survey_id, question_id, position) values (1,11,3);
