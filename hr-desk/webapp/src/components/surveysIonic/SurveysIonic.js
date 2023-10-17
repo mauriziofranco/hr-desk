@@ -5,7 +5,7 @@ import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import * as Commons from '../../commons.js';
 import * as Constants from '../../constants';
 import '../loader/LoadingSpinnerComponent.css';
-import proxima_arrow from '../../images/proxima_red_great_arrow.png'
+import proxima_arrow from '../../images/logo_big.png'
 import { toast } from 'react-toastify';
 import { IonButton, IonCheckbox, IonLabel, IonItem } from '@ionic/react';
 import './SurveysIonic.css';

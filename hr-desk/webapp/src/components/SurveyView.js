@@ -29,7 +29,7 @@ class SurveyView extends Component {
 				<IonHeader>
 					<IonToolbar color="white">
 						<img align="left" alt="centauri-academy-logo" src={centauri_academy_header_logo} className="logo" />
-						<span className="navbar-brand title">CeRePro.HR</span>
+						<span className="navbar-brand title">HrDesk</span>
 						{shouldRenderTime && (
 							<span slot="end" style={{ marginRight: "25px" }}>
 								<Timer duration={timer} sendSurveyProp={sendSurveyProp} />

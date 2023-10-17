@@ -17,7 +17,7 @@ export class AdministrationHeaderMenu extends Component {
 		return (
 			<li className="nav-item dropdown" onMouseLeave={() => this.setState({ showDropdownHeader: false })}>
 				<button className="nav-link dropdown-toggle buttonDropdown navigationBarItem" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onMouseOver={() => this.setState({ showDropdownHeader: true })}>
-					Admin
+					Amministrazione
 				</button>
 
 				<div className={`dropdown-menu ${this.state.showDropdownHeader ? 'show' : ''}`} aria-labelledby="navbarDropdown">

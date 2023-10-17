@@ -129,7 +129,7 @@ class RegistrationView extends Component {
         return (
             <div>
                 <SkyLight hideOnOverlayClicked ref={this.gridRef}>
-                    <DialogTitle>Registration</DialogTitle>
+                    <DialogTitle>Registrazione</DialogTitle>
                     <DialogContent>
                         <TextField
                             fullWidth

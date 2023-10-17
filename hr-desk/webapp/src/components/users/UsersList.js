@@ -114,7 +114,7 @@ class UsersList extends Component {
                   <TableCell style={{ color: "#fff" }}>NOME</TableCell>
                   <TableCell style={{ color: "#fff" }}>COGNOME</TableCell>
                   <TableCell style={{ color: "#fff" }}>RUOLO</TableCell>
-                  <TableCell style={{ color: "#333" }}></TableCell>
+                  <TableCell style={{ color: "#fff" }}>ABILITA/DISABILITA</TableCell>
                   <TableCell style={{ color: "#333" }}></TableCell>
                   <TableCell style={{ color: "#333" }}></TableCell>
                   <TableCell style={{ color: "#333" }}></TableCell>

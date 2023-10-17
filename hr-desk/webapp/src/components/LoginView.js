@@ -171,7 +171,7 @@ class LoginView extends Component {
               <LoginAuthenticationKOMessage
                 visibility={this.state.authenticationKO}
               />
-              <label>Inserisci email aziendale e password</label>
+              <label>Inserisci le credenziali per il login oppure registra una nuova utenza</label>
               <form onSubmit={this.formSubmit.bind(this)}>
                 <div className="form-group">
                   <input

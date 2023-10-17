@@ -92,7 +92,6 @@ class CandidateStatesList extends Component {
           <Table className={"table-style"}>
 						<TableHead>
 							<TableRow className={"table-head-row"}>
-                  <TableCell style={{ color: "#fff" }}>&nbsp;</TableCell>
                   <TableCell style={{ color: "#fff" }}>CODICE NUMERICO</TableCell>
                   <TableCell style={{ color: "#fff" }}>ETICHETTA</TableCell>
                   <TableCell style={{ color: "#fff" }}>DESCRIZIONE</TableCell>
@@ -109,7 +108,6 @@ class CandidateStatesList extends Component {
                       index % 2 === 0 ? "table-style-even-row" : "table-style-odd-row"
                     }
                   >
-                    <TableCell>{candidateState.id}</TableCell>
                     <TableCell>{candidateState.statusCode}</TableCell>
                     <TableCell>{candidateState.statusLabel}</TableCell>
                     <TableCell>{candidateState.statusDescription}</TableCell>

@@ -24,7 +24,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import './loader/LoadingSpinnerComponent.css'
-import proxima_arrow from '../images/proxima_red_great_arrow.png'
+import logo_big from '../images/logo_big.png'
 import AllCandidateSurveysView from './candidateSurveys/AllCandidateSurveysView';
 import CandidateSurveysToDoView from './candidateSurveys/CandidateSurveysToDoView';
 import CandidateSurveysDidView from './candidateSurveys/CandidateSurveysDidView';
@@ -74,7 +74,7 @@ class MainView extends Component {
 		if (loaderSpinner) {
 			return <div className="modalLoaderDialog">
 				<div className="loader modalLoader">
-					<img src={proxima_arrow} alt="loading..." className="proxima_arrow_spinner" />
+					<img src={logo_big} alt="loading..." className="proxima_arrow_spinner" />
 				</div>
 			</div>
 		}

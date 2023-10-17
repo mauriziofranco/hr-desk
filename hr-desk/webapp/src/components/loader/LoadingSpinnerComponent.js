@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePromiseTracker } from "react-promise-tracker";
 import './LoadingSpinnerComponent.css';
-import proxima_arrow from '../../images/proxima_red_great_arrow.png'
+import proxima_arrow from '../../images/logo_big.png'
 
 export const LoadingSpinnerComponent = (props) => {
   const { promiseInProgress } = usePromiseTracker({delay:100000});
