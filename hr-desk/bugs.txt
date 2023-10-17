@@ -1,0 +1,1 @@
+- nel dialog di modifica della posizione, la select dell'owner della posizione fallisce nel selezionare il valore di default in apertura

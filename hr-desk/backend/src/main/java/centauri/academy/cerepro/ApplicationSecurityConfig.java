@@ -50,6 +50,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/api/v1/role/level/**").authenticated()
 //		.antMatchers(HttpMethod.DELETE, "/api/v1/**/**/**/**/**").hasAuthority("ADMIN")
 		.and().csrf().disable().cors();
+		//security configuration for h2 console
+		http.csrf().disable();
+	    http.headers().frameOptions().disable();
 	}
 	
 //	@Override
