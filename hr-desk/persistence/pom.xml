@@ -7,7 +7,7 @@
 
 	<groupId>franco.maurizio</groupId>
 	<artifactId>hr-desk.persistence</artifactId>
-	<version>0.1</version>
+	<version>0.3</version>
 	<packaging>jar</packaging>
 
 	<name>hr-desk.persistence</name>
@@ -184,10 +184,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>mysql</groupId>-->
+<!--			<artifactId>mysql-connector-java</artifactId>-->
+<!--			<version>8.0.19</version>-->
+<!--		</dependency>-->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.19</version>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<!-- API, java.xml.bind module -->
 		<dependency>
