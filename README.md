@@ -1,4 +1,4 @@
-#RELEASES NOTES
+<h1>RELEASES NOTES</h1>
 #0.3
 Refactored database sql scripts.
 Changed default frontend logo and application image.
@@ -11,8 +11,7 @@ From now give mvn package from project root and after packaging all modules, dem
 On the top of CeRePro project, entire sources are moved into this development trunk. Now CeRePro has moved to HrDesk.
 Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr.rjs.frontend have been moved into a Maven multi module project.
 
-#DEVELOPMENT HOW-TO
-
+<h1>DEVELOPMENT HOW-TO</h1>
 #COMPILE, PACKAGING AND EXECUTE FROM SOURCES
 from root execute the following:
 mvn package
