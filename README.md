@@ -11,6 +11,19 @@ From now give mvn package from project root and after packaging all modules, dem
 On the top of CeRePro project, entire sources are moved into this development trunk. Now CeRePro has moved to HrDesk.
 Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr.rjs.frontend have been moved into a Maven multi module project.
 
+<h1>TARGET RELEASES</h1>
+<h2>0.4</h2>
+# mail properties have to been moved into application.properties so user can change it
+# Frontend QUESTION entity section, for exposing crud operation. 
+# Startup dialog for customizing application logo and name(perhaps into xml file?)
+# Define separation for "Community Edition" and "Enterprise Edition"
+# Target lines for product site
+# Redmine installation for bug tracking and community requests
+
+<h1>BUGS</h1>
+# CoursePage entity, frontend section: into update dialog, select component for the position owner doesn't accept default starting value.
+# Candidate frontend section: cv icon(for cv download) has to been show only if cv has to been charged
+
 <h1>DEVELOPMENT HOW-TO</h1>
 <h2>COMPILE, PACKAGING AND EXECUTE FROM SOURCES</h2>
 from root execute the following:
