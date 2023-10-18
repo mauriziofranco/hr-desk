@@ -14,7 +14,10 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 <h1>TARGET RELEASES</h1>
 <h2>0.4</h2>
 # mail properties have to been moved into application.properties so user can change it
-# Frontend QUESTION entity section, for exposing crud operation. 
+# Frontend QUESTION entity section, for exposing crud operation.
+# JWT instead Basic Authentication
+# JDK 21 instead JDK 11
+# SUpgrading PRING BOOT to last available version
 # Startup dialog for customizing application logo and name(perhaps into xml file?)
 # Define separation for "Community Edition" and "Enterprise Edition"
 # Target lines for product site
