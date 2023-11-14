@@ -21,11 +21,13 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 # Startup dialog for customizing application logo and name(perhaps into xml file?)
 # Define separation for "Community Edition" and "Enterprise Edition"
 # Target lines for product site
-# Redmine installation for bug tracking and community requests
+# Redmine installation for bug tracking and community requests (BUNNYSHELL???)
 
 <h1>BUGS</h1>
+# DEMO packaged version, fronted home page(login) show browser dialog for login...
 # CoursePage entity, frontend section: into update dialog, select component for the position owner doesn't accept default starting value.
 # Candidate frontend section: cv icon(for cv download) has to been show only if cv has to been charged
+# On pdf generation points have to be instead of i.e. "52 points", a percentage i.e. 52/100
 
 <h1>DEVELOPMENT HOW-TO</h1>
 <h2>COMPILE, PACKAGING AND EXECUTE FROM SOURCES</h2>

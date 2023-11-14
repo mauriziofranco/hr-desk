@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>franco.maurizio</groupId>
 	<artifactId>hr-desk.webapp</artifactId>
 	<version>0.1</version>
@@ -13,14 +13,11 @@
 	<packaging>jar</packaging>
 
 	<properties>
-<!--		<package.file.name>hr-desk.webapp</package.file.name>-->
 		<maven-surefire-plugin-version>2.22.2</maven-surefire-plugin-version>
-		<spring-security.version>5.3.2.RELEASE</spring-security.version>
 	</properties>
 
 
 	<build>
-<!--		<finalName>${package.file.name}</finalName>-->
 		<plugins>
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
@@ -83,7 +80,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	
 
 
 </project>

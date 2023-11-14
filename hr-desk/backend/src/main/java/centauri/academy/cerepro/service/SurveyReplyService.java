@@ -103,7 +103,7 @@ public class SurveyReplyService {
 	}
 	
 	public boolean updatePdfName(String name, long id) {
-		logger.info("updatePdfName() started");
+		logger.info("updatePdfName - START - name: {}, id:{}", name, id);
 		boolean returnValue = false ;
 		try {
 		    surveyReplyRepository.updatePdfFileName(name, id);

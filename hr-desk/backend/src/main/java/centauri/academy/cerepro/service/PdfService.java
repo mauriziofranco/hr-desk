@@ -102,17 +102,15 @@ public class PdfService {
 		Document document = new Document();
 		String path = env.getProperty("app.folder.candidate.survey.pdf");
 		logger.info("generatePdf - DEBUG - app.folder.candidate.survey.pdf: " + path);
-		String name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH_mm_ss")) + "-" + surveyReply.get().getId() + ".pdf";
-		String aa = path.concat(File.separator).concat(name);
+		String name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd--HH:mm:ss")) + "_" + surveyReply.get().getId() + ".pdf";
+		String fileName = path.concat(File.separator).concat(name);
 		boolean pdfGenerated = false ;
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream(
-					aa
-//					"C:\\Users\\Academy 7\\Desktop\\yourAns.pdf"
-//					"/home/maurizio/Desktop/iTextHelloWorld.pdf"
+					fileName
 					)
 					);
-			logger.debug("################### FILE CREATED #############");
+			logger.info("generatePdf - DEBUG - pdf generated: {}", fileName);
 			
 			document.open();
 			
@@ -132,10 +130,10 @@ public class PdfService {
 			
 			pdfGenerated = surveyReplyService.updatePdfName(name, surveyReply.get().getId());
 			surveyReply = surveyReplyRepository.findById(surveyReplyId) ;
-			logger.info("generatePdf - DEBUG - New object retrieved={}", surveyReply.get());
+			logger.info("generatePdf - DEBUG - Providing pdf for surveyReply object retrieved: {}", surveyReply.get());
 			String pdffilename = surveyReply.get().getPdffilename();
 			if (pdfGenerated&&pdffilename!=null) {
-				
+				logger.info("generatePdf - DEBUG - Launghing email generation...");
 				sendEmailWithPdf(candidate.get().getId(), surveyReply.get());
 			} else {
 			    logger.error("Nessun PDF trovato da inviare.");
@@ -162,14 +160,16 @@ public class PdfService {
 		    String mess = "Ciao, in allegato il PDF generato al termine del questionario compilato da " + optCandidate.get().getFirstname() + " " + optCandidate.get().getLastname() + ", candidato con ID " + optCandidate.get().getId() + ".";
 		    
 		    String path = env.getProperty("app.folder.candidate.survey.pdf");
-			String name = optCandidate.get().getFirstname() + "-" + optCandidate.get().getLastname() + "-" 
-					+ surveyReply.getStarttime().getMonthValue() + "-" 
+			//String name = optCandidate.get().getFirstname() + "-" + optCandidate.get().getLastname() + "-" 
+		    String attachmentName = optCandidate.get().getFirstname() + "-" + optCandidate.get().getLastname() + "-" 
+        			+ surveyReply.getStarttime().getMonthValue() + "-" 
 					+ surveyReply.getStarttime().getDayOfMonth() + "-" 
 					+ surveyReply.getId() + ".pdf";
-		    String attachmentPath = path.concat(File.separator).concat(name);
+		    //String attachmentPath = path.concat(File.separator).concat(name);
+			String originalPdfFileName = surveyReply.getPdffilename();
+			String attachmentPath = path.concat(File.separator).concat(originalPdfFileName);
 		    
-		    String pdfFileName = surveyReply.getPdffilename();
-		    String attachmentName = pdfFileName;
+		    //String attachmentName = pdfFileName;
 		    
 		    logger.info("sendEmailWithPdf - DEBUG - recipient={} - subject={} - mess={}, attachmentPath={}, attachmentName={}", recipient, subject, mess, attachmentPath, attachmentName);
 		    boolean mailSent = MailUtility.sendMailWithAttachment(recipient, subject, mess, attachmentPath, attachmentName);
