@@ -20,12 +20,11 @@ import javax.validation.constraints.NotNull;
 @Table( name = "surveyreplies" )
 public class SurveyReply extends CeReProAbstractEntity {
 
-	/* ATTRIBUTI */
-	@Id // specifca che fa riferimento ad un id, quindi un parametro che non sar� ripetuto nella tabella
-	@GeneratedValue(strategy=GenerationType.IDENTITY) // ie auto increment
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@Column (name="survey_id") // specifico il nome della colonna a cui fa riferimeto questo oggetto, se i nomi coincidono non serve
+	@Column (name="survey_id")
 	@NotNull(message = "error.surveyId.empty")
 	private long surveyId;
 	

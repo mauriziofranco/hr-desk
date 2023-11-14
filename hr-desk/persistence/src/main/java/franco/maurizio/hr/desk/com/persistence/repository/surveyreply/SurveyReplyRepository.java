@@ -2,7 +2,6 @@ package franco.maurizio.hr.desk.com.persistence.repository.surveyreply;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -23,6 +22,8 @@ import franco.maurizio.hr.desk.com.persistence.entity.SurveyReply;
 @Repository
 public interface SurveyReplyRepository extends JpaRepository<SurveyReply, Long>, SurveyReplyRepositoryCustom {
 	
+	
+//	SurveyReply findById(long id);
 	List<SurveyReply> findBySurveyId(long surveyId);
 	List<SurveyReply> findByCandidateId(long candidateId);
 		
@@ -33,9 +34,9 @@ public interface SurveyReplyRepository extends JpaRepository<SurveyReply, Long>,
 	long getSurveyReplyCountToday(LocalDateTime ldtstart, LocalDateTime ldtend);
 		
 	@Transactional
-	@Modifying
+	@Modifying(clearAutomatically = true)//fixing issue - force cached entity reload
 	@Query("UPDATE SurveyReply SET pdffilename = :pdfname WHERE id = :id")
-	void updatePdfFileName(@Param("pdfname")String pdfname, @Param("id")long id);
+	int updatePdfFileName(@Param("pdfname")String pdfname, @Param("id")long id);
 	
 //	@Query("SELECT id, survey_id, starttime, endtime, answers,pdffilename, points, candidate_id, generated_token FROM SurveyReply WHERE generated_token = :generatedToken")
 //	SurveyReply findByGeneratedToken(@Param("generatedToken") String generatedToken);
