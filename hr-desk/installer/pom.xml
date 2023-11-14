@@ -15,17 +15,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <staging.dir>${project.build.directory}/staging</staging.dir>
-        <installer-output-filename>the-example-installer.jar</installer-output-filename>
+        <installer-output-filename>hr-desk-ce-installer.jar</installer-output-filename>
     </properties>
 
-    <developers>
-        <developer>
-            <id>aaron</id>
-            <name>Aaron Spear</name>
-            <email>aaron@ontherock.com</email>
-            <timezone>+7</timezone>
-        </developer>
-    </developers>
+<!--    <developers>-->
+<!--        <developer>-->
+<!--            <name>Maurizio Franco</name>-->
+<!--            <email>maurizio.franco@ymail.com</email>-->
+<!--            <timezone>+1</timezone>-->
+<!--        </developer>-->
+<!--    </developers>-->
 
     <build>
         <defaultGoal>package</defaultGoal>

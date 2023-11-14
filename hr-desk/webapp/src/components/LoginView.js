@@ -16,6 +16,7 @@ class LoginView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      password_input_type: "password",
       id: "",
       formEmail: "",
       psw: "",
@@ -135,6 +136,16 @@ class LoginView extends Component {
     this.setState({ [input.name]: value });
   };
 
+  toggleShowPassword = () => {
+      console.log("toggleShowPassword...");
+      var password_input_type = this.state.password_input_type ;
+      if (password_input_type === "password") {
+        this.setState({password_input_type: "text"});
+      } else {
+        this.setState({password_input_type: "password"});
+      }
+  }
+
   render() {
     // sessionStorage.setItem("applicationInfo", responseData);
     //const applicationInfoData = JSON.parse(sessionStorage.getItem("applicationInfo"));
@@ -186,7 +197,7 @@ class LoginView extends Component {
                 </div>
                 <div className="form-group">
                   <input
-                    type="password"
+                    type={this.state.password_input_type}
                     className="form-control"
                     name="psw"
                     value={this.state.psw}
@@ -194,6 +205,10 @@ class LoginView extends Component {
                     placeholder="password"
                     required
                   />
+                </div>
+                <div>
+                    <label for="show_password_checkbox">Visualizza password</label>
+                    <input type="checkbox" id="show_password_checkbox" onClick={this.toggleShowPassword} />
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <input type="submit" className="btn btn-black" value="ENTRA" />

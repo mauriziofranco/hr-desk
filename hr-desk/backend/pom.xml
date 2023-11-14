@@ -139,7 +139,7 @@
 							<target>
 								<copy
 									file="target/${project.artifactId}.jar"
-									tofile="${project.basedir}/../target/standalone/hr-desk.jar" />
+									tofile="${project.basedir}/../installer/src/main/izpack/pack3_content/hr-desk.jar" />
 							</target>
 						</configuration>
 						<goals>

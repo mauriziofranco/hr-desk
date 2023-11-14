@@ -17,7 +17,7 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 # Frontend QUESTION entity section, for exposing crud operation.
 # JWT instead Basic Authentication
 # JDK 21 instead JDK 11
-# SUpgrading PRING BOOT to last available version
+# Upgrading SPRING BOOT to last available version
 # Startup dialog for customizing application logo and name(perhaps into xml file?)
 # Define separation for "Community Edition" and "Enterprise Edition"
 # Target lines for product site
@@ -28,6 +28,7 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 # CoursePage entity, frontend section: into update dialog, select component for the position owner doesn't accept default starting value.
 # Candidate frontend section: cv icon(for cv download) has to been show only if cv has to been charged
 # On pdf generation points have to be instead of i.e. "52 points", a percentage i.e. 52/100
+
 
 <h1>DEVELOPMENT HOW-TO</h1>
 <h2>COMPILE, PACKAGING AND EXECUTE FROM SOURCES</h2>
