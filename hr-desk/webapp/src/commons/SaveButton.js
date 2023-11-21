@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import {Button} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import { Save } from '@material-ui/icons';
 import styles from "../styles.js";
 

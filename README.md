@@ -13,8 +13,9 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 
 <h1>TARGET RELEASES</h1>
 <h2>0.4</h2>
+# Frontend QUESTION entity section: for now permetted list, insert and delete
+<h2>0.5</h2>
 # mail properties have to been moved into application.properties so user can change it
-# Frontend QUESTION entity section, for exposing crud operation.
 # JWT instead Basic Authentication
 # JDK 21 instead JDK 11
 # Upgrading SPRING BOOT to last available version
@@ -22,6 +23,9 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 # Define separation for "Community Edition" and "Enterprise Edition"
 # Target lines for product site
 # Redmine installation for bug tracking and community requests (BUNNYSHELL???)
+# Frontend internazionalization
+# Frontend - Question section: avoid delete buttons rendering if question already associated to a survey
+           - Question section: implementing update modal   
 
 <h1>BUGS</h1>
 # DEMO packaged version, fronted home page(login) show browser dialog for login...

@@ -1,6 +1,5 @@
 package franco.maurizio.hr.desk.com.persistence.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +15,7 @@ import org.hibernate.validator.constraints.Length;
  * This is the entity that maps table questions.
  * 
  * @author daniele piccinni
+ * @author maurizio.franco@ymail.com
  *
  */
 
@@ -25,7 +25,7 @@ public class Question extends CeReProAbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@NotNull(message = "error.question.label.notnull")
 	@Length(min = 3, max = 500, message = "error.question.label.length")
@@ -68,11 +68,11 @@ public class Question extends CeReProAbstractEntity {
 	private Boolean cansh;
 
 	@Length(max = 3000, message = "error.question.fullanswer.length")
-	@Column(name = "full_answer")
+//	@Column(name = "full_answer")
 	private String fullAnswer;
 
 ////	costruttori
-	public Question(long id, String label, String description, String ansa, Boolean cansa) {
+	public Question(Long id, String label, String description, String ansa, Boolean cansa) {
 		this();
 		this.id = id;
 		this.label = label;
@@ -81,7 +81,7 @@ public class Question extends CeReProAbstractEntity {
 		this.cansa = cansa;
 	}
 
-	public Question(long id, String label, String description) {
+	public Question(Long id, String label, String description) {
 		this();
 		this.id = id;
 		this.label = label;
@@ -110,7 +110,7 @@ public class Question extends CeReProAbstractEntity {
 	 * @param cansh
 	 * @param fullAnswer
 	 */
-	public Question(long id,
+	public Question(Long id,
 			@NotNull(message = "error.question.label.notnull") @Length(min = 3, max = 500, message = "error.question.label.length") String label,
 			@Length(max = 3000, message = "error.question.description.length") String description,
 			@Length(max = 250, message = "error.question.answer.length") String ansa,
@@ -165,14 +165,14 @@ public class Question extends CeReProAbstractEntity {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

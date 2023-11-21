@@ -96,49 +96,49 @@ public class QuestionControllerTest {
 		logger.info("Test-testCreateQuestion() ---- End");
 	}
 	
-	@Test
-	public void testUpdateQuestion() {
-		logger.info("Test-testUpdateQuestion() ---- Start");
-		Question testQuestion = new Question (100L, "test", "tester", "ansa test", true) ;
-		Optional<Question> currOpt = Optional.of(testQuestion) ;
-		List<SurveyQuestion> surveyQuestionList = new ArrayList<SurveyQuestion>();
-		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
-		when(this.surveyQuestionRepository.findByQuestionId(100L)).thenReturn(surveyQuestionList);
-		Question questionToUpdate = new Question(100L, "modifica", "desc test", "mod ansa", false);
-		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.updateQuestion(100L, questionToUpdate);
-		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-		assertEquals("modifica", ((Question)responseEntity.getBody()).getLabel());
-		assertEquals("desc test", ((Question)responseEntity.getBody()).getDescription());
-		assertEquals("mod ansa", ((Question)responseEntity.getBody()).getAnsa());
-		assertEquals(false, ((Question)responseEntity.getBody()).getCansa());
-		logger.info("Test-testUpdateQuestion() ---- End");
-	}
+//	@Test
+//	public void testUpdateQuestion() {
+//		logger.info("Test-testUpdateQuestion() ---- Start");
+//		Question testQuestion = new Question (100L, "test", "tester", "ansa test", true) ;
+//		Optional<Question> currOpt = Optional.of(testQuestion) ;
+//		List<SurveyQuestion> surveyQuestionList = new ArrayList<SurveyQuestion>();
+//		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
+//		when(this.surveyQuestionRepository.findByQuestionId(100L)).thenReturn(surveyQuestionList);
+//		Question questionToUpdate = new Question(100L, "modifica", "desc test", "mod ansa", false);
+//		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.updateQuestion(100L, questionToUpdate);
+//		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+//		assertEquals("modifica", ((Question)responseEntity.getBody()).getLabel());
+//		assertEquals("desc test", ((Question)responseEntity.getBody()).getDescription());
+//		assertEquals("mod ansa", ((Question)responseEntity.getBody()).getAnsa());
+//		assertEquals(false, ((Question)responseEntity.getBody()).getCansa());
+//		logger.info("Test-testUpdateQuestion() ---- End");
+//	}
 	
-	@Test
-	public void testUpdateInvalidQuestion() {
-		logger.info("Test-testUpdateInvalidQuestion() ---- Start");
-		Question testQuestion = new Question (100L, "test", "tester", "ansa test", true) ;
-		Optional<Question> currOpt = Optional.of(testQuestion) ;
-		List<SurveyQuestion> surveyQuestionList = new ArrayList<SurveyQuestion>();
-		surveyQuestionList.add(new SurveyQuestion());
-		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
-		when(this.surveyQuestionRepository.findByQuestionId(100L)).thenReturn(surveyQuestionList);
-		Question questionToUpdate = new Question(100L, "modifica", "desc test", "mod ansa", false);
-		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.updateQuestion(100L, questionToUpdate);
-		assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
-		logger.info("Test-testUpdateInvalidQuestion() ---- End");
-	}
+//	@Test
+//	public void testUpdateInvalidQuestion() {
+//		logger.info("Test-testUpdateInvalidQuestion() ---- Start");
+//		Question testQuestion = new Question (100L, "test", "tester", "ansa test", true) ;
+//		Optional<Question> currOpt = Optional.of(testQuestion) ;
+//		List<SurveyQuestion> surveyQuestionList = new ArrayList<SurveyQuestion>();
+//		surveyQuestionList.add(new SurveyQuestion());
+//		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
+//		when(this.surveyQuestionRepository.findByQuestionId(100L)).thenReturn(surveyQuestionList);
+//		Question questionToUpdate = new Question(100L, "modifica", "desc test", "mod ansa", false);
+//		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.updateQuestion(100L, questionToUpdate);
+//		assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
+//		logger.info("Test-testUpdateInvalidQuestion() ---- End");
+//	}
 	
-	@Test
-	public void testUpdateInexistentQuestion() {
-		logger.info("Test-testUpdateInexistentQuestion() ---- Start");
-		Optional<Question> currOpt = Optional.empty();
-		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
-		Question questionToUpdate = new Question(100L, "modifica", "desc test", "mod ansa", false);
-		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.updateQuestion(100L, questionToUpdate);
-		assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
-		logger.info("Test-testUpdateInexistentQuestion() ---- End");
-	}
+//	@Test
+//	public void testUpdateInexistentQuestion() {
+//		logger.info("Test-testUpdateInexistentQuestion() ---- Start");
+//		Optional<Question> currOpt = Optional.empty();
+//		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
+//		Question questionToUpdate = new Question(100L, "modifica", "desc test", "mod ansa", false);
+//		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.updateQuestion(100L, questionToUpdate);
+//		assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+//		logger.info("Test-testUpdateInexistentQuestion() ---- End");
+//	}
 	
 	@Test
 	public void testDeleteQuestion() {

@@ -1,0 +1,10 @@
+@import url("../../commons/addDialog.css");
+
+/* Insert new question modal dialog max-width */
+div.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
+    max-width: 1000px;
+}
+
+.radio-group {
+    display:block ruby;
+}

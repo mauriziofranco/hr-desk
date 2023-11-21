@@ -278,7 +278,7 @@
 		<dependency>
 			<groupId>franco.maurizio</groupId>
 			<artifactId>hr-desk.persistence</artifactId>
-			<version>0.3</version>
+			<version>0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>franco.maurizio</groupId>

@@ -29,6 +29,8 @@ import AllCandidateSurveysView from './candidateSurveys/AllCandidateSurveysView'
 import CandidateSurveysToDoView from './candidateSurveys/CandidateSurveysToDoView';
 import CandidateSurveysDidView from './candidateSurveys/CandidateSurveysDidView';
 import CandidateSurveysExpiredView from './candidateSurveys/CandidateSurveysExpiredView';
+import QuestionsList from './questions/QuestionsList';
+import QuestionsView from './questions/QuestionsView';
 //import * as Commons from "../commons.js";
 
 class MainView extends Component {
@@ -96,6 +98,12 @@ class MainView extends Component {
 					<Route exact path="/users" component={UsersView} />
 					<Route exact path="/coursepage" component={CoursePagesView} />
 					<Route exact path="/surveys" component={SurveysView} />
+					<Route exact path="/questions" component={QuestionsView} />
+					{/* <Route path="/questions" element={<QuestionsList uri={Constants.FULL_QUESTION_API_URI}/>} /> */}
+					{/* <Route exact path="/questions2" element={QuestionsView} /> */}
+					{/* <Route exact path="/questions" component={<QuestionsView uri=Constants.FULL_QUESTION_API_URI/>} /> */}
+					{/* <Route exact path="/questions" element={<QuestionsList uri={Constants.FULL_QUESTION_API_URI}/>} /> */}
+				    {/* <Route exact path="/questions" component={<QuestionsView/>} /> */}
 				    <Route exact path="/surveyquestions" component={SurveyQuestionsView} />
 					<Route exact path="/allCandidateSurveys" component={AllCandidateSurveysView} />
 					<Route exact path="/candidateSurveysToDo" component={CandidateSurveysToDoView} />

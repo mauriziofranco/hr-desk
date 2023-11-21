@@ -3,12 +3,14 @@
     display:inline-block;
     left:100px;
     margin-right:50px;
+    padding-top: 1%;
 }
 .add-button {
   display:inline-block;
   float: right;
   color: #fff  !important;
   background-color: green !important;
+  /* padding-top: 5%; */
 } 
 
 

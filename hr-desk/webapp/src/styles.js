@@ -36,13 +36,6 @@ const styles = {
     backgroundColor: "#ff8300",
   },
 
-  addButton: {
-    marginBottom: "30px",
-    backgroundColor: "green",
-    color: "#fff",
-    float: "right",
-  },
-
   resetButton: {
     margin: "7px",
     marginRight: "14px",

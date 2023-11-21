@@ -33,6 +33,7 @@ export class QuestionsHeaderMenu extends Component {
 
 				<div className={`dropdown-menu ${this.state.showDropdownHeader ? 'show' : ''}`} aria-labelledby="navbarDropdown">
 					<Link className="dropdown-item navigationBarItem" to="/surveys">Questionari</Link>
+					<Link className="dropdown-item navigationBarItem" to="/questions">Domande</Link>
 					<Link className="dropdown-item navigationBarItem" to="/surveyquestions">Associazione domande/questionari</Link>
 
 				</div>
