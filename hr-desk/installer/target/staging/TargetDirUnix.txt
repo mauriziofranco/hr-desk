@@ -1,1 +1,1 @@
-$USER_HOME/izPackExample
+$USER_HOME/hrdesk_ce

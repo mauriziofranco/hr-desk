@@ -15,9 +15,12 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 <h2>0.4</h2>
 # Frontend QUESTION entity section: for now permetted list, insert and delete
 <h2>0.5</h2>
+# recover handleValidationError method into RestValidationHandler class
+# recover tests in backend module
+# recover tests in persistence module
 # mail properties have to been moved into application.properties so user can change it
 # JWT instead Basic Authentication
-# JDK 21 instead JDK 11
+# upgrade JDK to 21
 # Upgrading SPRING BOOT to last available version
 # Startup dialog for customizing application logo and name(perhaps into xml file?)
 # Define separation for "Community Edition" and "Enterprise Edition"

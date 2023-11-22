@@ -7,7 +7,7 @@
 
 	<groupId>franco.maurizio</groupId>
 	<artifactId>hr-desk.persistence</artifactId>
-	<version>0.4</version>
+	<version>0.4.3</version>
 	<packaging>jar</packaging>
 
 	<name>hr-desk.persistence</name>

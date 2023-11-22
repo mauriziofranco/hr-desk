@@ -113,11 +113,12 @@
 	</build>
 	<modules>
 		<module>mail-manager</module>
-		<module>persistence</module>
+	<!--	<module>persistence</module>-->
+		<module>persistence17</module>
 <!--		<module>service</module>-->
 <!--		<module>core</module>-->
 		<module>webapp</module>
-		<module>backend</module>
+		<!--<module>backend</module>-->
 		<module>backend17</module>
 		<module>installer</module>
 	</modules>

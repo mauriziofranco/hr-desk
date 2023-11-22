@@ -1,0 +1,111 @@
+package franco.maurizio.hr.desk.com;
+
+import java.util.Arrays;
+
+import org.slf4j.Logger;
+
+import static org.springframework.security.config.Customizer.withDefaults;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import franco.maurizio.hr.desk.com.service.LoginService;
+
+@Configuration
+@EnableWebSecurity
+public class ApplicationSecurityConfig {
+
+	@Autowired
+	private LoginService loginService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ApplicationSecurityConfig.class);
+
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http.httpBasic(withDefaults()).authorizeRequests(requests -> requests
+                .antMatchers(HttpMethod.POST, "/api/v1/user/").permitAll()//to allow registration????
+                .antMatchers(HttpMethod.GET, "/api/v1/user/email/**").permitAll()//to allow login
+                .antMatchers(HttpMethod.GET, "/api/v1/survey/getSurveyForCandidate/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/surveyreplyrequest/start/").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/v1/surveyreplyrequest/end/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/application/info/").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/pdf/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/coursepagecustom").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/v1/positionuserowner").authenticated()
+                .antMatchers(HttpMethod.PATCH, "/api/v1/user/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/v1/**/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/v1/**/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/api/v1/coursepage/createcoursepagecustom").authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/v1/**/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/api/v1/**/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/v1/role/level/**").authenticated()).csrf(csrf -> csrf.disable());
+        //security configuration for h2 console
+        http.csrf(csrf -> csrf.disable());
+        http.headers(headers -> headers.frameOptions().disable());
+        return http.build();
+	}
+	
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {		
+//		http.authorizeRequests().antMatchers("/api/v1/**/").permitAll()
+//		                        .antMatchers("/api/v1/**").permitAll()
+//		                        .antMatchers("/api/v1/**/**").permitAll()
+//		                        .and().csrf().disable().cors();
+//	}
+	
+	@Autowired
+	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		logger.info("SpringSecurityConfiguration_Database.configureGlobal - START");
+		auth.userDetailsService(loginService).passwordEncoder(new BCryptPasswordEncoder());
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+	      UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	      CorsConfiguration config = new CorsConfiguration();
+			config.setAllowedOrigins(Arrays.asList("*"));
+			config.setAllowedMethods(Arrays.asList("*"));
+			config.setAllowedHeaders(Arrays.asList("*"));
+			config.setAllowCredentials(true);
+	      config.applyPermitDefaultValues();
+	      
+	      source.registerCorsConfiguration("/api/v1/**", config);
+	      source.registerCorsConfiguration("/**", config);
+	      source.registerCorsConfiguration("/user", config);
+	      return source;
+	}	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

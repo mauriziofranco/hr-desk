@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.5.RELEASE</version>
+		<version>3.1.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>franco.maurizio</groupId>
@@ -22,14 +22,13 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.release>17</maven.compiler.release>
 		<checkstyle-maven-plugin.version>3.1.1</checkstyle-maven-plugin.version>
-		<package.file.name>hr-desk.backend</package.file.name>
 		<maven-surefire-plugin-version>2.22.2</maven-surefire-plugin-version>
 		<spring-security.version>5.3.2.RELEASE</spring-security.version>
 	</properties>
 
 
 	<build>
-		<finalName>${package.file.name}</finalName>
+		<finalName>hr-desk.backend17</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -39,7 +38,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.5</version>
+				<version>0.8.8</version>
 				<executions>
 					<execution>
 						<id>default-prepare-agent</id>
@@ -207,25 +206,25 @@
 			<!--					</execution>-->
 			<!--				</executions>-->
 			<!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-antrun-plugin</artifactId>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<phase>package</phase>-->
-<!--						<configuration>-->
-<!--							<target>-->
-<!--								<copy-->
-<!--									file="target/${project.artifactId}.jar"-->
-<!--									tofile="target/../${project.artifactId}.jar" />-->
-<!--							</target>-->
-<!--						</configuration>-->
-<!--						<goals>-->
-<!--							<goal>run</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
+			<!--			<plugin>-->
+			<!--				<groupId>org.apache.maven.plugins</groupId>-->
+			<!--				<artifactId>maven-antrun-plugin</artifactId>-->
+			<!--				<executions>-->
+			<!--					<execution>-->
+			<!--						<phase>package</phase>-->
+			<!--						<configuration>-->
+			<!--							<target>-->
+			<!--								<copy-->
+			<!--									file="target/${project.artifactId}.jar"-->
+			<!--									tofile="target/../${project.artifactId}.jar" />-->
+			<!--							</target>-->
+			<!--						</configuration>-->
+			<!--						<goals>-->
+			<!--							<goal>run</goal>-->
+			<!--						</goals>-->
+			<!--					</execution>-->
+			<!--				</executions>-->
+			<!--			</plugin>-->
 		</plugins>
 	</build>
 	<reporting>
@@ -277,8 +276,8 @@
 		</dependency>
 		<dependency>
 			<groupId>franco.maurizio</groupId>
-			<artifactId>hr-desk.persistence</artifactId>
-			<version>0.4</version>
+			<artifactId>hr-desk-persistence</artifactId>
+			<version>0.4.2_17</version>
 		</dependency>
 		<dependency>
 			<groupId>franco.maurizio</groupId>
@@ -306,23 +305,24 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
-			<version>1.2.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.30</version>
 		</dependency>
 
 
@@ -343,7 +343,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.20</version>
 			<scope>provided</scope>
 		</dependency>
 

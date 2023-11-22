@@ -22,3 +22,11 @@ REQUIREMENTS:
  
  
  )
+ 
+#road to 0.4 release
+Persistence: moving to jdk 17
+Backend: moving to jdk 17
+#road to 0.4 release
+Frontend: implemented Question section with: list, insert and delete operation.
+Backend: implementing porting to jdk 17
+Persistence: updated version to 0.4 for Question refactoring

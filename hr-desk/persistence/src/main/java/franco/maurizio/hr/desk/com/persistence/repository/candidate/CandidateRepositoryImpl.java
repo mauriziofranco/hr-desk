@@ -278,7 +278,9 @@ public class CandidateRepositoryImpl implements CandidateRepositoryCustom {
 	/*********** PAGEABLE -> END */
 
 	@Override
-	public CandidateCustom getSingleCustomCandidate(Long id) throws NoResultException {
+	public CandidateCustom getSingleCustomCandidate(Long id) 
+			throws NoResultException 
+	{
 		logger.info("getSingleCustomCandidate - START - with id: {}", id);
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<CandidateCustom> query = null;

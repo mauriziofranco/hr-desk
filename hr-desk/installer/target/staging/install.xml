@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <installation version="5.0">
     <info>
-        <appname>HRDESK_CE Installer</appname>
+        <appname>HrDesk Community Edition</appname>
         <appversion>0.1-SNAPSHOT</appversion>
 <!--         <url>https://github.com/aspear/izpack5-example-installer</url> -->
         <authors>
@@ -71,14 +71,14 @@
 <!--             <file src="pack2_content/adave_willet_jim_davies.jpg" targetdir="$INSTALL_PATH"/> -->
 <!--         </pack> -->
         <pack name="HrDesk CE" required="yes">
-            <description>Human Resources desktop application</description>
+            <description>HrDesk Community Edition DESKTOP application</description>
             <file src="pack3_content/hr-desk.jar"            targetdir="$INSTALL_PATH"/>
-            <file src="pack3_content/application.properties" targetdir="$INSTALL_PATH"/>
             <file src="pack3_content/startup.sh"             targetdir="$INSTALL_PATH"/>
         </pack>
         <pack name="HsqlDB" required="no">
-            <description>hsql database - default application connected [HIGHTLY SUGGESTED]</description>
+            <description>Default database - (hqsql)already application connected</description>
             <file src="database/hsql/demo.mv.db"            targetdir="$INSTALL_PATH/data"/>
+            <file src="database/hsql/application.properties"  targetdir="$INSTALL_PATH"/>
         </pack>
     </packs>
 </installation>
