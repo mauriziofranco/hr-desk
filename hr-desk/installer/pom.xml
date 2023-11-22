@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>izpack-installer</artifactId>
-    <name>IzPack Installer</name>
+    <name>hrdesk_ce-desktop-installer</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

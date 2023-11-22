@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<installation version="5.0">
+<!-- <variables> -->
+<!--   <variable name="app-version" value="1.4"/> -->
+<!--   <variable name="released-on" value="08/03/2002"/> -->
+<!-- </variables> -->
+	<info>
+		<appname>Test installer</appname>
+	
+		<appversion>alpha_1.2.3</appversion>
+		<authors>
+			<author name="Maurizio Franco" email="maurizio.franco@ymail.com" />
+		</authors>
+		<url>https://www.linkedin.com/in/mauriziofranco/</url>
+	</info>
+
+	<guiprefs width="660" height="480" resizable="yes">
+		<modifier key="allXGap" value="0" />
+		<modifier key="allYGap" value="0" />
+		<modifier key="useHeadingPanel" value="yes" />
+		<modifier key="useButtonIcons" value="yes" />
+		<modifier key="useHeadingForSummary" value="yes" />
+		<modifier key="headingImageOnLeft" value="yes" />
+		<modifier key="headingLineCount" value="1" />
+		<modifier key="headingFontSize" value="1.5" />
+		<modifier key="headingBackgroundColor" value="0x00ffffff" />
+		<modifier key="headingPanelCounter" value="text" />
+		<modifier key="headingPanelCounterPos" value="inHeading" />
+	</guiprefs>
+
+	<locale>
+		<langpack iso3="eng" />
+	</locale>
+
+	<resources>
+		<res id="HTMLLicencePanel.licence" src="License.html" />
+		<res id="InfoPanel.info" src="Readme.txt" />
+		<res id="SummaryPanel.info" src="Summary.txt" />
+	</resources>
+
+
+	<panels>
+		<panel classname="HelloPanel" />
+		<panel classname="HTMLLicencePanel" />
+		<panel classname="SimpleFinishPanel" />
+
+	</panels>
+
+	<packs>
+		<pack name="Base" required="yes" preselected="yes">
+			<description>The base files</description>
+			<file src="Readme.txt" targetdir="$INSTALL_PATH" />
+			<file src="License.txt" targetdir="$INSTALL_PATH" />
+		</pack>
+	</packs>
+
+</installation>

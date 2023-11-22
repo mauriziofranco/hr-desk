@@ -118,6 +118,7 @@
 <!--		<module>core</module>-->
 		<module>webapp</module>
 		<module>backend</module>
+		<module>backend17</module>
 		<module>installer</module>
 	</modules>
 </project>
