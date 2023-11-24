@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="maven-antrun-" default="main">
-  <target name="main">
-    <copy todir="/home/maurizio/git/hr-desk/hr-desk/backend17/target/classes/public">
-      <fileset dir="/home/maurizio/git/hr-desk/hr-desk/backend17/../webapp/build" />
-    </copy>
-  </target>
-</project>

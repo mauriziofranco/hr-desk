@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: franco.maurizio.hr.desk.com.integration.controller.CandidateCustomControllerIntegrationTests
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.991 s - in franco.maurizio.hr.desk.com.integration.controller.CandidateCustomControllerIntegrationTests
