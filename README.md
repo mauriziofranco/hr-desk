@@ -1,4 +1,10 @@
 <h1>RELEASES NOTES</h1>
+<h2>0.4</h2>
+# Frontend: new QUESTION entity section(introduced for now list, insert and delete operations)
+# Upgraded spring boot used starter parent module, to version 3.1.5
+# Upgraded default used JDK to version 17
+# Recovered compatibility with MariaDB/MySQL
+# Refactoring of main sources package from centauri.academy to franco.maurizio
 <h2>0.3</h2>
 Refactored database sql scripts.
 Changed default frontend logo and application image.
@@ -12,11 +18,6 @@ On the top of CeRePro project, entire sources are moved into this development tr
 Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr.rjs.frontend have been moved into a Maven multi module project.
 
 <h1>TARGET RELEASES</h1>
-<h2>0.4</h2>
-# Frontend QUESTION entity section: for now allowed: list, insert and delete operations
-# Upgrading SPRING BOOT to last available version
-# default used JDK version upgraded to 17
-# default spring-boot starter partent version upgraded to 3.1.5 
 <h2>0.5</h2>
 # recover hsqdb compatibility
 # recover handleValidationError method into RestValidationHandler class
@@ -25,6 +26,7 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 # mail properties have to been moved into application.properties so user can change it
 # JWT instead Basic Authentication
 # upgrade JDK to 21
+# upgrade Spring Boot to 3.2.0
 # Startup dialog for customizing application logo and name(perhaps into xml file?)
 # Define separation for "Community Edition" and "Enterprise Edition"
 # Target lines for product site

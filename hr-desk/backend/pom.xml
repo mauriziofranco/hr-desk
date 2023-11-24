@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>franco.maurizio</groupId>
 	<artifactId>hr-desk.backend</artifactId>
-	<version>0.3.8_j17</version>
+	<version>0.4.0_j17</version>
 
 	<description>CeRePro is now HrDesk....</description>
 

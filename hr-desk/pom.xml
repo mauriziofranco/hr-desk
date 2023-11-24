@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>franco.maurizio</groupId>
 	<artifactId>hr-desk</artifactId>
-	<version>0.3.8</version>
+	<version>0.4.0</version>
 	<packaging>pom</packaging>
 	<name>hr-desk</name>
 	<!-- FIXME change it to the project's website -->
@@ -77,13 +77,11 @@
 	</build>
 	<modules>
 		<module>mail-manager</module>
-	<!--	<module>persistence</module>-->
-		<module>persistence17</module>
+		<module>persistence</module>
 <!--		<module>service</module>-->
 <!--		<module>core</module>-->
 		<module>webapp</module>
-		<!--<module>backend</module>-->
-		<module>backend17</module>
+		<module>backend</module>
 		<module>installer</module>
 	</modules>
 </project>
