@@ -2,8 +2,8 @@ package franco.maurizio.hr.desk.com.persistence.repository;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,8 +30,8 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
      * in order to be able to execute tests.
      * Execute clean before and after each test
      */
-	@BeforeAll
-	@AfterAll
+	@BeforeEach
+	@AfterEach
 	public void initializeRoleTests () {
 		logger.info("RoleRepositoryTest.initializeRoleTests - START");		
 		roleRepository.deleteAll();

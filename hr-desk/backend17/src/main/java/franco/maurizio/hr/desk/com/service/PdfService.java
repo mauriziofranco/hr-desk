@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.proxima.common.mail.MailUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import franco.maurizio.hr.desk.com.backend.QuestionController;
 import franco.maurizio.hr.desk.com.dto.AswerJsonResponse;
 import franco.maurizio.hr.desk.com.dto.QuestionAndReply;
+import franco.maurizio.hr.desk.com.mail.manager.MailUtility;
 import franco.maurizio.hr.desk.com.persistence.entity.Candidate;
 import franco.maurizio.hr.desk.com.persistence.entity.Survey;
 import franco.maurizio.hr.desk.com.persistence.entity.SurveyReply;

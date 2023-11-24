@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
-import org.proxima.common.mail.MailUtility;
 import org.slf4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import franco.maurizio.hr.desk.com.backend.CandidateSurveyTokenController;
+import franco.maurizio.hr.desk.com.mail.manager.MailUtility;
 import franco.maurizio.hr.desk.com.persistence.entity.CoursePage;
 import franco.maurizio.hr.desk.com.persistence.entity.PositionUserOwner;
 import franco.maurizio.hr.desk.com.persistence.entity.User;

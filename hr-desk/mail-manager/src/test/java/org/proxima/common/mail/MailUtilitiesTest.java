@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import franco.maurizio.hr.desk.com.mail.manager.MailUtility;
+
 public class MailUtilitiesTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MailUtilitiesTest.class);

@@ -1,4 +1,4 @@
-package org.proxima.common.mail;
+package franco.maurizio.hr.desk.com.mail.manager;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -6,22 +6,6 @@ import java.util.Arrays;
 import java.util.Properties;
 import java.util.function.Function;
 import java.util.function.IntFunction;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
-import javax.mail.internet.MimeMultipart;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,14 +15,30 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.mail.Address;
+import jakarta.mail.Message;
+import jakarta.mail.Message.RecipientType;
+import jakarta.mail.MessagingException;
+import jakarta.mail.NoSuchProviderException;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+
 /**
  * Provides a series of utilities mail to send mail: simple, with an attachment, with cc and ccn
  * recipients.
  * 
  * @author DaniG - Milan Centauri Academy I
  * @author TraianC - Milano Centauri Academy III
- * @author Maurizio Franco - maurizio.franco@ymail.com
  * @author Antonio Iannaccone - Roma Academy VII 
+ * @author Maurizio Franco - maurizio.franco@ymail.com
  *
  */
 

@@ -6,8 +6,8 @@ package franco.maurizio.hr.desk.com.persistence.repository;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,8 +34,8 @@ public class CandidateStatesRepositoryTest extends AbstractRepositoryTest {
 	@Autowired
 	private CandidateStatesRepository csr;
 	
-	@BeforeAll
-	@AfterAll
+	@BeforeEach
+	@AfterEach
     public void initializeCandidateStatesRepositoryTest() {
     	logger.info("CandidateStatesRepositoryTest.initializeCandidateStateTest - START");    	
     	csr.deleteAll();

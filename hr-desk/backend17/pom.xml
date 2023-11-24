@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>franco.maurizio</groupId>
 	<artifactId>hr-desk.backend17</artifactId>
-	<version>0.4</version>
+	<version>0.3.8_j17</version>
 
 	<description>CeRePro is now HrDesk....</description>
 
@@ -23,7 +23,7 @@
 		<maven.compiler.release>17</maven.compiler.release>
 		<checkstyle-maven-plugin.version>3.1.1</checkstyle-maven-plugin.version>
 		<maven-surefire-plugin-version>2.22.2</maven-surefire-plugin-version>
-		<spring-security.version>5.3.2.RELEASE</spring-security.version>
+<!--		<spring-security.version>5.3.2.RELEASE</spring-security.version>-->
 	</properties>
 
 
@@ -277,12 +277,12 @@
 		<dependency>
 			<groupId>franco.maurizio</groupId>
 			<artifactId>hr-desk-persistence</artifactId>
-			<version>0.4.2_17</version>
+			<version>0.3.5_j17</version>
 		</dependency>
 		<dependency>
 			<groupId>franco.maurizio</groupId>
-			<artifactId>hr-desk.mail.manager</artifactId>
-			<version>0.2</version>
+			<artifactId>hr-desk-mail-manager</artifactId>
+			<version>0.3.4_j11</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

@@ -3,8 +3,8 @@ package franco.maurizio.hr.desk.com.persistence.repository;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.Lifecycle;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import franco.maurizio.hr.desk.com.persistence.entity.Candidate;
@@ -50,8 +49,8 @@ public class CandidateRepositoryTest extends AbstractRepositoryTest {
      * prepareDB method prepares the database in order to test
      * CandidateRepository's methods
      */
-	@BeforeAll
-	@AfterAll
+	@BeforeEach
+	@AfterEach
 	public void prepareDB () {
 		logger.info(" START -> prepareDB() ");
 		candidateRepository.deleteAll();

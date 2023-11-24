@@ -23,6 +23,13 @@ REQUIREMENTS:
  
  )
  
+
+#road to 0.4 release
+Persistence: moving to jdk 17
+Persistence: moving spring to 3.1.5
+Backend: moving to jdk 17
+Backend: moving spring to 3.1.5
+Recovered compatibility with MariaDB/MySQL
 #road to 0.4 release
 Persistence: moving to jdk 17
 Backend: moving to jdk 17

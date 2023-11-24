@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,8 +42,8 @@ public class SurveyQuestionCustomRepositoryTest extends AbstractRepositoryTest {
      * prepareDB method prepares the database in order to test
      * CandidateRepository's methods
      */
-	@BeforeAll
-	@AfterAll
+	@BeforeEach
+	@AfterEach
 	public void prepareDB () {
 		logger.info(" START -> prepareDB() ");
 		surveyQuestionRepository.deleteAll();

@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,8 +66,8 @@ public abstract class AbstractRepositoryTest {
 	 * Provides to clean tables in order to execute single integration tests
      * Execute table cleaning before and after each test
      */
-	@BeforeAll
-	@AfterAll
+	@BeforeEach
+	@AfterEach
 	public void prepareDB () {
 		logger.info("############################");
 		logger.info("############################");

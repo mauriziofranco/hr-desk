@@ -5,8 +5,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>franco.maurizio</groupId>
-	<artifactId>hr-desk.webapp</artifactId>
-	<version>0.1</version>
+	<artifactId>hr-desk-webapp</artifactId>
+	<version>0.3.9_r18.2.0</version>
 
 	<description>webapp module</description>
 

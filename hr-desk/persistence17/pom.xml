@@ -7,7 +7,7 @@
 
 	<groupId>franco.maurizio</groupId>
 	<artifactId>hr-desk-persistence</artifactId>
-	<version>0.4.2_17</version>
+	<version>0.3.5_j17</version>
 	<packaging>jar</packaging>
 
 	<name>hr-desk-persistence</name>
@@ -201,16 +201,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--		<dependency>-->
-		<!--			<groupId>mysql</groupId>-->
-		<!--			<artifactId>mysql-connector-java</artifactId>-->
-		<!--			<version>8.0.19</version>-->
-		<!--		</dependency>-->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>8.0.19</version>
+				</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.h2database</groupId>-->
+<!--			<artifactId>h2</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--		</dependency>-->
 		<!-- API, java.xml.bind module -->
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>

@@ -17,14 +17,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@PropertySources({
-	@PropertySource("classpath:messages.properties"),
-})
-@ComponentScan({"franco.maurizio.hr.desk.com"})
-@ComponentScan({"franco.maurizio.hr.desk.com"})
-@ComponentScan(basePackages={"franco.maurizio.hr.desk.com.persistence.entity"})
-@EntityScan(           basePackages={"franco.maurizio.hr.desk.com.persistence.entity"})
-@EnableJpaRepositories(basePackages={"franco.maurizio.hr.desk.com.persistence.repository"})
+//@PropertySources({
+//	@PropertySource("classpath:messages.properties"),
+//})
+//@ComponentScan({"franco.maurizio.hr.desk.com"})
+////@ComponentScan({"franco.maurizio.hr.desk.com"})
+////@ComponentScan(basePackages={"franco.maurizio.hr.desk.com.persistence.entity"})
+//@EntityScan(           basePackages={"franco.maurizio.hr.desk.com.persistence.entity"})
+//@EnableJpaRepositories(basePackages={"franco.maurizio.hr.desk.com.persistence.repository"})
 public class CeReProBackendApplication extends SpringBootServletInitializer {
 
 	private static final Logger logger = LoggerFactory.getLogger(CeReProBackendApplication.class);

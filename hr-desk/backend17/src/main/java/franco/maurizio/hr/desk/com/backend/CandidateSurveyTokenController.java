@@ -8,7 +8,6 @@ import java.util.Properties;
 
 import jakarta.validation.Valid;
 
-import org.proxima.common.mail.MailUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import franco.maurizio.hr.desk.com.mail.manager.MailUtility;
 import franco.maurizio.hr.desk.com.persistence.entity.Candidate;
 import franco.maurizio.hr.desk.com.persistence.entity.CandidateSurveyToken;
 import franco.maurizio.hr.desk.com.persistence.entity.CeReProAbstractEntity;
