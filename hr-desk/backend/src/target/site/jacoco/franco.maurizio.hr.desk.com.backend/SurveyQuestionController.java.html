@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SurveyQuestionController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.backend</a> &gt; <span class="el_source">SurveyQuestionController.java</span></div><h1>SurveyQuestionController.java</h1><pre class="source lang-java linenums">package franco.maurizio.hr.desk.com.backend;
+
+import java.util.List;
+import java.util.Optional;
+
+import jakarta.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import franco.maurizio.hr.desk.com.persistence.entity.CeReProAbstractEntity;
+import franco.maurizio.hr.desk.com.persistence.entity.SurveyQuestion;
+import franco.maurizio.hr.desk.com.persistence.entity.custom.CustomErrorType;
+import franco.maurizio.hr.desk.com.persistence.repository.SurveyRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.question.QuestionRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.surveyquestion.SurveyQuestionRepository;
+
+@RestController
+@RequestMapping(&quot;/api/v1/surveyquestion&quot;)
+<span class="fc" id="L33">public class SurveyQuestionController {</span>
+
+<span class="fc" id="L35">	public static final Logger logger = LoggerFactory.getLogger(SurveyQuestionController.class);</span>
+	@Autowired
+	private SurveyQuestionRepository sqRepository;
+	@Autowired
+	private SurveyRepository sRepository;
+	@Autowired
+	private QuestionRepository qRepository;
+
+	@GetMapping(&quot;/&quot;)
+	public ResponseEntity&lt;List&lt;SurveyQuestion&gt;&gt; listAllSurveyQuestion() {
+<span class="fc" id="L45">		List&lt;SurveyQuestion&gt; sq = sqRepository.findAll();</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">		if (sq.isEmpty()) {</span>
+<span class="nc" id="L47">			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		}
+<span class="fc" id="L49">		return new ResponseEntity&lt;&gt;(sq, HttpStatus.OK);</span>
+	}
+
+	@PostMapping(value = &quot;/&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; createSQ(@Valid @RequestBody final SurveyQuestion sq) {
+<span class="fc" id="L54">		logger.info(&quot;Creating SurveyQuestion : {}&quot;, sq);</span>
+
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">		  if (sqRepository.findBySurveyIdAndQuestionId(sq.getSurveyId(), sq.getQuestionId()) != null) {</span>
+<span class="nc" id="L57">			logger.error(&quot;Unable to create. A SurveyQuestion with surveyId {} already exist&quot;, sq.getSurveyId());</span>
+<span class="nc" id="L58">			return new ResponseEntity&lt;&gt;(</span>
+					new CustomErrorType(&quot;Unable to create new surveyQuestion. A SurveyQuestion with surveyId &quot;
+<span class="nc" id="L60">							+ sq.getSurveyId() + &quot; and questionId &quot; + sq.getQuestionId() + &quot; already exist.&quot;),</span>
+					HttpStatus.CONFLICT);
+
+		} 
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">		if (!(sRepository.findById(sq.getSurveyId()).isPresent())) {</span>
+<span class="nc" id="L65">			logger.info(&quot; Survey with id &quot; + sq.getSurveyId() + &quot; is not found&quot;);</span>
+<span class="nc" id="L66">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot; Survey with id &quot; + sq.getSurveyId() + &quot; is not found&quot;),</span>
+					HttpStatus.CONFLICT);
+		} 
+		
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">		if (!(qRepository.findById(sq.getQuestionId()).isPresent())) {</span>
+<span class="nc" id="L71">			logger.info(&quot; Question with id &quot; + sq.getQuestionId() + &quot; is not found&quot;);</span>
+<span class="nc" id="L72">			return new ResponseEntity&lt;&gt;(</span>
+<span class="nc" id="L73">					new CustomErrorType(&quot; Question with id &quot; + sq.getQuestionId() + &quot; is not found&quot;),</span>
+					HttpStatus.CONFLICT);
+		}
+<span class="fc" id="L76">		sqRepository.save(sq);</span>
+<span class="fc" id="L77">		return new ResponseEntity&lt;&gt;(sq, HttpStatus.CREATED);</span>
+	}
+
+	// method to get surveyQuestion by id
+	@GetMapping(&quot;/{id}&quot;)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; getSurveyQuestionById(@PathVariable final Long id) {
+<span class="fc" id="L83">		Optional&lt;SurveyQuestion&gt; sq = sqRepository.findById(id);</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">		if (sq.isEmpty()) {</span>
+<span class="nc" id="L85">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;SurveyQuestion with id &quot; + id + &quot; not found&quot;),</span>
+					HttpStatus.NOT_FOUND);
+		}
+<span class="fc" id="L88">		return new ResponseEntity&lt;&gt;(sq.get(), HttpStatus.OK);</span>
+	}
+
+	// method to update an existing user
+	@PutMapping(value = &quot;/{id}&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; updateSQ(@PathVariable final Long id,
+			@RequestBody SurveyQuestion sq) {
+
+<span class="fc" id="L96">		Optional&lt;SurveyQuestion&gt; optSQ = sqRepository.findById(id);</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">		if (optSQ.isEmpty()) {</span>
+<span class="nc" id="L98">			return new ResponseEntity&lt;&gt;(</span>
+					new CustomErrorType(&quot;Unable to upate. SurveyQuestion with id &quot; + id + &quot; not found.&quot;),
+					HttpStatus.NOT_FOUND);
+		}
+		
+<span class="fc" id="L103">		SurveyQuestion currentSQ = optSQ.get();</span>
+<span class="fc" id="L104">		currentSQ.setSurveyId(sq.getSurveyId());</span>
+<span class="fc" id="L105">		currentSQ.setQuestionId(sq.getQuestionId());</span>
+<span class="fc" id="L106">		currentSQ.setPosition(sq.getPosition());</span>
+<span class="fc" id="L107">		sqRepository.saveAndFlush(currentSQ);</span>
+
+<span class="fc" id="L109">		return new ResponseEntity&lt;&gt;(currentSQ, HttpStatus.OK);</span>
+	}
+
+	// delete an existing user
+	@DeleteMapping(&quot;/{id}&quot;)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; deleteSurveyQuestion(@PathVariable final Long id) {
+<span class="fc" id="L115">		Optional&lt;SurveyQuestion&gt; optSQ = sqRepository.findById(id);</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">		if (optSQ.isEmpty()) {</span>
+<span class="nc" id="L117">			return new ResponseEntity&lt;&gt;(</span>
+					new CustomErrorType(&quot;Unable to delete. SurveyQuestion with id &quot; + id + &quot; not found.&quot;),
+					HttpStatus.NOT_FOUND);
+		}
+<span class="fc" id="L121">		sqRepository.deleteById(id);</span>
+<span class="fc" id="L122">		return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

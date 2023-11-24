@@ -3,7 +3,7 @@ package franco.maurizio.hr.desk.com.persistence.entity.custom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
+import jakarta.persistence.Column;
 
 import franco.maurizio.hr.desk.com.persistence.entity.CeReProAbstractEntity;
 

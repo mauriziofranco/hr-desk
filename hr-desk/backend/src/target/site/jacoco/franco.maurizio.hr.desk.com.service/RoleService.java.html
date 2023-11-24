@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RoleService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.service</a> &gt; <span class="el_source">RoleService.java</span></div><h1>RoleService.java</h1><pre class="source lang-java linenums">package franco.maurizio.hr.desk.com.service;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import franco.maurizio.hr.desk.com.persistence.entity.Role;
+import franco.maurizio.hr.desk.com.persistence.repository.RoleRepository;
+
+/**
+ * 
+ * @author maurizio.franco@ymail.com
+ *
+ */
+@Service
+<span class="fc" id="L19">public class RoleService {</span>
+
+<span class="fc" id="L21">	public static final Logger logger = LoggerFactory.getLogger(RoleService.class);</span>
+
+	@Autowired
+	RoleRepository roleRepository;
+
+	/**
+	 * Provides list of role entities from repository
+	 * 
+	 * @return List&lt;Role&gt;, list of Role entity objects
+	 */
+	public List&lt;Role&gt; getAll() {
+<span class="fc" id="L32">		logger.info(&quot;getAll - START&quot;);</span>
+<span class="fc" id="L33">		List&lt;Role&gt; roles = roleRepository.findAll();</span>
+<span class="fc" id="L34">		logger.info(&quot;getAll - END - returning &quot; + roles.size() + &quot; roles.&quot;);</span>
+<span class="fc" id="L35">		return roles;</span>
+	}
+
+	/**
+	 * Try to delete all entities from role table
+	 */
+	public void deleteAll() {
+<span class="fc" id="L42">		logger.debug(&quot;deleteAll - START&quot;);</span>
+<span class="fc" id="L43">		roleRepository.deleteAll();</span>
+<span class="fc" id="L44">	}</span>
+	
+	/**
+	 * Provides to insert given role entity 
+	 * 
+	 * @return entity, Role entity just inserted
+	 */
+	public Role insert(Role entity) {
+<span class="nc" id="L52">		logger.info(&quot;insert - START - entity: {}&quot;, entity);</span>
+<span class="nc" id="L53">		entity = roleRepository.save(entity);</span>
+<span class="nc" id="L54">		logger.info(&quot;insert - END - returning inserted entity: {}&quot; + entity);</span>
+<span class="nc" id="L55">		return entity;</span>
+	}
+	
+	public Role selectByLevel(int level) {
+<span class="nc" id="L59">		logger.info(&quot;selectByLevel - START - level: {}&quot;, level);</span>
+<span class="nc" id="L60">		Role role = roleRepository.findByLevel(level);</span>
+<span class="nc" id="L61">		logger.info(&quot;selectByLevel - END - returning selectByLevel role: {}&quot; + role);</span>
+<span class="nc" id="L62">		return role;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

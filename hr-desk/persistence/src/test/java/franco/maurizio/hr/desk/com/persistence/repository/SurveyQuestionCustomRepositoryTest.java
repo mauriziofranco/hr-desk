@@ -1,30 +1,32 @@
 package franco.maurizio.hr.desk.com.persistence.repository;
 
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import franco.maurizio.hr.desk.com.persistence.entity.custom.SurveyQuestionCustom;
-import franco.maurizio.hr.desk.com.persistence.repository.SurveyRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.question.QuestionRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.surveyquestion.SurveyQuestionRepository;
 
 /**
  * Unit test for SurveyQuestionCustomRepository
  * @author joffre
+* @author maurizio.franco@ymail.com
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
 public class SurveyQuestionCustomRepositoryTest extends AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(SurveyQuestionCustomRepositoryTest.class);
@@ -40,8 +42,8 @@ public class SurveyQuestionCustomRepositoryTest extends AbstractRepositoryTest {
      * prepareDB method prepares the database in order to test
      * CandidateRepository's methods
      */
-	@Before
-	@After
+	@BeforeEach
+	@AfterEach
 	public void prepareDB () {
 		logger.info(" START -> prepareDB() ");
 		surveyQuestionRepository.deleteAll();

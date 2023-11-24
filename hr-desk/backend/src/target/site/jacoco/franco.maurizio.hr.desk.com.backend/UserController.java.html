@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.backend</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package franco.maurizio.hr.desk.com.backend;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Optional;
+
+import jakarta.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import franco.maurizio.hr.desk.com.persistence.entity.CeReProAbstractEntity;
+import franco.maurizio.hr.desk.com.persistence.entity.SurveyReply;
+import franco.maurizio.hr.desk.com.persistence.entity.User;
+import franco.maurizio.hr.desk.com.persistence.entity.custom.CustomErrorType;
+import franco.maurizio.hr.desk.com.persistence.repository.RoleRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.UserRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.surveyreply.SurveyReplyRepository;
+import franco.maurizio.hr.desk.com.service.UserService;
+
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * @author maurizio.franco@ymail.com
+ * @author joffre
+ * @author Orlando Platì
+ * 
+ *
+ */
+@RestController
+@RequestMapping(&quot;/api/v1/user&quot;)
+<span class="fc" id="L58">public class UserController {</span>
+
+<span class="fc" id="L60">	public static final Logger logger = LoggerFactory.getLogger(UserController.class);</span>
+
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
+
+	/**
+	 * getUsers method gets all users
+	 * 
+	 * @return a new ResponseEntity with the given status code
+	 */
+	@GetMapping(&quot;/&quot;)
+	public ResponseEntity&lt;List&lt;User&gt;&gt; getUsers() {
+<span class="fc" id="L76">		List&lt;User&gt; user = userService.getAll();</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">		if (user.isEmpty()) {</span>
+<span class="nc" id="L78">			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		}
+<span class="fc" id="L80">		return new ResponseEntity&lt;&gt;(user, HttpStatus.OK);</span>
+	}
+
+	@GetMapping(&quot;/email/{email}&quot;)
+	public ResponseEntity&lt;User&gt; getUserByEmail(@PathVariable final String email) {
+
+<span class="nc" id="L86">		Optional&lt;User&gt; user = userRepository.findByEmail(email);</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">		if (user.isPresent())</span>
+<span class="nc" id="L88">			return new ResponseEntity&lt;&gt;(user.get(), HttpStatus.OK);</span>
+		else
+<span class="nc" id="L90">			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+	}
+
+	/**
+	 * getPaginatedUsers method gets all users and return only a paginated list
+	 * 
+	 * @return a new ResponseEntity with the given status code
+	 */
+	@GetMapping(&quot;/paginated/{size}/{number}/&quot;)
+	public ResponseEntity&lt;Page&lt;User&gt;&gt; getPaginatedUsers(@PathVariable final int size,
+            @PathVariable final int number) {
+<span class="nc" id="L101">		Page&lt;User&gt; user = userRepository.findAll(PageRequest.of(number, size, Sort.Direction.ASC, &quot;regdate&quot;));</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">		if (user.isEmpty()) {</span>
+<span class="nc" id="L103">			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		}
+<span class="nc" id="L105">		return new ResponseEntity&lt;&gt;(user, HttpStatus.OK);</span>
+	}
+
+	/**
+	 * getUserById method gets a user by id
+	 * 
+	 * @param id of the user to be selected
+	 * @return a new ResponseEntity with the given status code
+	 */
+	@GetMapping(&quot;/{id}&quot;)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; getUserById(@PathVariable final Long id) {
+<span class="fc" id="L116">		Optional&lt;User&gt; optUser = userRepository.findById(id);</span>
+
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">		if (optUser.isEmpty()) {</span>
+<span class="nc" id="L119">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;Question with id &quot; + id + &quot; not found&quot;),</span>
+					HttpStatus.NOT_FOUND);
+		}
+
+<span class="fc" id="L123">		return new ResponseEntity&lt;&gt;(optUser.get(), HttpStatus.OK);</span>
+	}
+	
+	/**
+	 * getUserByRole method gets all users by role
+	 * 
+	 * @param role of the user to be selected
+	 * @return a new List &lt;ResponseEntity&gt; with the given status code
+	 */
+	@GetMapping(&quot;/role/{role}&quot;)
+	public ResponseEntity&lt;List&lt;User&gt;&gt; getUserByRole(@PathVariable final Integer role) {
+<span class="nc" id="L134">		List&lt;Optional&lt;User&gt;&gt; optionalUsers = userService.getByRole(role);</span>
+<span class="nc" id="L135">		List &lt;User&gt; users = new ArrayList&lt;User&gt;();</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">		if (optionalUsers.isEmpty()) {</span>
+<span class="nc" id="L137">			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		}
+<span class="nc bnc" id="L139" title="All 2 branches missed.">		for (Optional&lt;User&gt; u : optionalUsers) {</span>
+<span class="nc" id="L140">			users.add(u.get());</span>
+<span class="nc" id="L141">		}</span>
+<span class="nc" id="L142">		return new ResponseEntity&lt;&gt;(users, HttpStatus.OK);</span>
+	}
+
+	/**
+	 * createUser method creates a user
+	 * 
+	 * @param user to be created
+	 * @return a new ResponseEntity with the given status code
+	 */
+	@PostMapping(value = &quot;/&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; createUser(@Valid @RequestBody final User user) {
+<span class="fc" id="L153">		logger.info(&quot;Creating User : {}&quot;, user);</span>
+
+<span class="fc bfc" id="L155" title="All 2 branches covered.">		if (userRepository.findByEmail(user.getEmail()).isPresent()) {</span>
+
+<span class="fc" id="L157">			return new ResponseEntity&lt;&gt;(</span>
+					new CustomErrorType(
+<span class="fc" id="L159">							&quot;Unable to create new user. A User with email &quot; + user.getEmail() + &quot; already exist.&quot;),</span>
+					HttpStatus.CONFLICT);
+		}
+
+<span class="fc bfc" id="L163" title="All 2 branches covered.">		if (roleRepository.findByLevel(user.getRole()) == null) {</span>
+
+<span class="fc" id="L165">			return new ResponseEntity&lt;&gt;(</span>
+					new CustomErrorType(
+<span class="fc" id="L167">							&quot;Unable to create new user. Level &quot; + user.getRole() + &quot; is not present in database.&quot;),</span>
+					HttpStatus.CONFLICT);
+		}
+
+<span class="fc" id="L171">		user.setRegdate(LocalDateTime.now());</span>
+<span class="fc" id="L172">		System.out.println(&quot;user pass no cript &quot; + user.getPassword());</span>
+<span class="fc" id="L173">		String encoded = new BCryptPasswordEncoder().encode(user.getPassword());</span>
+<span class="fc" id="L174">		user.setPassword(encoded);</span>
+<span class="fc" id="L175">		System.out.println(&quot;user pass cript &quot; + user.getPassword());</span>
+<span class="fc" id="L176">		userRepository.save(user);</span>
+<span class="fc" id="L177">		return new ResponseEntity&lt;&gt;(user, HttpStatus.CREATED);</span>
+	}
+
+	/**
+	 * updateUser method updates a user
+	 * 
+	 * 
+	 * WARNING THIS METHOD UPDATES ONLY EMAIL, FIRSTNAME AND LASTNAME FIELDS
+	 * 
+	 * 
+	 * @param id   of the user to be updated
+	 * @param user with the fields updated
+	 * @return a new ResponseEntity with the given status code
+	 */
+	@PutMapping(value = &quot;/{id}&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; updateUser(@PathVariable final Long id, @RequestBody User user) {
+<span class="fc" id="L193">		Optional&lt;User&gt; optUser = userRepository.findById(id);</span>
+
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">		if (optUser.isEmpty()) {</span>
+<span class="nc" id="L196">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;Unable to upate. User with id &quot; + id + &quot; not found.&quot;),</span>
+					HttpStatus.NOT_FOUND);
+		}
+
+<span class="fc bfc" id="L200" title="All 2 branches covered.">		if (roleRepository.findByLevel(user.getRole()) == null) {</span>
+
+<span class="fc" id="L202">			return new ResponseEntity&lt;&gt;(</span>
+					new CustomErrorType(
+<span class="fc" id="L204">							&quot;Unable to update user. Level &quot; + user.getRole() + &quot; is not present in database.&quot;),</span>
+					HttpStatus.CONFLICT);
+		}
+
+		// REGISTRATION DATE HAVE NOT TO BE CHANGED!!!!!!!!!!!!!!
+		// so keep data from user and put all into currentUser (without regDate value!!!
+//		User currentUser = optUser.get();
+//		currentUser.setEmail(user.getEmail());
+////		currentUser.setPassword(user.getPassword());
+//		currentUser.setFirstname(user.getFirstname());
+//		currentUser.setLastname(user.getLastname());
+////		currentUser.setRole(user.getRole());
+////		currentUser.setEnabled(user.isEnabled());
+
+		try {
+<span class="fc" id="L219">			User currentUser = optUser.get();</span>
+<span class="fc" id="L220">			currentUser.setEmail(user.getEmail());</span>
+<span class="fc" id="L221">			currentUser.setFirstname(user.getFirstname());</span>
+<span class="fc" id="L222">			currentUser.setLastname(user.getLastname());</span>
+<span class="fc" id="L223">			currentUser.setRole(user.getRole());</span>
+<span class="fc" id="L224">			userRepository.save(currentUser);</span>
+<span class="fc" id="L225">			return new ResponseEntity&lt;&gt;(currentUser, HttpStatus.OK);</span>
+<span class="nc" id="L226">		} catch (Exception e) {</span>
+<span class="nc" id="L227">			logger.error(&quot;error&quot;, e);</span>
+<span class="nc" id="L228">			return new ResponseEntity&lt;CeReProAbstractEntity&gt;(new CustomErrorType(e.getMessage())  , HttpStatus.INTERNAL_SERVER_ERROR);</span>
+
+		}
+
+	}
+
+	/**
+	 * deleteUser method deletes a user
+	 * 
+	 * @param id of the user to be canceled
+	 * @return a new ResponseEntity with the given status code
+	 */
+	@DeleteMapping(&quot;/{id}&quot;)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; deleteUser(@PathVariable final Long id) {
+<span class="fc" id="L242">		Optional&lt;User&gt; optUser = userRepository.findById(id);</span>
+
+<span class="pc bpc" id="L244" title="1 of 2 branches missed.">		if (optUser.isEmpty()) {</span>
+<span class="nc" id="L245">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;Unable to delete. User with id &quot; + id + &quot; not found.&quot;),</span>
+					HttpStatus.NOT_FOUND);
+		}
+
+//		List&lt;UserTokenSurvey&gt; userTokenSurvey = userSurveyTokenRepository.findByUserId(id);
+//		List&lt;SurveyReply&gt; surveyReplies = surveyReplyRepository.findByUserId(id);
+
+//		if (!userTokenSurvey.isEmpty()) {
+//			return new ResponseEntity&lt;&gt;(
+//					new CustomErrorType(&quot;Unable to delete. User with id &quot; + id + &quot; is userTokenSurvey referenced.&quot;),
+//					HttpStatus.CONFLICT); // code 409
+//
+//		} else 
+//			if (!surveyReplies.isEmpty()) {
+//			return new ResponseEntity&lt;&gt;(
+//					new CustomErrorType(&quot;Unable to delete. User with id &quot; + id + &quot; is surveyReply referenced.&quot;),
+//					HttpStatus.CONFLICT); // code 409
+//		} else {
+<span class="fc" id="L263">			userRepository.delete(optUser.get());</span>
+<span class="fc" id="L264">			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT); // code 204</span>
+//		}
+	}
+	
+	@PatchMapping(&quot;/{id}&quot;)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; updateUserEnabledByid(@PathVariable final Long id) {
+		
+<span class="nc" id="L271">		Optional&lt;User&gt; optUser = userService.getById(id);</span>
+		
+<span class="nc bnc" id="L273" title="All 2 branches missed.">		if (optUser.isEmpty()) {</span>
+<span class="nc" id="L274">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;Unable to update. User with id &quot; + id + &quot; not found.&quot;),HttpStatus.NOT_FOUND);</span>
+		}
+		
+		try {
+<span class="nc bnc" id="L278" title="All 2 branches missed.">			boolean result = userService.updateEnabledById(id, !optUser.get().isEnabled());</span>
+<span class="nc" id="L279">			logger.info(&quot;&quot;+result);</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">			if (result) {</span>
+<span class="nc" id="L281">				User updatedUser = userService.getById(id).get();</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">				updatedUser.setEnabled(!updatedUser.isEnabled());</span>
+<span class="nc" id="L283">				return new ResponseEntity&lt;&gt;(updatedUser, HttpStatus.OK);</span>
+			} else {
+<span class="nc" id="L285">				return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;Unable to update. Something went wrong.&quot;), HttpStatus.INTERNAL_SERVER_ERROR);</span>
+			}
+<span class="nc" id="L287">		} catch (Exception e) {</span>
+<span class="nc" id="L288">			logger.error(&quot;error&quot;, e);</span>
+<span class="nc" id="L289">			return new ResponseEntity&lt;CeReProAbstractEntity&gt;(new CustomErrorType(e.getMessage())  , HttpStatus.INTERNAL_SERVER_ERROR);</span>
+
+		}
+		
+	}
+	
+	
+	@PatchMapping(&quot;/{id}/{pwd}&quot;)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; updatePasswordById(@PathVariable final Long id, @PathVariable(&quot;pwd&quot;) final String password) {
+<span class="nc" id="L298">		logger.info(&quot;updatePasswordById - START&quot;);</span>
+<span class="nc" id="L299">		Optional&lt;User&gt; optUser = userService.getById(id);</span>
+<span class="nc" id="L300">		logger.info(&quot;updatePasswordById - DEBUG - requesting update password for user id: {} &quot;, id);</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">	    if (optUser.isEmpty()) {</span>
+<span class="nc" id="L302">	        return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;Unable to update. User with id &quot; + id + &quot; not found.&quot;), HttpStatus.NOT_FOUND);</span>
+	    }
+	    try {
+<span class="nc" id="L305">	        User currentUser = optUser.get();</span>
+//	        String password = passwordHashtable.get(&quot;password&quot;);
+<span class="nc" id="L307">	        logger.info(&quot;updatePasswordById - DEBUG - requesting update password for user id {} with password {} to encode.&quot;, id, password);</span>
+<span class="nc" id="L308">	        String encoded = new BCryptPasswordEncoder().encode(password);</span>
+<span class="nc" id="L309">	        currentUser.setPassword(encoded);</span>
+<span class="nc" id="L310">	        User updatedUser = userRepository.save(currentUser);</span>
+<span class="nc" id="L311">	        return new ResponseEntity&lt;&gt;(updatedUser, HttpStatus.OK);</span>
+<span class="nc" id="L312">	    } catch (Exception e) {</span>
+<span class="nc" id="L313">	        logger.error(&quot;error&quot;, e);</span>
+<span class="nc" id="L314">	        return new ResponseEntity&lt;&gt;(new CustomErrorType(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);</span>
+	    }
+	}
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

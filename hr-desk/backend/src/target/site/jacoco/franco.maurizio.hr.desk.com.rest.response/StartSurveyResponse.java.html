@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StartSurveyResponse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.rest.response</a> &gt; <span class="el_source">StartSurveyResponse.java</span></div><h1>StartSurveyResponse.java</h1><pre class="source lang-java linenums">package franco.maurizio.hr.desk.com.rest.response;
+
+import java.util.List;
+
+/**
+ * Questa classe mi serve per inviare al frontend tutti i dati che ha bisogno.
+ * Infatti contiene la lista delle questione che l'utente deve rispondere
+ * L'id del candidato e il surveyId.
+ * @author Marco Fulgosi
+ * @author maurizio.franco@ymail.com
+ *
+ */
+public class StartSurveyResponse {
+	private List&lt;ResponseQuestion&gt; questions;
+	private long surveyId;
+	private long candidateId;
+	private long candidateTokenId;
+	private long time;
+	private String afterSurvey;
+	private String invalidToken;
+	private String expiredToken;
+
+	//private long surveyReplyId;
+	/*
+	 * 0 - Ok
+	 * 1 - Invalid Token 
+	 * 2 - Expired Token
+	 */
+	private int errorCode;
+	
+<span class="nc" id="L31">	public StartSurveyResponse() {</span>
+<span class="nc" id="L32">		this.errorCode = 0;</span>
+<span class="nc" id="L33">	}</span>
+
+	/**
+	 * @return the questions
+	 */
+	public List&lt;ResponseQuestion&gt; getQuestions() {
+<span class="nc" id="L39">		return questions;</span>
+	}
+
+	/**
+	 * @param questions the questions to set
+	 */
+	public void setQuestions(List&lt;ResponseQuestion&gt; questions) {
+<span class="nc" id="L46">		this.questions = questions;</span>
+<span class="nc" id="L47">	}</span>
+
+	/**
+	 * @return the surveyId
+	 */
+	public long getSurveyId() {
+<span class="nc" id="L53">		return surveyId;</span>
+	}
+
+	/**
+	 * @param surveyId the surveyId to set
+	 */
+	public void setSurveyId(long surveyId) {
+<span class="nc" id="L60">		this.surveyId = surveyId;</span>
+<span class="nc" id="L61">	}</span>
+
+	/**
+	 * @return the errorCode
+	 */
+	public int getErrorCode() {
+<span class="nc" id="L67">		return errorCode;</span>
+	}
+
+	/**
+	 * @param errorCode the errorCode to set
+	 */
+	public void setErrorCode(int errorCode) {
+<span class="nc" id="L74">		this.errorCode = errorCode;</span>
+<span class="nc" id="L75">	}</span>
+
+	/**
+	 * @return the time
+	 */
+	public long getTime() {
+<span class="nc" id="L81">		return time;</span>
+	}
+
+	/**
+	 * @param timer the timer to set
+	 */
+	public void setTime(long time) {
+<span class="nc" id="L88">		this.time = time;</span>
+<span class="nc" id="L89">	}</span>
+
+	/**
+	 * @return the afterSurvey
+	 */
+	public String getAfterSurvey() {
+<span class="nc" id="L95">		return afterSurvey;</span>
+	}
+
+	/**
+	 * @param afterSurvey the afterSurvey to set
+	 */
+	public void setAfterSurvey(String afterSurvey) {
+<span class="nc" id="L102">		this.afterSurvey = afterSurvey;</span>
+<span class="nc" id="L103">	}</span>
+
+	/**
+	 * @return the invalidToken
+	 */
+	public String getInvalidToken() {
+<span class="nc" id="L109">		return invalidToken;</span>
+	}
+
+	/**
+	 * @param invalidToken the invalidToken to set
+	 */
+	public void setInvalidToken(String invalidToken) {
+<span class="nc" id="L116">		this.invalidToken = invalidToken;</span>
+<span class="nc" id="L117">	}</span>
+
+	/**
+	 * @return the expiredToken
+	 */
+	public String getExpiredToken() {
+<span class="nc" id="L123">		return expiredToken;</span>
+	}
+
+	/**
+	 * @param expiredToken the expiredToken to set
+	 */
+	public void setExpiredToken(String expiredToken) {
+<span class="nc" id="L130">		this.expiredToken = expiredToken;</span>
+<span class="nc" id="L131">	}</span>
+
+	/**
+	 * @return the candidateId
+	 */
+	public long getCandidateId() {
+<span class="nc" id="L137">		return candidateId;</span>
+	}
+
+	/**
+	 * @param candidateId the candidateId to set
+	 */
+	public void setCandidateId(long candidateId) {
+<span class="nc" id="L144">		this.candidateId = candidateId;</span>
+<span class="nc" id="L145">	}</span>
+
+	/**
+	 * @return the candidateTokenId
+	 */
+	public long getCandidateTokenId() {
+<span class="nc" id="L151">		return candidateTokenId;</span>
+	}
+
+	/**
+	 * @param candidateTokenId the candidateTokenId to set
+	 */
+	public void setCandidateTokenId(long candidateTokenId) {
+<span class="nc" id="L158">		this.candidateTokenId = candidateTokenId;</span>
+<span class="nc" id="L159">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L163">		return &quot;StartSurveyResponse [questions=&quot; + questions + &quot;, surveyId=&quot; + surveyId + &quot;, candidateId=&quot; + candidateId</span>
+				+ &quot;, candidateTokenId=&quot; + candidateTokenId + &quot;, time=&quot; + time + &quot;, afterSurvey=&quot; + afterSurvey
+				+ &quot;, invalidToken=&quot; + invalidToken + &quot;, expiredToken=&quot; + expiredToken + &quot;, errorCode=&quot; + errorCode
+				+ &quot;]&quot;;
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

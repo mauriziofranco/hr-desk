@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: franco.maurizio.hr.desk.com.unit.backend.SurveyControllerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.568 s - in franco.maurizio.hr.desk.com.unit.backend.SurveyControllerTest

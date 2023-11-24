@@ -116,14 +116,16 @@ create table questions (
 	cansf BIT,
 	cansg BIT,
 	cansh BIT,
-	full_answer VARCHAR(3000)
+	full_answer VARCHAR(3000),
+	PRIMARY KEY (`id`)
 );
 
 create table surveys(
 	id bigint(20) NOT NULL AUTO_INCREMENT,
 	label VARCHAR(50) NOT NULL,
 	time bigint,
-	description VARCHAR(2000)
+	description VARCHAR(2000),
+	PRIMARY KEY (`id`)
 );
 
 create table surveyquestions (
@@ -133,7 +135,8 @@ create table surveyquestions (
     position int,
     foreign key (survey_id) references surveys(id),
     foreign key (question_id) references questions(id),
-    CONSTRAINT UC_SurveyQuestion UNIQUE (survey_id,question_id)
+    CONSTRAINT UC_SurveyQuestion UNIQUE (survey_id,question_id),
+    PRIMARY KEY (`id`)
     
 );
 
@@ -148,7 +151,8 @@ create table surveyreplies(
 	candidate_id bigint(20) NOT NULL,
 	generated_token varchar(50),
 	foreign key(survey_id) references surveys(id),
-	foreign key(candidate_id) references candidates(id)
+	foreign key(candidate_id) references candidates(id),
+	PRIMARY KEY (`id`)
 );
 
 create table candidatesurveytokens (

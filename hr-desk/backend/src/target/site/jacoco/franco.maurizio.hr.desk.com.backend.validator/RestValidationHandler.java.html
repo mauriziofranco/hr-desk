@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RestValidationHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.backend.validator</a> &gt; <span class="el_source">RestValidationHandler.java</span></div><h1>RestValidationHandler.java</h1><pre class="source lang-java linenums">package franco.maurizio.hr.desk.com.backend.validator;
+
+import java.awt.TrayIcon.MessageType;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@ControllerAdvice
+<span class="fc" id="L26">public class RestValidationHandler {</span>
+	
+<span class="fc" id="L28">	private static final Logger logger = LoggerFactory.getLogger(RestValidationHandler.class);</span>
+	
+	@Autowired
+	private MessageSource messageSource;
+	
+
+	// method to handle validation error
+//	@ExceptionHandler(MethodArgumentNotValidException.class)
+//	@ResponseStatus(HttpStatus.BAD_REQUEST)
+//	public ResponseEntity&lt;FieldValidationErrorDetails&gt; handleValidationError(
+//			MethodArgumentNotValidException mNotValidException, HttpServletRequest request) {
+//		logger.warn(&quot;#################&quot;);
+//		logger.warn(&quot;#################&quot;);
+//		logger.warn(&quot;#################&quot;);
+//		logger.warn(&quot;#################&quot;);
+//		logger.warn(&quot;#################&quot;);
+//		logger.warn(&quot;WARNING&quot;);
+//		logger.warn(&quot;#################&quot;);
+//		logger.warn(&quot;#################&quot;);
+//		logger.warn(&quot;#################&quot;);
+//		logger.warn(&quot;#################&quot;);
+//		logger.warn(&quot;#################&quot;);
+//		FieldValidationErrorDetails fErrorDetails = new FieldValidationErrorDetails();
+//		fErrorDetails.setError_timeStamp(new Date().getTime());
+//		fErrorDetails.setError_status(HttpStatus.BAD_REQUEST.value());
+//		fErrorDetails.setError_title(&quot;Field Validation Error&quot;);
+//		fErrorDetails.setError_detail(&quot;Inut Field Validation Failed&quot;);
+//		fErrorDetails.setError_developer_Message(mNotValidException.getClass().getName());
+//		fErrorDetails.setError_path(request.getRequestURI());
+//
+//		BindingResult result = mNotValidException.getBindingResult();
+//		List&lt;FieldError&gt; fieldErrors = result.getFieldErrors();
+//		for (FieldError error : fieldErrors) {
+//			FieldValidationError fError = processFieldError(error);
+//			List&lt;FieldValidationError&gt; fValidationErrorsList = fErrorDetails.getErrors().get(error.getField());
+//			if (fValidationErrorsList == null) {
+//				fValidationErrorsList = new ArrayList&lt;FieldValidationError&gt;();
+//			}
+//			fValidationErrorsList.add(fError);
+//			fErrorDetails.getErrors().put(error.getField(), fValidationErrorsList);
+//		}
+//		return new ResponseEntity&lt;FieldValidationErrorDetails&gt;(fErrorDetails, HttpStatus.BAD_REQUEST);
+//	}
+//
+//	// method to process field error
+//	private FieldValidationError processFieldError(final FieldError error) {
+//		logger.warn(&quot;processFieldError - START - error: &quot; + error);
+//		FieldValidationError fieldValidationError = new FieldValidationError();
+//		if (error != null) {
+//			Locale currentLocale = LocaleContextHolder.getLocale();
+//			//logger.info(&quot;processFieldError - DEBUG - error.getDefaultMessage(): &quot; + error.getDefaultMessage());
+//			String msg = messageSource.getMessage(
+//			error.getDefaultMessage(), null, currentLocale);
+//			fieldValidationError.setFiled(error.getField());
+//			fieldValidationError.setType(MessageType.ERROR);
+//			fieldValidationError.setMessage(msg);
+//		}
+//		logger.warn(&quot;processFieldError - END - fieldValidationError: &quot; + fieldValidationError);
+//		return fieldValidationError;
+//	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

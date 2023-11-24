@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SurveyReplyRequestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.backend</a> &gt; <span class="el_source">SurveyReplyRequestController.java</span></div><h1>SurveyReplyRequestController.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package franco.maurizio.hr.desk.com.backend;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import jakarta.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import franco.maurizio.hr.desk.com.persistence.entity.CandidateSurveyToken;
+import franco.maurizio.hr.desk.com.persistence.entity.CeReProAbstractEntity;
+import franco.maurizio.hr.desk.com.persistence.entity.SurveyReply;
+import franco.maurizio.hr.desk.com.persistence.entity.custom.CustomErrorType;
+import franco.maurizio.hr.desk.com.persistence.repository.SurveyRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.UserRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.surveyreply.SurveyReplyRepository;
+import franco.maurizio.hr.desk.com.rest.request.SurveyReplyRequest;
+import franco.maurizio.hr.desk.com.rest.request.SurveyReplyStartRequest;
+import franco.maurizio.hr.desk.com.service.SurveyReplyRequestService;
+
+
+/**
+ * @author Marco Fulgosi
+ * @author Antonio Iannaccone - Roma Academy VII
+ *
+ */
+
+@RestController
+@RequestMapping(&quot;/api/v1/surveyreplyrequest&quot;)
+<span class="fc" id="L46">public class SurveyReplyRequestController {</span>
+
+	@Autowired
+	private SurveyRepository surveyRepository;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private SurveyReplyRepository surveyReplyRepository;
+	@Autowired
+	private SurveyReplyRequestService surveyReplyRequestService;
+	@Autowired
+	private CandidateSurveyTokenRepository candidateSurveyTokenRepository;
+	@Autowired
+	PdfController pdfController;
+	@Autowired
+	private Environment env;
+	
+<span class="fc" id="L63">	public static final Logger logger = LoggerFactory.getLogger(SurveyReplyRequestController.class);</span>
+	/** CREATE A NEW SURVEY REPLY REQUEST */
+	@PostMapping(value = &quot;/&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; insertSurveyReply(@Valid @RequestBody final SurveyReplyRequest surveyReplyRequest) {
+<span class="fc" id="L67">		logger.info(&quot;insertSurveyReply - START - surveyReplyRequest: {}&quot;, surveyReplyRequest);</span>
+		
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">		if (surveyRepository.findById(surveyReplyRequest.getSurveyId())==null)</span>
+<span class="nc" id="L70">			return new ResponseEntity&lt;&gt;(</span>
+<span class="nc" id="L71">					new CustomErrorType(&quot;Unable to create new Survey Reply. Survey Id: &quot; + surveyReplyRequest.getSurveyId()</span>
+							+ &quot; is not present in database.&quot;),HttpStatus.CONFLICT);
+		
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">		if (userRepository.findById(surveyReplyRequest.getUserId()) == null)</span>
+<span class="nc" id="L75">			return new ResponseEntity&lt;&gt;(</span>
+<span class="nc" id="L76">					new CustomErrorType(&quot;Unable to create new Survey Reply. User id: &quot; + surveyReplyRequest.getUserId()</span>
+							+ &quot; is not present in database.&quot;),HttpStatus.CONFLICT);
+		
+		/* Creating a SurveyReply by SurveyReplyRequest */
+<span class="fc" id="L80">		SurveyReply surveyReply = new SurveyReply();</span>
+<span class="fc" id="L81">		surveyReply.setSurveyId(surveyReplyRequest.getSurveyId());</span>
+<span class="fc" id="L82">		surveyReply.setCandidateId(surveyReplyRequest.getUserId());</span>
+<span class="fc" id="L83">		surveyReply.setStarttime(surveyReplyRequest.getStarttime());</span>
+<span class="fc" id="L84">		surveyReply.setEndtime(surveyReplyRequest.getEndtime());</span>
+		
+<span class="fc" id="L86">		surveyReply.setAnswers(surveyReplyRequestService.answersToString(surveyReplyRequest.getAnswers()));</span>
+<span class="fc" id="L87">		surveyReply.setPoints(surveyReplyRequestService.calculateScore(surveyReplyRequest.getAnswers()).toString()); </span>
+<span class="fc" id="L88">		surveyReply.setPdffilename(&quot;Risposte del candidato n.&quot;+surveyReplyRequest.getUserId()+&quot; Al questionario n.&quot;+surveyReplyRequest.getSurveyId());</span>
+<span class="fc" id="L89">		surveyReply.setGenerated_token(surveyReplyRequest.getGenerated_token());</span>
+		
+<span class="fc" id="L91">		surveyReplyRepository.save(surveyReply);</span>
+<span class="fc" id="L92">		return new ResponseEntity&lt;&gt;(surveyReply, HttpStatus.CREATED);</span>
+	}
+	
+	/** CREATE A NEW START SURVEY REPLY */
+	@PostMapping(value = &quot;/start/&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; insertStartSurveyReply(@Valid @RequestBody final SurveyReplyStartRequest surveyReplyRequest) {
+<span class="nc" id="L98">		logger.info(&quot;Creating Survey Reply : {}&quot;, surveyReplyRequest);</span>
+		
+<span class="nc bnc" id="L100" title="All 2 branches missed.">		if (surveyRepository.findById(surveyReplyRequest.getSurveyId())==null)</span>
+<span class="nc" id="L101">			return new ResponseEntity&lt;&gt;(</span>
+<span class="nc" id="L102">					new CustomErrorType(&quot;Unable to create new Survey Reply. Survey Id: &quot; + surveyReplyRequest.getSurveyId()</span>
+							+ &quot; is not present in database.&quot;),HttpStatus.CONFLICT);
+		
+<span class="nc bnc" id="L105" title="All 2 branches missed.">		if (userRepository.findById(surveyReplyRequest.getCandidateId()) == null)</span>
+<span class="nc" id="L106">			return new ResponseEntity&lt;&gt;(</span>
+<span class="nc" id="L107">					new CustomErrorType(&quot;Unable to create new Survey Reply. User id: &quot; + surveyReplyRequest.getCandidateId()</span>
+							+ &quot; is not present in database.&quot;),HttpStatus.CONFLICT);
+		
+		/* Creating a SurveyReply by SurveyReplyRequest */
+<span class="nc" id="L111">		SurveyReply surveyReply = new SurveyReply();</span>
+<span class="nc" id="L112">		surveyReply.setSurveyId(surveyReplyRequest.getSurveyId());</span>
+<span class="nc" id="L113">		surveyReply.setCandidateId(surveyReplyRequest.getCandidateId());</span>
+<span class="nc" id="L114">		surveyReply.setStarttime(LocalDateTime.now());</span>
+<span class="nc" id="L115">		surveyReply.setGenerated_token(surveyReplyRequest.getGenerated_token());</span>
+			
+<span class="nc" id="L117">		surveyReplyRepository.save(surveyReply);</span>
+		
+<span class="nc" id="L119">		logger.info(&quot;surveyReplyRequest.getUserTokenId() &quot;+surveyReplyRequest.getUserTokenId());</span>
+		
+<span class="nc" id="L121">		Optional&lt;CandidateSurveyToken&gt; candidateSurveyToken = candidateSurveyTokenRepository.findById(surveyReplyRequest.getUserTokenId());</span>
+
+<span class="nc" id="L123">		CandidateSurveyToken currentCandidateSurveyToken = candidateSurveyToken.get();</span>
+<span class="nc" id="L124">		currentCandidateSurveyToken.setExpired(true);</span>
+<span class="nc" id="L125">		candidateSurveyTokenRepository.save(currentCandidateSurveyToken); </span>
+
+<span class="nc" id="L127">		return new ResponseEntity&lt;&gt;(surveyReply, HttpStatus.CREATED);</span>
+	}
+	
+	/** END SURVEY REPLY */
+	@PutMapping(value = &quot;/end/{id}&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; updateSurvay(@PathVariable final Long id, @RequestBody SurveyReplyRequest surveyReplyRequest) {
+
+
+<span class="nc" id="L135">		Optional&lt;SurveyReply&gt; optSurveyReply = surveyReplyRepository.findById(id);</span>
+
+<span class="nc bnc" id="L137" title="All 2 branches missed.">		if (optSurveyReply.isEmpty()) {</span>
+<span class="nc" id="L138">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;Unable to upate. User with id &quot; + id + &quot; not found.&quot;), HttpStatus.NOT_FOUND);</span>
+		}
+		
+<span class="nc" id="L141">		SurveyReply currentSurveyReply = optSurveyReply.get(); </span>
+<span class="nc" id="L142">		currentSurveyReply.setEndtime(LocalDateTime.now());</span>
+<span class="nc" id="L143">		currentSurveyReply.setAnswers(surveyReplyRequestService.answersToString(surveyReplyRequest.getAnswers()));</span>
+//		currentSurveyReply.setPoints(surveyReplyRequestService.pointsCalculator(surveyReplyRequest.getAnswers()).toString()); 
+<span class="nc" id="L145">		currentSurveyReply.setPoints(surveyReplyRequestService.calculateScore(surveyReplyRequest.getAnswers())); </span>
+	 
+<span class="nc" id="L147">		currentSurveyReply.setGenerated_token(surveyReplyRequest.getGenerated_token());</span>
+		
+<span class="nc" id="L149">		surveyReplyRepository.save(currentSurveyReply);</span>
+		
+<span class="nc" id="L151">		pdfController.createPdfForSurveyFromId(currentSurveyReply.getId());</span>
+		
+<span class="nc" id="L153">		return new ResponseEntity&lt;&gt;(currentSurveyReply, HttpStatus.OK);</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

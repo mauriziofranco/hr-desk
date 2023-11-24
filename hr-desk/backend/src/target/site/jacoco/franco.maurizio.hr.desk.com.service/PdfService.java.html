@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PdfService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.service</a> &gt; <span class="el_source">PdfService.java</span></div><h1>PdfService.java</h1><pre class="source lang-java linenums">package franco.maurizio.hr.desk.com.service;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+
+import com.google.gson.Gson;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import franco.maurizio.hr.desk.com.backend.QuestionController;
+import franco.maurizio.hr.desk.com.dto.AswerJsonResponse;
+import franco.maurizio.hr.desk.com.dto.QuestionAndReply;
+import franco.maurizio.hr.desk.com.mail.manager.MailUtility;
+import franco.maurizio.hr.desk.com.persistence.entity.Candidate;
+import franco.maurizio.hr.desk.com.persistence.entity.Survey;
+import franco.maurizio.hr.desk.com.persistence.entity.SurveyReply;
+import franco.maurizio.hr.desk.com.persistence.entity.User;
+import franco.maurizio.hr.desk.com.persistence.entity.custom.QuestionCustom;
+import franco.maurizio.hr.desk.com.persistence.repository.SurveyRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.UserRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.candidate.CandidateRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.surveyreply.SurveyReplyRepository;
+
+/**
+ * 
+ * @author git-DaimCod
+ *
+ */
+@Service
+<span class="fc" id="L44">public class PdfService {</span>
+
+<span class="fc" id="L46">	public static final Logger logger = LoggerFactory.getLogger(</span>
+			QuestionController.class);
+
+	@Autowired
+	private SurveyReplyRepository surveyReplyRepository;
+
+	@Autowired
+	private CandidateService candidateService;
+	
+	@Autowired
+	private QuestionService questionService;
+
+	@Autowired
+	private SurveyRepository surveyRepository;
+	
+	@Autowired
+	private Environment env;
+	
+	@Autowired
+	private SurveyReplyService surveyReplyService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private CandidateRepository candidateRepository;
+
+	public boolean generatePdf(Long surveyReplyId) {
+		
+<span class="nc" id="L75">		logger.debug(&quot;################### generatePdf START ###################&quot;);</span>
+		
+<span class="nc" id="L77">		Optional&lt;SurveyReply&gt; surveyReply = surveyReplyRepository.findById(surveyReplyId);</span>
+<span class="nc" id="L78">		Optional&lt;Survey&gt; survey = surveyRepository.findById(surveyReply.get().getSurveyId());</span>
+<span class="nc" id="L79">		Optional&lt;Candidate&gt; candidate = candidateService.getById(surveyReply</span>
+<span class="nc" id="L80">				.get().getCandidateId());</span>
+<span class="nc" id="L81">		List&lt;QuestionCustom&gt; questionCustomList = questionService.getAllQuestionCustomListFromSurveyId(surveyReply.get().getSurveyId());</span>
+<span class="nc" id="L82">		List&lt;QuestionAndReply&gt; questionReplyList = null;</span>
+		
+		try {
+<span class="nc" id="L85">			questionReplyList = this.createQuestionReplyList(questionCustomList, surveyReply.get().getAnswers());</span>
+			//System.out.println(&quot;######## QUESTION LIST è null? &quot; + questionCustomList == null);
+<span class="nc bnc" id="L87" title="All 2 branches missed.">			if(questionReplyList == null)</span>
+<span class="nc" id="L88">				return false;</span>
+<span class="nc" id="L89">		} catch (Exception e1) {</span>
+<span class="nc" id="L90">			e1.printStackTrace();</span>
+<span class="nc" id="L91">			return false;</span>
+<span class="nc" id="L92">		}</span>
+		
+<span class="nc" id="L94">		logger.debug(&quot;################### SURVEY FOUND WITH ID: &quot; + surveyReply</span>
+<span class="nc" id="L95">				.get().getId());</span>
+		
+<span class="nc bnc" id="L97" title="All 2 branches missed.">		if (surveyReply.isEmpty()) {</span>
+<span class="nc" id="L98">			return false;</span>
+		}
+		
+		
+<span class="nc" id="L102">		Document document = new Document();</span>
+<span class="nc" id="L103">		String path = env.getProperty(&quot;app.folder.candidate.survey.pdf&quot;);</span>
+<span class="nc" id="L104">		logger.info(&quot;generatePdf - DEBUG - app.folder.candidate.survey.pdf: &quot; + path);</span>
+<span class="nc" id="L105">		String name = LocalDateTime.now().format(DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd--HH:mm:ss&quot;)) + &quot;_&quot; + surveyReply.get().getId() + &quot;.pdf&quot;;</span>
+<span class="nc" id="L106">		String fileName = path.concat(File.separator).concat(name);</span>
+<span class="nc" id="L107">		boolean pdfGenerated = false ;</span>
+		try {
+<span class="nc" id="L109">			PdfWriter.getInstance(document, new FileOutputStream(</span>
+					fileName
+					)
+					);
+<span class="nc" id="L113">			logger.info(&quot;generatePdf - DEBUG - pdf generated: {}&quot;, fileName);</span>
+			
+<span class="nc" id="L115">			document.open();</span>
+			
+<span class="nc" id="L117">			List&lt;String&gt; listaStr = convertInfoToString(candidate.get(), surveyReply</span>
+<span class="nc" id="L118">					.get(), questionCustomList, survey.get(), questionReplyList);</span>
+			
+<span class="nc bnc" id="L120" title="All 2 branches missed.">			for (String a : listaStr) {</span>
+<span class="nc" id="L121">				Paragraph para = new Paragraph(a);</span>
+				try {
+<span class="nc" id="L123">					document.add(para);</span>
+<span class="nc" id="L124">				} catch (DocumentException e) {</span>
+<span class="nc" id="L125">					e.printStackTrace();</span>
+<span class="nc" id="L126">				}</span>
+<span class="nc" id="L127">			}</span>
+			
+<span class="nc" id="L129">			document.close();</span>
+			
+<span class="nc" id="L131">			pdfGenerated = surveyReplyService.updatePdfName(name, surveyReply.get().getId());</span>
+<span class="nc" id="L132">			surveyReply = surveyReplyRepository.findById(surveyReplyId) ;</span>
+<span class="nc" id="L133">			logger.info(&quot;generatePdf - DEBUG - Providing pdf for surveyReply object retrieved: {}&quot;, surveyReply.get());</span>
+<span class="nc" id="L134">			String pdffilename = surveyReply.get().getPdffilename();</span>
+<span class="nc bnc" id="L135" title="All 4 branches missed.">			if (pdfGenerated&amp;&amp;pdffilename!=null) {</span>
+<span class="nc" id="L136">				logger.info(&quot;generatePdf - DEBUG - Launghing email generation...&quot;);</span>
+<span class="nc" id="L137">				sendEmailWithPdf(candidate.get().getId(), surveyReply.get());</span>
+			} else {
+<span class="nc" id="L139">			    logger.error(&quot;Nessun PDF trovato da inviare.&quot;);</span>
+			}
+			
+//			return true;
+<span class="nc" id="L143">		} catch (FileNotFoundException e) {</span>
+<span class="nc" id="L144">			e.printStackTrace();</span>
+<span class="nc" id="L145">		} catch (DocumentException e) {</span>
+<span class="nc" id="L146">			e.printStackTrace();</span>
+<span class="nc" id="L147">		}</span>
+		
+<span class="nc" id="L149">		return pdfGenerated;	</span>
+	}
+	
+	private void sendEmailWithPdf (long candidateId, SurveyReply surveyReply) {
+		try {
+<span class="nc" id="L154">			Optional&lt;Candidate&gt; optCandidate = candidateRepository.findById(candidateId);</span>
+<span class="nc" id="L155">			long insertedBy = optCandidate.get().getInsertedBy();</span>
+<span class="nc" id="L156">			Optional&lt;User&gt; optUser = userRepository.findById(insertedBy);</span>
+<span class="nc" id="L157">			String recipient = optUser.get().getEmail();</span>
+			
+<span class="nc" id="L159">		    String subject = &quot;Nuovo PDF generato da &quot; + optCandidate.get().getFirstname() + optCandidate.get().getLastname();</span>
+<span class="nc" id="L160">		    String mess = &quot;Ciao, in allegato il PDF generato al termine del questionario compilato da &quot; + optCandidate.get().getFirstname() + &quot; &quot; + optCandidate.get().getLastname() + &quot;, candidato con ID &quot; + optCandidate.get().getId() + &quot;.&quot;;</span>
+		    
+<span class="nc" id="L162">		    String path = env.getProperty(&quot;app.folder.candidate.survey.pdf&quot;);</span>
+			//String name = optCandidate.get().getFirstname() + &quot;-&quot; + optCandidate.get().getLastname() + &quot;-&quot; 
+<span class="nc" id="L164">		    String attachmentName = optCandidate.get().getFirstname() + &quot;-&quot; + optCandidate.get().getLastname() + &quot;-&quot; </span>
+<span class="nc" id="L165">        			+ surveyReply.getStarttime().getMonthValue() + &quot;-&quot; </span>
+<span class="nc" id="L166">					+ surveyReply.getStarttime().getDayOfMonth() + &quot;-&quot; </span>
+<span class="nc" id="L167">					+ surveyReply.getId() + &quot;.pdf&quot;;</span>
+		    //String attachmentPath = path.concat(File.separator).concat(name);
+<span class="nc" id="L169">			String originalPdfFileName = surveyReply.getPdffilename();</span>
+<span class="nc" id="L170">			String attachmentPath = path.concat(File.separator).concat(originalPdfFileName);</span>
+		    
+		    //String attachmentName = pdfFileName;
+		    
+<span class="nc" id="L174">		    logger.info(&quot;sendEmailWithPdf - DEBUG - recipient={} - subject={} - mess={}, attachmentPath={}, attachmentName={}&quot;, recipient, subject, mess, attachmentPath, attachmentName);</span>
+<span class="nc" id="L175">		    boolean mailSent = MailUtility.sendMailWithAttachment(recipient, subject, mess, attachmentPath, attachmentName);</span>
+
+<span class="nc bnc" id="L177" title="All 2 branches missed.">		    if (mailSent) {</span>
+<span class="nc" id="L178">		        logger.info(&quot;E-mail inviata con successo.&quot;);</span>
+		    } else {
+<span class="nc" id="L180">		        logger.error(&quot;Errore durante l'invio dell'e-mail.&quot;);</span>
+		    }
+<span class="nc" id="L182">		} catch (Exception e) {</span>
+<span class="nc" id="L183">			logger.error(e.getMessage(), e);</span>
+<span class="nc" id="L184">		}</span>
+<span class="nc" id="L185">	}</span>
+
+	private List&lt;QuestionAndReply&gt; createQuestionReplyList(
+			List&lt;QuestionCustom&gt; questionCustomList, String answers) throws Exception{
+		
+<span class="nc" id="L190">		List&lt;QuestionAndReply&gt; lista = new ArrayList&lt;QuestionAndReply&gt;();</span>
+<span class="nc" id="L191">		logger.info(&quot;createQuestionReplyList - DEBUG - #### DIMENSIONE QUESTION CUSTOM LIST : &quot; + questionCustomList.size() + &quot; ######&quot;);</span>
+		
+//		ObjectMapper mapper = new ObjectMapper();
+<span class="nc" id="L194">		Gson gson = new Gson(); </span>
+<span class="nc" id="L195">		logger.info(&quot;createQuestionReplyList - DEBUG - answers: {}&quot;, answers);</span>
+<span class="nc" id="L196">		AswerJsonResponse[] qarArray = gson.fromJson(answers, AswerJsonResponse[].class); </span>
+<span class="nc" id="L197">		logger.info(&quot;qarArray.length: &quot; + qarArray.length);</span>
+<span class="nc" id="L198">		logger.info(&quot;questionCustomList.size(): &quot; + questionCustomList.size());</span>
+//		int i = 0;
+<span class="nc bnc" id="L200" title="All 4 branches missed.">		if(answers == null || answers.equals(&quot;&quot;))</span>
+<span class="nc" id="L201">			return null;</span>
+		try {
+//			List&lt;QuestionAndReply&gt; qaaq = mapper.readValue(answers, List&lt;QuestionAndReply.class&gt;);
+<span class="nc bnc" id="L204" title="All 2 branches missed.">			for(QuestionCustom es : questionCustomList) {</span>
+<span class="nc" id="L205">				logger.info(&quot;createQuestionReplyList - DEBUG - &quot; + es);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">				for (int i=0; i&lt;qarArray.length; i++) {</span>
+<span class="nc" id="L207">					logger.info(&quot;qarArray[i].getQuestionId(): &quot;+qarArray[i].getQuestionId());</span>
+<span class="nc" id="L208">					logger.info(&quot;es.getId(): &quot; + es.getId());</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">					if (qarArray[i].getQuestionId()==es.getId()) {</span>
+<span class="nc" id="L210">						QuestionAndReply qar = new QuestionAndReply(es.getId(), es.getLabel(), es.getDescription(), </span>
+<span class="nc" id="L211">								es.getAnsa(), es.getAnsb(), es.getAnsc(), es.getAnsd(), es.getAnse(), es.getAnsf(), </span>
+<span class="nc" id="L212">								es.getAnsg(), es.getAnsh(), es.getCansa(), es.getCansb(), es.getCansc(), es.getCansd(), </span>
+<span class="nc" id="L213">								es.getCanse(), es.getCansf(), es.getCansg(), es.getCansh() , es.getFullAnswer(), es.getPosition(),</span>
+<span class="nc" id="L214">								qarArray[i].getQuestionId(), qarArray[i].getCansa(), qarArray[i].getCansb(), qarArray[i].getCansc(), qarArray[i].getCansd(), qarArray[i].getCanse(),</span>
+<span class="nc" id="L215">								qarArray[i].getCansf(), qarArray[i].getCansg(), qarArray[i].getCansh());</span>
+<span class="nc" id="L216">						logger.info(&quot;createQuestionReplyList - DEBUG - qar={}&quot;, qar);</span>
+<span class="nc" id="L217">						lista.add(qar);</span>
+					}
+				}
+//				for(; i &lt; questionCustomList.size()-1; i++) {
+//				
+//					QuestionAndReply qar = new QuestionAndReply(es.getId(), es.getLabel(), es.getDescription(), 
+//							es.getAnsa(), es.getAnsb(), es.getAnsc(), es.getAnsd(), es.getAnse(), es.getAnsf(), 
+//							es.getAnsg(), es.getAnsh(), es.getCansa(), es.getCansb(), es.getCansc(), es.getCansd(), 
+//							es.getCanse(), es.getCansf(), es.getCansg(), es.getCansh() , es.getFullAnswer(), es.getPosition(),
+//							qarArray[i].getQuestionId(), qarArray[i].getUserCansa(), qarArray[i].getUserCansb(), qarArray[i].getUserCansc(), qarArray[i].getUserCansd(), qarArray[i].getUserCanse(),
+//							qarArray[i].getUserCansf(), qarArray[i].getUserCansg(), qarArray[i].getUserCansh());
+//					lista.add(qar);
+//				}
+<span class="nc" id="L230">			}</span>
+//			System.out.println(&quot;####### POSIZIONE: &quot; + i);
+//			for(QuestionCustom es : questionCustomList) {
+//				
+//				System.out.println(es.toString());
+//				System.out.println(&quot;\n\n&quot;);
+//				System.out.println(&quot;####### POSIZIONE: &quot; + i);
+//				i++;
+//			}
+<span class="nc" id="L239">		} catch (Exception e) {</span>
+<span class="nc" id="L240">			e.printStackTrace();</span>
+<span class="nc" id="L241">			return null;</span>
+<span class="nc" id="L242">		}</span>
+		
+		
+<span class="nc" id="L245">		return lista;</span>
+	}
+
+	private List&lt;String&gt; convertInfoToString(Candidate candidate,
+			SurveyReply surveyReply,
+			List&lt;QuestionCustom&gt; questionCustomList,
+			Survey survey, List&lt;QuestionAndReply&gt; questionReplyList) {
+		
+<span class="nc" id="L253">		List&lt;String&gt; lista = new ArrayList&lt;String&gt;();</span>
+
+<span class="nc" id="L255">		String s = &quot;Candidate complete name: &quot;;</span>
+//		s += candidate.getClass().getSimpleName().toUpperCase() + &quot;\n&quot;;
+//		s += &quot;ID: &quot; + candidate.getId() + &quot;\n&quot;;
+//		s += &quot;Course code: &quot; + candidate.getCourseCode() + &quot;\n&quot;;
+//		s += &quot;Email: &quot; + candidate.getEmail() + &quot;\n&quot;;
+//		s += &quot;Firstname: &quot; + candidate.getFirstname() + &quot;\n&quot;;
+//		s += &quot;Lastname: &quot; + candidate.getLastname() + &quot;\n&quot;;		
+<span class="nc" id="L262">		s += candidate.getFirstname() + &quot; &quot; + candidate.getLastname() + &quot;\n&quot;;</span>
+<span class="nc" id="L263">		s += &quot;Candidate email: &quot; + candidate.getEmail() + &quot;\n&quot;;</span>
+//		s += &quot;DateOfBirth: &quot; + candidate.getDateOfBirth() + &quot;\n&quot;;
+//		s += &quot;Residential city: &quot; + candidate.getDomicileCity() + &quot;\n&quot;;
+//		s += &quot;Mobile: &quot; + candidate.getMobile() + &quot;\n&quot;;
+//		s += &quot;StudyQualification: &quot; + candidate.getStudyQualification() + &quot;\n&quot;;
+//		s += &quot;HrNote: &quot; + candidate.getHrNote() + &quot;\n&quot;;
+//		s += &quot;Inserted by: &quot; + candidate.getInsertedBy() + &quot;\n&quot;;
+//		s += &quot;Is graduadated: &quot; + candidate.getGraduate() + &quot;\n&quot;;
+//		s += &quot;CV path: &quot; + candidate.getCvExternalPath() + &quot;\n&quot;;
+//		s += &quot;When did he candidated: &quot; + candidate.getCandidacyDateTime()
+//				+ &quot;\n&quot;;
+//		s += &quot;Status code: &quot; + candidate.getCandidateStatusCode() + &quot;\n&quot;;
+//		s += &quot;Image path: &quot; + candidate.getImgpath() + &quot;\n\n\n\n\n&quot;;
+		
+<span class="nc" id="L277">		lista.add(s);</span>
+		
+
+//		s = &quot;&quot;;
+//		s += surveyReply.getClass().getSimpleName().toUpperCase() + &quot;\n&quot;;
+//		s += &quot;ID survey: &quot; + surveyReply.getSurveyId() + &quot;\n&quot;;
+//		s += &quot;Candidate ID:&quot; + surveyReply.getCandidateId() + &quot;\n&quot;;
+//		s += &quot;Start time: &quot; + surveyReply.getStarttime() + &quot;\n&quot;;
+//		s += &quot;End time: &quot; + surveyReply.getEndtime() + &quot;\n&quot;;
+//		s += &quot;Point: &quot; + surveyReply.getPoints() + &quot;\n&quot;;
+//		s += &quot;Answers:&quot; + surveyReply.getAnswers() + &quot;\n\n\n\n\n&quot;;
+		
+<span class="nc" id="L289">		s = &quot;&quot;;</span>
+<span class="nc" id="L290">		s += &quot;Exam name: &quot; + survey.getLabel() + &quot;(&quot; + questionCustomList.size() + &quot; questions)\n&quot;;</span>
+<span class="nc" id="L291">		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
+<span class="nc" id="L292">		s += &quot;Exam execution day: &quot; + surveyReply.getStarttime().format(formatter) + &quot;\n&quot;;</span>
+<span class="nc" id="L293">		s += &quot;Survey max execution time: &quot; + survey.getTime() + &quot; minuti\n&quot;;</span>
+<span class="nc" id="L294">		formatter = DateTimeFormatter.ofPattern(&quot;HH:mm:ss&quot;);</span>
+<span class="nc" id="L295">		s += &quot;Start time: &quot; + surveyReply.getStarttime().format(formatter) + &quot; - End time: &quot; + surveyReply.getEndtime().format(formatter) + &quot;\n&quot;;</span>
+<span class="nc" id="L296">		s += &quot;\n\n\n&quot;;</span>
+<span class="nc" id="L297">		lista.add(s);</span>
+<span class="nc" id="L298">		int i = 0;</span>
+<span class="nc bnc" id="L299" title="All 2 branches missed.">		for (QuestionCustom rq : questionReplyList) {</span>
+<span class="nc" id="L300">				logger.info(&quot;####################### CREAZIONE STRINGA DENTRO FOR ###########&quot;);</span>
+<span class="nc" id="L301">				logger.info(&quot;####################### dimensione questionCustomList: &quot; + questionCustomList.size());</span>
+				
+<span class="nc" id="L303">				s = &quot;&quot;;</span>
+//				s += &quot;ID: &quot; + rq.getId() + &quot;\n&quot;;
+<span class="nc" id="L305">				s += &quot;Question number: &quot; + rq.getPosition() + &quot; - &quot; + rq.getLabel() + &quot;\n&quot;;</span>
+<span class="nc" id="L306">				s += rq.getDescription() + &quot;\n&quot;;</span>
+//				s += &quot;Position: &quot; + rq.getPosition() + &quot;\n&quot;;
+<span class="nc bnc" id="L308" title="All 2 branches missed.">				if (rq.getAnsa()!=null) {</span>
+<span class="nc" id="L309">					s += &quot;Answer A: &quot; + rq.getAnsa() + &quot;(&quot; + rq.getCansa() + &quot;): &quot; + questionReplyList.get(i).getUserCansa()+ &quot;\n&quot;;</span>
+				}
+<span class="nc bnc" id="L311" title="All 2 branches missed.">				if (rq.getAnsb()!=null) {</span>
+<span class="nc" id="L312">				    s += &quot;Answer B: &quot; + rq.getAnsb() + &quot;(&quot; + rq.getCansb() + &quot;): &quot; + questionReplyList.get(i).getUserCansb() + &quot;\n&quot;;</span>
+				}
+<span class="nc bnc" id="L314" title="All 2 branches missed.">				if (rq.getAnsc()!=null) {</span>
+<span class="nc" id="L315">					s += &quot;Answer C: &quot; + rq.getAnsc() + &quot;(&quot; + rq.getCansc() + &quot;): &quot; + questionReplyList.get(i).getUserCansc() + &quot;\n&quot;;</span>
+				}
+<span class="nc bnc" id="L317" title="All 2 branches missed.">				if (rq.getAnsd()!=null) {</span>
+<span class="nc" id="L318">					s += &quot;Answer D: &quot; + rq.getAnsd() + &quot;(&quot; + rq.getCansd() + &quot;): &quot; + questionReplyList.get(i).getUserCansd() + &quot;\n&quot;;</span>
+				}
+<span class="nc bnc" id="L320" title="All 2 branches missed.">				if (rq.getAnse()!=null) {</span>
+<span class="nc" id="L321">					s += &quot;Answer E: &quot; + rq.getAnse() + &quot;(&quot; + rq.getCanse() + &quot;): &quot; + questionReplyList.get(i).getUserCanse() + &quot;\n&quot;;</span>
+				}
+<span class="nc bnc" id="L323" title="All 2 branches missed.">				if (rq.getAnsf()!=null) {</span>
+<span class="nc" id="L324">				    s += &quot;Answer F: &quot; + rq.getAnsf() + &quot;(&quot; + rq.getCansf() + &quot;): &quot; + questionReplyList.get(i).getUserCansf() + &quot;\n&quot;;</span>
+				}
+<span class="nc bnc" id="L326" title="All 2 branches missed.">				if (rq.getAnsg()!=null) {</span>
+<span class="nc" id="L327">				    s += &quot;Answer G: &quot; + rq.getAnsg() + &quot;(&quot; + rq.getCansg() + &quot;): &quot; + questionReplyList.get(i).getUserCansg() + &quot;\n&quot;;</span>
+				}
+<span class="nc bnc" id="L329" title="All 2 branches missed.">				if (rq.getAnsh()!=null) {</span>
+<span class="nc" id="L330">					s += &quot;Answer H: &quot; + rq.getAnsh() + &quot;(&quot; + rq.getCansh() + &quot;): &quot; + questionReplyList.get(i).getUserCansh() + &quot;\n&quot;;</span>
+				}
+<span class="nc" id="L332">				s += &quot;\n&quot;;</span>
+<span class="nc" id="L333">				s += &quot;Full answer: &quot; + rq.getFullAnswer() + &quot;\n\n\n\n&quot;;</span>
+<span class="nc" id="L334">				logger.info(&quot;####### String creata: &quot; + s);</span>
+<span class="nc" id="L335">				lista.add(s);</span>
+<span class="nc" id="L336">				i++;</span>
+			
+<span class="nc" id="L338">		}</span>
+		
+<span class="nc" id="L340">		s = &quot;Exam final result: &quot; + surveyReply.getPoints() + &quot; points\n&quot;;</span>
+//		s += &quot;Answers:&quot; + surveyReply.getAnswers() + &quot;\n\n\n\n\n&quot;;
+<span class="nc" id="L342">		lista.add(s);</span>
+
+<span class="nc" id="L344">		return lista;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

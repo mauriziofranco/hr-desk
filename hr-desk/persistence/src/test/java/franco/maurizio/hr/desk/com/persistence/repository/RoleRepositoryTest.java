@@ -1,23 +1,24 @@
 package franco.maurizio.hr.desk.com.persistence.repository;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import franco.maurizio.hr.desk.com.persistence.entity.Role;
 /**
  * @author anna
+ * @author maurizio.franco@ymail.com
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
 public class RoleRepositoryTest extends AbstractRepositoryTest  {
 
@@ -29,8 +30,8 @@ public class RoleRepositoryTest extends AbstractRepositoryTest  {
      * in order to be able to execute tests.
      * Execute clean before and after each test
      */
-	@Before
-	@After
+	@BeforeEach
+	@AfterEach
 	public void initializeRoleTests () {
 		logger.info("RoleRepositoryTest.initializeRoleTests - START");		
 		roleRepository.deleteAll();

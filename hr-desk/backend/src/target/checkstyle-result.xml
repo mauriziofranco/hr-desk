@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.29">
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/UserDetailServiceImpl.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/SurveyReplyController.java">
+<error line="33" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/ApplicationVersionController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/validator/FieldValidationErrorDetails.java">
+<error line="6" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/validator/FieldValidationError.java">
+<error line="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/validator/MessageType.java">
+<error line="3" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/validator/RestValidationHandler.java">
+<error line="25" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/validator/CustomErrorType.java">
+<error line="7" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/PositionUserOwnerController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/AuthenticationController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/CoursePageController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/RoleController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/UserController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/PdfController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/SurveyQuestionController.java">
+<error line="31" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/SurveyQuestionCustomController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/CustomCode.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/CandidateSurveyTokenCustomController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/CandidateController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/CandidateSurveyTokenController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/CoursePageCustomController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/StatisticsController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/QuestionController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/SurveyController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/SurveyReplyRequestController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/CandidateCustomController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/backend/CandidateStatesController.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/CeReProBackendApplication.java">
+<error line="19" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/ApplicationSecurityConfig.java">
+<error line="29" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/SingleQuestionReplyRequest.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/SurveyReplyStartRequest.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/candidate/RequestCandidateCustom.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/candidate/RequestCustom.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/candidate/RequestUpdateCandidateCustom.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/candidate/RequestUpdateCustom.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/InterviewReplyStartRequest.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/InterviewReplyRequest.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/RequestUpdateItConsultantCustom.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/RequestItConsultantCustom.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/request/SurveyReplyRequest.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/SpringSessionUser.java">
+<error line="8" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/statistics/course_code/CourseCodeStatisticsModel.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/statistics/interviews/SurveyPieChartDataset.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/statistics/interviews/InterviewPieChartDataset.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/statistics/interviews/InterviewRepliesDataset.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/ResponseQuestion.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/PdfGeneratedResponse.java">
+<error line="3" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/AbstractSurveyResponse.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/ApplicationInfoResponseModel.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/StartSurveyResponse.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/rest/response/ResponseInterview.java">
+<error line="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/dto/SurveyReplyScore.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/dto/AswerJsonResponse.java">
+<error line="3" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/dto/QuestionAndReply.java">
+<error line="5" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/common/CeReProBackendConfiguration.java">
+<error line="7" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/util/RandomTokenGenerator.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/StatisticsService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/LoginService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/CoursePageService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/QuestionService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/CandidateSurveyTokenService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/PositionUserOwnerService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/RoleService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/SurveyReplyRequestService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/PdfService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/SurveyReplyService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/CandidateStateService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/exception/CandidateNotFoundException.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/CandidateService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/ApplicationInfoService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/SurveyService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/java/franco/maurizio/hr/desk/com/service/UserService.java">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/resources/messages.properties">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/resources/application.properties">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/main/resources/mail.properties">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/test/resources/application.properties">
+</file>
+<file name="/home/maurizio/git/hr-desk/hr-desk/backend17/src/test/resources/mail.properties">
+</file>
+</checkstyle>

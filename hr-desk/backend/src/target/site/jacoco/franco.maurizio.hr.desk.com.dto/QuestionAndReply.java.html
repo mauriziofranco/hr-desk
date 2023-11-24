@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QuestionAndReply.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.dto</a> &gt; <span class="el_source">QuestionAndReply.java</span></div><h1>QuestionAndReply.java</h1><pre class="source lang-java linenums">package franco.maurizio.hr.desk.com.dto;
+
+import franco.maurizio.hr.desk.com.persistence.entity.custom.QuestionCustom;
+
+public class QuestionAndReply extends QuestionCustom {
+
+	private long questionId;
+	private Boolean userCansa;
+	private Boolean userCansb;
+	private Boolean userCansc;
+	private Boolean userCansd;
+	private Boolean userCanse;
+	private Boolean userCansf;
+	private Boolean userCansg;
+	private Boolean userCansh;
+
+	public QuestionAndReply() {
+<span class="nc" id="L18">		super();</span>
+<span class="nc" id="L19">	}</span>
+
+	public QuestionAndReply(long id, String label, String description,
+			String ansa, String ansb, String ansc, String ansd, String anse,
+			String ansf, String ansg, String ansh, Boolean cansa, Boolean cansb,
+			Boolean cansc, Boolean cansd, Boolean canse, Boolean cansf,
+			Boolean cansg, Boolean cansh, String fullAnswer, Long position, long questionId, Boolean userCansa, Boolean userCansb,
+			Boolean userCansc, Boolean userCansd, Boolean userCanse,
+			Boolean userCansf, Boolean userCansg, Boolean userCansh) {
+<span class="nc" id="L28">		super(id, label, description, ansa, ansb, ansc, ansd, anse, ansf, ansg,</span>
+				ansh, cansa, cansb, cansc, cansd, canse, cansf, cansg, cansh,
+				fullAnswer, position);
+<span class="nc" id="L31">		this.questionId = questionId;</span>
+<span class="nc" id="L32">		this.userCansa = userCansa;</span>
+<span class="nc" id="L33">		this.userCansb = userCansb;</span>
+<span class="nc" id="L34">		this.userCansc = userCansc;</span>
+<span class="nc" id="L35">		this.userCansd = userCansd;</span>
+<span class="nc" id="L36">		this.userCanse = userCanse;</span>
+<span class="nc" id="L37">		this.userCansf = userCansf;</span>
+<span class="nc" id="L38">		this.userCansg = userCansg;</span>
+<span class="nc" id="L39">		this.userCansh = userCansh;</span>
+<span class="nc" id="L40">	}</span>
+
+	/**
+	 * @return the questionId
+	 */
+	public long getQuestionId() {
+<span class="nc" id="L46">		return questionId;</span>
+	}
+
+	/**
+	 * @param questionId the questionId to set
+	 */
+	public void setQuestionId(long questionId) {
+<span class="nc" id="L53">		this.questionId = questionId;</span>
+<span class="nc" id="L54">	}</span>
+
+	public QuestionAndReply(Boolean userCansa, Boolean userCansb,
+			Boolean userCansc, Boolean userCansd, Boolean userCanse,
+<span class="nc" id="L58">			Boolean userCansf, Boolean userCansg, Boolean userCansh) {</span>
+
+<span class="nc" id="L60">		this.userCansa = userCansa;</span>
+<span class="nc" id="L61">		this.userCansb = userCansb;</span>
+<span class="nc" id="L62">		this.userCansc = userCansc;</span>
+<span class="nc" id="L63">		this.userCansd = userCansd;</span>
+<span class="nc" id="L64">		this.userCanse = userCanse;</span>
+<span class="nc" id="L65">		this.userCansf = userCansf;</span>
+<span class="nc" id="L66">		this.userCansg = userCansg;</span>
+<span class="nc" id="L67">		this.userCansh = userCansh;</span>
+<span class="nc" id="L68">	}</span>
+
+	/**
+	 * @return the userCansa
+	 */
+	public Boolean getUserCansa() {
+<span class="nc" id="L74">		return userCansa;</span>
+	}
+
+	/**
+	 * @param userCansa the userCansa to set
+	 */
+	public void setUserCansa(Boolean userCansa) {
+<span class="nc" id="L81">		this.userCansa = userCansa;</span>
+<span class="nc" id="L82">	}</span>
+
+	/**
+	 * @return the userCansb
+	 */
+	public Boolean getUserCansb() {
+<span class="nc" id="L88">		return userCansb;</span>
+	}
+
+	/**
+	 * @param userCansb the userCansb to set
+	 */
+	public void setUserCansb(Boolean userCansb) {
+<span class="nc" id="L95">		this.userCansb = userCansb;</span>
+<span class="nc" id="L96">	}</span>
+
+	/**
+	 * @return the userCansc
+	 */
+	public Boolean getUserCansc() {
+<span class="nc" id="L102">		return userCansc;</span>
+	}
+
+	/**
+	 * @param userCansc the userCansc to set
+	 */
+	public void setUserCansc(Boolean userCansc) {
+<span class="nc" id="L109">		this.userCansc = userCansc;</span>
+<span class="nc" id="L110">	}</span>
+
+	/**
+	 * @return the userCansd
+	 */
+	public Boolean getUserCansd() {
+<span class="nc" id="L116">		return userCansd;</span>
+	}
+
+	/**
+	 * @param userCansd the userCansd to set
+	 */
+	public void setUserCansd(Boolean userCansd) {
+<span class="nc" id="L123">		this.userCansd = userCansd;</span>
+<span class="nc" id="L124">	}</span>
+
+	/**
+	 * @return the userCanse
+	 */
+	public Boolean getUserCanse() {
+<span class="nc" id="L130">		return userCanse;</span>
+	}
+
+	/**
+	 * @param userCanse the userCanse to set
+	 */
+	public void setUserCanse(Boolean userCanse) {
+<span class="nc" id="L137">		this.userCanse = userCanse;</span>
+<span class="nc" id="L138">	}</span>
+
+	/**
+	 * @return the userCansf
+	 */
+	public Boolean getUserCansf() {
+<span class="nc" id="L144">		return userCansf;</span>
+	}
+
+	/**
+	 * @param userCansf the userCansf to set
+	 */
+	public void setUserCansf(Boolean userCansf) {
+<span class="nc" id="L151">		this.userCansf = userCansf;</span>
+<span class="nc" id="L152">	}</span>
+
+	/**
+	 * @return the userCansg
+	 */
+	public Boolean getUserCansg() {
+<span class="nc" id="L158">		return userCansg;</span>
+	}
+
+	/**
+	 * @param userCansg the userCansg to set
+	 */
+	public void setUserCansg(Boolean userCansg) {
+<span class="nc" id="L165">		this.userCansg = userCansg;</span>
+<span class="nc" id="L166">	}</span>
+
+	/**
+	 * @return the userCansh
+	 */
+	public Boolean getUserCansh() {
+<span class="nc" id="L172">		return userCansh;</span>
+	}
+
+	/**
+	 * @param userCansh the userCansh to set
+	 */
+	public void setUserCansh(Boolean userCansh) {
+<span class="nc" id="L179">		this.userCansh = userCansh;</span>
+<span class="nc" id="L180">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L184">		return &quot;QuestionAndReply [questionId=&quot; + questionId + &quot;, userCansa=&quot; + userCansa + &quot;, userCansb=&quot; + userCansb</span>
+				+ &quot;, userCansc=&quot; + userCansc + &quot;, userCansd=&quot; + userCansd + &quot;, userCanse=&quot; + userCanse + &quot;, userCansf=&quot;
+				+ userCansf + &quot;, userCansg=&quot; + userCansg + &quot;, userCansh=&quot; + userCansh + &quot;, getPosition()=&quot;
+<span class="nc" id="L187">				+ getPosition() + &quot;, toString()=&quot; + super.toString() + &quot;, getId()=&quot; + getId() + &quot;, getLabel()=&quot;</span>
+<span class="nc" id="L188">				+ getLabel() + &quot;, getDescription()=&quot; + getDescription() + &quot;, getAnsa()=&quot; + getAnsa() + &quot;, getAnsb()=&quot;</span>
+<span class="nc" id="L189">				+ getAnsb() + &quot;, getAnsc()=&quot; + getAnsc() + &quot;, getAnsd()=&quot; + getAnsd() + &quot;, getAnse()=&quot; + getAnse()</span>
+<span class="nc" id="L190">				+ &quot;, getAnsf()=&quot; + getAnsf() + &quot;, getAnsg()=&quot; + getAnsg() + &quot;, getAnsh()=&quot; + getAnsh() + &quot;, getCansa()=&quot;</span>
+<span class="nc" id="L191">				+ getCansa() + &quot;, getCansb()=&quot; + getCansb() + &quot;, getCansc()=&quot; + getCansc() + &quot;, getCansd()=&quot;</span>
+<span class="nc" id="L192">				+ getCansd() + &quot;, getCanse()=&quot; + getCanse() + &quot;, getCansf()=&quot; + getCansf() + &quot;, getCansg()=&quot;</span>
+<span class="nc" id="L193">				+ getCansg() + &quot;, getCansh()=&quot; + getCansh() + &quot;, getFullAnswer()=&quot; + getFullAnswer() + &quot;, getClass()=&quot;</span>
+<span class="nc" id="L194">				+ getClass() + &quot;, hashCode()=&quot; + hashCode() + &quot;]&quot;;</span>
+	}
+	
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

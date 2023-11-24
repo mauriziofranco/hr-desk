@@ -1,22 +1,17 @@
 package franco.maurizio.hr.desk.com.persistence.repository;
 
-import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import franco.maurizio.hr.desk.com.persistence.entity.CandidateSurveyToken;
-import franco.maurizio.hr.desk.com.persistence.repository.CandidateStatesRepository;
-import franco.maurizio.hr.desk.com.persistence.repository.RoleRepository;
-import franco.maurizio.hr.desk.com.persistence.repository.SurveyRepository;
-import franco.maurizio.hr.desk.com.persistence.repository.UserRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.candidate.CandidateRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
 
@@ -24,10 +19,9 @@ import franco.maurizio.hr.desk.com.persistence.repository.candidatesurveytoken.C
  * 
  * Provides a repository test class to test repository methods
  * 
- * @author maurizio.franco@ymail.com
- *
+* @author maurizio.franco@ymail.com
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class CandidateSurveyTokenRepositoryTest extends AbstractRepositoryTest {
 

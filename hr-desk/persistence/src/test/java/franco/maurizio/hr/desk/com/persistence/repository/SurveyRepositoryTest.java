@@ -1,19 +1,20 @@
 package franco.maurizio.hr.desk.com.persistence.repository;
 
-import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import franco.maurizio.hr.desk.com.persistence.entity.Survey;
-import franco.maurizio.hr.desk.com.persistence.repository.SurveyRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.candidate.CandidateRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.surveyquestion.SurveyQuestionRepository;
@@ -22,9 +23,9 @@ import franco.maurizio.hr.desk.com.persistence.repository.surveyreply.SurveyRepl
 /**
  * 
  * @author anna
- *
+ * @author maurizio.franco@ymail.com
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class SurveyRepositoryTest extends AbstractRepositoryTest {
 
@@ -45,8 +46,8 @@ public class SurveyRepositoryTest extends AbstractRepositoryTest {
 	     * initializeUserTests() method inserts a new Role
 	     * in order to be able to insert a new Role
 	     */
-		@Before
-		@After
+		@BeforeEach
+		@AfterEach
 	    public void initializeSurveyTests() {
 	    	
 	    	logger.info("SurveyRepositoryTest.initializeSurveyTests - START");    	

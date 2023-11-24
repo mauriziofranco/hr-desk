@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CourseCodeStatisticsModel.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.rest.response.statistics.course_code</a> &gt; <span class="el_source">CourseCodeStatisticsModel.java</span></div><h1>CourseCodeStatisticsModel.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package franco.maurizio.hr.desk.com.rest.response.statistics.course_code;
+
+/**
+ * @author maurizio
+ *
+ */
+public class CourseCodeStatisticsModel {
+	
+	private String courseCode ;
+	private Integer candidatesNumber ;
+	
+	public CourseCodeStatisticsModel(String courseCode, Integer candidatesNumber) {
+<span class="nc" id="L16">		super();</span>
+<span class="nc" id="L17">		this.courseCode = courseCode;</span>
+<span class="nc" id="L18">		this.candidatesNumber = candidatesNumber;</span>
+<span class="nc" id="L19">	}</span>
+	
+	public CourseCodeStatisticsModel() {
+<span class="nc" id="L22">		super();</span>
+<span class="nc" id="L23">	}</span>
+	/**
+	 * @return the courseCode
+	 */
+	public String getCourseCode() {
+<span class="nc" id="L28">		return courseCode;</span>
+	}
+	/**
+	 * @param courseCode the courseCode to set
+	 */
+	public void setCourseCode(String courseCode) {
+<span class="nc" id="L34">		this.courseCode = courseCode;</span>
+<span class="nc" id="L35">	}</span>
+	/**
+	 * @return the candidatesNumber
+	 */
+	public Integer getCandidatesNumber() {
+<span class="nc" id="L40">		return candidatesNumber;</span>
+	}
+	/**
+	 * @param candidatesNumber the candidatesNumber to set
+	 */
+	public void setCandidatesNumber(Integer candidatesNumber) {
+<span class="nc" id="L46">		this.candidatesNumber = candidatesNumber;</span>
+<span class="nc" id="L47">	}</span>
+	
+	@Override
+	public String toString() {
+<span class="nc" id="L51">		return &quot;CourseCodeStatisticsModel [courseCode=&quot; + courseCode + &quot;, candidatesNumber=&quot; + candidatesNumber + &quot;]&quot;;</span>
+	}
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

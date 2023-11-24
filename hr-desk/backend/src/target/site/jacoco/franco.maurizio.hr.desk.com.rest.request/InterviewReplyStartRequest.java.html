@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InterviewReplyStartRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.rest.request</a> &gt; <span class="el_source">InterviewReplyStartRequest.java</span></div><h1>InterviewReplyStartRequest.java</h1><pre class="source lang-java linenums">package franco.maurizio.hr.desk.com.rest.request;
+
+import jakarta.validation.constraints.NotNull;
+/**
+ * @author Fabio
+ *
+ */
+<span class="nc" id="L8">public class InterviewReplyStartRequest {</span>
+	
+	@NotNull(message = &quot;error.surveyId.empty&quot;)
+	private long surveyId;
+	
+	@NotNull(message = &quot;error.userId.empty&quot;)
+	private long userId;
+	
+	@NotNull(message = &quot;error.userTokenId.empty&quot;)
+	private long userTokenId;
+
+	/**
+	 * @return the surveyId
+	 */
+	public long getSurveyId() {
+<span class="nc" id="L23">		return surveyId;</span>
+	}
+
+	/**
+	 * @param surveyId the surveyId to set
+	 */
+	public void setSurveyId(long surveyId) {
+<span class="nc" id="L30">		this.surveyId = surveyId;</span>
+<span class="nc" id="L31">	}</span>
+
+	/**
+	 * @return the userId
+	 */
+	public long getUserId() {
+<span class="nc" id="L37">		return userId;</span>
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(long userId) {
+<span class="nc" id="L44">		this.userId = userId;</span>
+<span class="nc" id="L45">	}</span>
+
+	/**
+	 * @return the userTokenId
+	 */
+	public long getUserTokenId() {
+<span class="nc" id="L51">		return userTokenId;</span>
+	}
+
+	/**
+	 * @param userTokenId the userTokenId to set
+	 */
+	public void setUserTokenId(long userTokenId) {
+<span class="nc" id="L58">		this.userTokenId = userTokenId;</span>
+<span class="nc" id="L59">	}</span>
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+<span class="nc" id="L66">		return &quot;InterviewReplyStartRequest [surveyId=&quot; + surveyId + &quot;, userId=&quot; + userId + &quot;, userTokenId=&quot;</span>
+				+ userTokenId + &quot;]&quot;;
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,20 +1,17 @@
 package franco.maurizio.hr.desk.com.persistence.repository;
 
-import static org.junit.Assert.assertTrue;
+
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import javax.persistence.Tuple;
-
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import franco.maurizio.hr.desk.com.persistence.entity.CoursePage;
 import franco.maurizio.hr.desk.com.persistence.entity.custom.CoursePageCustom;
@@ -23,8 +20,9 @@ import franco.maurizio.hr.desk.com.persistence.entity.custom.CoursePageCustom;
  * 
  * @author TraianC - Milano Centauri Academy III
  * 
+* @author maurizio.franco@ymail.com
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class CoursePageRepositoryTest extends AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(CoursePageRepositoryTest.class);

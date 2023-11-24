@@ -1,6 +1,6 @@
 package franco.maurizio.hr.desk.com.persistence.entity.custom;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 

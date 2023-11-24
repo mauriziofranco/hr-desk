@@ -1,35 +1,30 @@
 package franco.maurizio.hr.desk.com.persistence.repository;
 
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import franco.maurizio.hr.desk.com.persistence.entity.Candidate;
 import franco.maurizio.hr.desk.com.persistence.entity.custom.CandidateCustom;
 import franco.maurizio.hr.desk.com.persistence.entity.custom.ListedCandidateCustom;
-import franco.maurizio.hr.desk.com.persistence.repository.candidate.CandidateRepository;
-import franco.maurizio.hr.desk.com.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
-import franco.maurizio.hr.desk.com.persistence.repository.surveyreply.SurveyReplyRepository;
 
 /**
  * Unit test for CandidateCustomRepository
- * @author m.franco
+* @author maurizio.franco@ymail.com
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(CandidateCustomRepositoryTest.class);
@@ -130,7 +125,7 @@ public class CandidateCustomRepositoryTest extends AbstractRepositoryTest {
 		this.getFakeCandidate();
 		logger.info("getCandidateCountWithRegdateInPeriodOfToday - DEBUG - ur.getUserRegdateInPeriod(start, end): " + candidateRepository.getCandidateCountWithRegdateInPeriod(startLDT, endLDT));
 //		logger.info("getUserRegistratedTodayTest - DEBUG - ur.getUserRegdateInPeriod(start, end): " + ur.getUserRegdateInPeriodSQL(start, end));		
-		Assert.assertEquals(candidateRepository.getCandidateCountWithRegdateInPeriod(startLDT, endLDT), 1l);
+		assertEquals(candidateRepository.getCandidateCountWithRegdateInPeriod(startLDT, endLDT), 1l);
 		logger.info("getCandidateCountWithRegdateInPeriodOfToday - END");
 	}
 //	

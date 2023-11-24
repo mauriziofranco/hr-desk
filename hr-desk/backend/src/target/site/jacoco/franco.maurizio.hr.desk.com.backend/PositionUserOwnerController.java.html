@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PositionUserOwnerController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.backend</a> &gt; <span class="el_source">PositionUserOwnerController.java</span></div><h1>PositionUserOwnerController.java</h1><pre class="source lang-java linenums">package franco.maurizio.hr.desk.com.backend;
+
+import java.util.Optional;
+
+import jakarta.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import franco.maurizio.hr.desk.com.persistence.entity.PositionUserOwner;
+import franco.maurizio.hr.desk.com.persistence.entity.custom.CustomErrorType;
+import franco.maurizio.hr.desk.com.service.PositionUserOwnerService;
+
+/**
+ * 
+ * @author m.peruzza@proximanetwork.it
+ *
+ */
+
+@RestController
+@RequestMapping(&quot;/api/v1/positionuserowner&quot;)
+<span class="fc" id="L32">public class PositionUserOwnerController {</span>
+
+<span class="fc" id="L34">	public static final Logger logger = LoggerFactory.getLogger(PositionUserOwnerController.class);</span>
+	
+	@Autowired
+	private PositionUserOwnerService positionUserOwnerService;
+	
+	@GetMapping(&quot;/{coursepageid}&quot;)
+	public ResponseEntity&lt;PositionUserOwner&gt; getByCoursePageId(@PathVariable(&quot;coursepageid&quot;) final Long couserPageId) {
+		
+<span class="nc" id="L42">		Optional&lt;PositionUserOwner&gt; positionUserOwner = positionUserOwnerService.getByCoursePageId(couserPageId);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">		if (positionUserOwner.isEmpty()) return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+<span class="nc" id="L44">		else return new ResponseEntity&lt;&gt;(positionUserOwner.get(), HttpStatus.OK);</span>
+		
+	}
+	
+	@PostMapping(value = &quot;/&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;PositionUserOwner&gt; createPositionUserOwner(@Valid @RequestBody final PositionUserOwner positionUserOwner) {
+		
+<span class="nc" id="L51">		logger.info(&quot;Creating PositionUserOwner : {}&quot;, positionUserOwner);</span>
+		
+<span class="nc" id="L53">		positionUserOwnerService.insert(positionUserOwner);</span>
+<span class="nc" id="L54">		return new ResponseEntity&lt;&gt;(positionUserOwner, HttpStatus.CREATED);</span>
+		
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

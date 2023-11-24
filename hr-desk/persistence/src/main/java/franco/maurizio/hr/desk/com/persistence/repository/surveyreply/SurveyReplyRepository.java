@@ -3,7 +3,7 @@ package franco.maurizio.hr.desk.com.persistence.repository.surveyreply;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

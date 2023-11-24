@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SurveyReplyController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hr-desk.backend17</a> &gt; <a href="index.source.html" class="el_package">franco.maurizio.hr.desk.com.backend</a> &gt; <span class="el_source">SurveyReplyController.java</span></div><h1>SurveyReplyController.java</h1><pre class="source lang-java linenums">package franco.maurizio.hr.desk.com.backend;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import jakarta.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import franco.maurizio.hr.desk.com.persistence.entity.CeReProAbstractEntity;
+import franco.maurizio.hr.desk.com.persistence.entity.SurveyReply;
+import franco.maurizio.hr.desk.com.persistence.entity.custom.CustomErrorType;
+import franco.maurizio.hr.desk.com.persistence.entity.custom.SurveyReplyCustom;
+import franco.maurizio.hr.desk.com.persistence.repository.SurveyRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.candidate.CandidateRepository;
+import franco.maurizio.hr.desk.com.persistence.repository.surveyreply.SurveyReplyRepository;
+import franco.maurizio.hr.desk.com.service.SurveyReplyService;
+
+@RestController
+@RequestMapping(&quot;/api/v1/surveyreply&quot;)
+<span class="fc" id="L35">public class SurveyReplyController {</span>
+
+<span class="fc" id="L37">	public static final Logger logger = LoggerFactory.getLogger(SurveyReplyController.class);</span>
+
+	@Autowired
+	private SurveyReplyRepository surveyReplyRepository;
+	@Autowired
+	private SurveyReplyService surveyReplyService;
+	@Autowired
+	private CandidateRepository candidateRepository;
+	@Autowired
+	private SurveyRepository surveyRepository;
+
+	@Autowired
+	public void setSurveyReplyJpaRepository(SurveyReplyRepository surveyReplyRepository) {
+<span class="fc" id="L50">		this.surveyReplyRepository = surveyReplyRepository;</span>
+<span class="fc" id="L51">	}</span>
+
+	/** SELECT ALL SURVEY REPLIES */
+	@GetMapping(&quot;/&quot;)
+	public ResponseEntity&lt;List&lt;SurveyReply&gt;&gt; listAllSurveyReplies() {
+<span class="fc" id="L56">		List&lt;SurveyReply&gt; surveyReplies = surveyReplyRepository.findAll();</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">		if (surveyReplies.isEmpty()) {</span>
+<span class="nc" id="L58">			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		}
+<span class="fc" id="L60">		return new ResponseEntity&lt;&gt;(surveyReplies, HttpStatus.OK);</span>
+	}
+
+	/** CREATE A NEW SURVEY REPLY */
+	@PostMapping(value = &quot;/&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; createSurveyReply(@Valid @RequestBody final SurveyReply surveyReply) {
+<span class="fc" id="L66">		logger.info(&quot;Creating Survey Reply : {}&quot;, surveyReply);</span>
+
+<span class="fc bfc" id="L68" title="All 2 branches covered.">		if (surveyRepository.findById(surveyReply.getSurveyId()) == null)</span>
+<span class="fc" id="L69">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;Unable to create new Survey Reply. Survey Id: &quot;</span>
+<span class="fc" id="L70">					+ surveyReply.getSurveyId() + &quot; is not present in database.&quot;), HttpStatus.CONFLICT);</span>
+
+<span class="fc bfc" id="L72" title="All 2 branches covered.">		if (candidateRepository.findById(surveyReply.getCandidateId()) == null)</span>
+<span class="fc" id="L73">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;Unable to create new Survey Reply. Candidate id: &quot;</span>
+<span class="fc" id="L74">					+ surveyReply.getCandidateId() + &quot; does not exists.&quot;), HttpStatus.CONFLICT);</span>
+
+<span class="fc" id="L76">		surveyReplyRepository.save(surveyReply);</span>
+<span class="fc" id="L77">		return new ResponseEntity&lt;&gt;(surveyReply, HttpStatus.CREATED);</span>
+	}
+
+	/** SELECT SURVEY REPLY BY ID */
+	@GetMapping(&quot;/{id}&quot;)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; getSurveyReplyById(@PathVariable final Long id) {
+<span class="fc" id="L83">		Optional&lt;SurveyReply&gt; surveyReply = surveyReplyRepository.findById(id);</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">		if (surveyReply.isEmpty()) {</span>
+<span class="nc" id="L85">			return new ResponseEntity&lt;&gt;(new CustomErrorType(&quot;SurveyReply with id &quot; + id + &quot; not found&quot;),</span>
+					HttpStatus.NOT_FOUND);
+		}
+<span class="fc" id="L88">		return new ResponseEntity&lt;&gt;(surveyReply.get(), HttpStatus.OK);</span>
+	}
+
+	/** UPDATE SURVEY REPLY */
+	@PutMapping(value = &quot;/{id}&quot;, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; updateSurveyReply(@PathVariable final Long id,
+			@RequestBody SurveyReply surveyReply) {
+
+<span class="fc" id="L96">		Optional&lt;SurveyReply&gt; currentSurveyReply = surveyReplyRepository.findById(id);</span>
+
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">		if (currentSurveyReply.isEmpty()) {</span>
+<span class="nc" id="L99">			return new ResponseEntity&lt;&gt;(</span>
+					new CustomErrorType(&quot;Unable to upate. SurveyReply with id &quot; + id + &quot; not found.&quot;),
+					HttpStatus.NOT_FOUND);
+		}
+		// update currentSurveyReply object data with SurveyReply object data
+
+<span class="fc" id="L105">		currentSurveyReply.get().setCandidateId(surveyReply.getCandidateId());</span>
+<span class="fc" id="L106">		currentSurveyReply.get().setSurveyId(surveyReply.getSurveyId());</span>
+<span class="fc" id="L107">		currentSurveyReply.get().setStarttime(surveyReply.getStarttime());</span>
+<span class="fc" id="L108">		currentSurveyReply.get().setEndtime(surveyReply.getEndtime());</span>
+<span class="fc" id="L109">		currentSurveyReply.get().setAnswers(surveyReply.getAnswers());</span>
+<span class="fc" id="L110">		currentSurveyReply.get().setPdffilename(surveyReply.getPdffilename());</span>
+<span class="fc" id="L111">		currentSurveyReply.get().setPoints(surveyReply.getPoints());</span>
+
+<span class="fc" id="L113">		surveyReplyRepository.saveAndFlush(currentSurveyReply.get());</span>
+
+<span class="fc" id="L115">		return new ResponseEntity&lt;&gt;(currentSurveyReply.get(), HttpStatus.OK);</span>
+	}
+
+	/** DELETE SURVEY REPLY BY ID */
+	@DeleteMapping(&quot;/{id}&quot;)
+	public ResponseEntity&lt;CeReProAbstractEntity&gt; deleteSurveyReply(@PathVariable final Long id) {
+<span class="fc" id="L121">		Optional&lt;SurveyReply&gt; surveyReply = surveyReplyRepository.findById(id);</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">		if (surveyReply.isEmpty()) {</span>
+<span class="nc" id="L123">			return new ResponseEntity&lt;&gt;(</span>
+					new CustomErrorType(&quot;Unable to delete. SurveyReply with id &quot; + id + &quot; not found.&quot;),
+					HttpStatus.NOT_FOUND);
+		}
+<span class="fc" id="L127">		surveyReplyRepository.delete(surveyReply.get());</span>
+<span class="fc" id="L128">		return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+	}
+
+	/** SELECT SURVEY REPLY LAST 7 DAYS */
+	@GetMapping(&quot;/lastweek&quot;)
+	public ResponseEntity&lt;List&lt;SurveyReplyCustom&gt;&gt; getSurveyReplyEndTimeLastWeek() {
+		// calculating the number of insertions in the last 7 days
+<span class="nc" id="L135">		List&lt;SurveyReplyCustom&gt; toReturn = surveyReplyService.throwbackPeriods(7);</span>
+<span class="nc" id="L136">		return new ResponseEntity&lt;List&lt;SurveyReplyCustom&gt;&gt;(toReturn, HttpStatus.OK);</span>
+	}
+
+	/** SELECT SURVEY REPLY LAST 30 DAYS */
+	@GetMapping(&quot;/lastmonth&quot;)
+	public ResponseEntity&lt;List&lt;SurveyReplyCustom&gt;&gt; getSurveyReplyEndTimeLastMonth() {
+		// calculating the number of insertions in the last 30 days
+<span class="nc" id="L143">		List&lt;SurveyReplyCustom&gt; toReturn = surveyReplyService.throwbackPeriods(30);</span>
+<span class="nc" id="L144">		return new ResponseEntity&lt;List&lt;SurveyReplyCustom&gt;&gt;(toReturn, HttpStatus.OK);</span>
+	}
+
+	/** SELECT SURVEY REPLY LAST 365 DAYS */
+	@GetMapping(&quot;/lastyear&quot;)
+	public ResponseEntity&lt;List&lt;SurveyReplyCustom&gt;&gt; getSurveyReplyEndTimeLastYear() {
+		// calculating the number of insertions in the last 365 days
+<span class="nc" id="L151">		List&lt;SurveyReplyCustom&gt; toReturn = surveyReplyService.throwbackPeriods(365);</span>
+<span class="nc" id="L152">		return new ResponseEntity&lt;List&lt;SurveyReplyCustom&gt;&gt;(toReturn, HttpStatus.OK);</span>
+	}
+
+	// questionari compilati oggi
+	@GetMapping(&quot;/todayFilled&quot;)
+	public ResponseEntity&lt;Long&gt; getSurveyFilledToday() {
+<span class="fc" id="L158">		logger.info(&quot;getSurveyFilledToday() started&quot;);</span>
+<span class="fc" id="L159">		LocalDate date = LocalDate.now();</span>
+<span class="fc" id="L160">		Long count = surveyReplyService.getPeriod(date);</span>
+<span class="fc" id="L161">		logger.info(&quot;getSurveyFilledToday() end &quot; + count);</span>
+<span class="fc" id="L162">		return new ResponseEntity&lt;Long&gt;(count, HttpStatus.OK);</span>
+	}
+
+	// questionari compilati oggi
+	@GetMapping(&quot;/lastSevenDaysFilled&quot;)
+	public ResponseEntity&lt;Long&gt; getSurveyFilledLastSevenDays() {
+<span class="fc" id="L168">		logger.info(&quot;getSurveyFilledLastSevenDays() started&quot;);</span>
+<span class="fc" id="L169">		Long count = surveyReplyService.surveyFilledInPeriod(7);</span>
+<span class="fc" id="L170">		logger.info(&quot;getSurveyFilledLastSevenDays() end&quot; + count);</span>
+<span class="fc" id="L171">		return new ResponseEntity&lt;Long&gt;(count, HttpStatus.OK);</span>
+	}
+
+	// questionari compilati ieri
+	@GetMapping(&quot;/yesterdayFilled&quot;)
+	public ResponseEntity&lt;Long&gt; getSurveyFilledYesterday() {
+<span class="fc" id="L177">		logger.info(&quot;getSurveyFilledToday() started&quot;);</span>
+<span class="fc" id="L178">		LocalDate date = LocalDate.now();</span>
+<span class="fc" id="L179">		date = date.minusDays(1);</span>
+<span class="fc" id="L180">		Long count = surveyReplyService.getPeriod(date);</span>
+<span class="fc" id="L181">		logger.info(&quot;getSurveyFilledToday() end &quot; + count);</span>
+<span class="fc" id="L182">		return new ResponseEntity&lt;Long&gt;(count, HttpStatus.OK);</span>
+	}
+
+	// questionari compilati settimana scorsa
+	@GetMapping(&quot;/lastWeekFilled&quot;)
+	public ResponseEntity&lt;Long&gt; getSurveyFilledLastWeek() {
+<span class="fc" id="L188">		logger.info(&quot;getSurveyFilledLastSevenDays() started&quot;);</span>
+<span class="fc" id="L189">		Long count = surveyReplyService.surveyFilledInLastWeek(14);</span>
+<span class="fc" id="L190">		logger.info(&quot;getSurveyFilledLastSevenDays() end&quot; + count);</span>
+<span class="fc" id="L191">		return new ResponseEntity&lt;Long&gt;(count, HttpStatus.OK);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

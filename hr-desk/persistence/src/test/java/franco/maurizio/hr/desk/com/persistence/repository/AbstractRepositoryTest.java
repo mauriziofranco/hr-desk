@@ -5,8 +5,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,6 @@ import franco.maurizio.hr.desk.com.persistence.entity.Survey;
 import franco.maurizio.hr.desk.com.persistence.entity.SurveyQuestion;
 import franco.maurizio.hr.desk.com.persistence.entity.SurveyReply;
 import franco.maurizio.hr.desk.com.persistence.entity.User;
-import franco.maurizio.hr.desk.com.persistence.repository.CandidateStatesRepository;
-import franco.maurizio.hr.desk.com.persistence.repository.PositionUserOwnerRepository;
-import franco.maurizio.hr.desk.com.persistence.repository.RoleRepository;
-import franco.maurizio.hr.desk.com.persistence.repository.SurveyRepository;
-import franco.maurizio.hr.desk.com.persistence.repository.UserRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.candidate.CandidateRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.candidatesurveytoken.CandidateSurveyTokenRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.coursepage.CoursePageRepository;
@@ -39,6 +35,7 @@ import franco.maurizio.hr.desk.com.persistence.repository.surveyreply.SurveyRepl
  * @author anna
  * @author Daniele Piccinni
  */
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class AbstractRepositoryTest {
 	private static final Logger logger = LoggerFactory.getLogger(AbstractRepositoryTest.class);
 
@@ -69,8 +66,8 @@ public abstract class AbstractRepositoryTest {
 	 * Provides to clean tables in order to execute single integration tests
      * Execute table cleaning before and after each test
      */
-	@Before
-	@After
+	@BeforeEach
+	@AfterEach
 	public void prepareDB () {
 		logger.info("############################");
 		logger.info("############################");

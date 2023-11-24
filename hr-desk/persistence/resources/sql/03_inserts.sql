@@ -37,6 +37,6 @@ INSERT INTO `coursepage` (id, title, code, body_text, file_name, opened_by) VALU
 --(6,'Candidatura corso FullStackWeb+Java 05 Milano','MICEACFS05','Corso FullStack Java 05 - Milano',NULL),
 --(9,'Corso Fullstack java developer Roma-Milano 01','FSRMMI01','https://proximainformatica.com/',NULL);
 
-insert into POSITIONUSEROWNER (id, course_page_id, user_id) VALUES 
-(1, 1, 2),
-(2, 2, 2);
+insert into positionuserowner (course_page_id, user_id) VALUES 
+(1, 2),
+(2, 2);
