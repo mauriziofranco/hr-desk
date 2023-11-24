@@ -13,15 +13,18 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 
 <h1>TARGET RELEASES</h1>
 <h2>0.4</h2>
-# Frontend QUESTION entity section: for now permetted list, insert and delete
+# Frontend QUESTION entity section: for now allowed: list, insert and delete operations
+# Upgrading SPRING BOOT to last available version
+# default used JDK version upgraded to 17
+# default spring-boot starter partent version upgraded to 3.1.5 
 <h2>0.5</h2>
+# recover hsqdb compatibility
 # recover handleValidationError method into RestValidationHandler class
 # recover tests in backend module
 # recover tests in persistence module
 # mail properties have to been moved into application.properties so user can change it
 # JWT instead Basic Authentication
 # upgrade JDK to 21
-# Upgrading SPRING BOOT to last available version
 # Startup dialog for customizing application logo and name(perhaps into xml file?)
 # Define separation for "Community Edition" and "Enterprise Edition"
 # Target lines for product site
