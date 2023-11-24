@@ -31,14 +31,14 @@ public class CoursePageServiceTest {
 
 	public static final Logger logger = LoggerFactory.getLogger(CoursePageServiceTest.class);
 
-	@TestConfiguration
-    static class CoursePageServiceTestContextConfiguration {
-  
-        @Bean
-        public CoursePageService coursePageService() {
-            return new CoursePageService();
-        }
-    }
+//	@TestConfiguration
+//    static class CoursePageServiceTestContextConfiguration {
+//  
+//        @Bean
+//        CoursePageService coursePageService() {
+//            return new CoursePageService();
+//        }
+//    }
  
     @Autowired
     private CoursePageService coursePageService;

@@ -25,6 +25,7 @@ import franco.maurizio.hr.desk.com.CeReProBackendApplication;
 import franco.maurizio.hr.desk.com.persistence.entity.Question;
 import franco.maurizio.hr.desk.com.persistence.repository.question.QuestionRepository;
 import franco.maurizio.hr.desk.com.rest.request.SingleQuestionReplyRequest;
+import franco.maurizio.hr.desk.com.service.QuestionService;
 import franco.maurizio.hr.desk.com.service.SurveyReplyRequestService;
 
 /**
@@ -42,6 +43,9 @@ public class SurveyReplyRequestServiceTest {
 	private SurveyReplyRequestService surveyReplyRequestService;
 	@Mock
 	private QuestionRepository questionRepository;
+	
+	@Mock
+	QuestionService questionService ;
 	
 	@BeforeEach
 	public void setup() {
@@ -83,7 +87,7 @@ public class SurveyReplyRequestServiceTest {
 		List<SingleQuestionReplyRequest> answers = new ArrayList<SingleQuestionReplyRequest>();
 		answers.add(testsqr);
 		
-		when(this.questionRepository.getOne(question.getId())).thenReturn(question);
+		when(this.questionRepository.getById(question.getId())).thenReturn(question);
 		
 		String punteggio = surveyReplyRequestService.calculateScore(answers);
 		logger.info(" # # punteggio totalizzato: "+ punteggio);
@@ -123,7 +127,7 @@ public class SurveyReplyRequestServiceTest {
 		List<SingleQuestionReplyRequest> answers = new ArrayList<SingleQuestionReplyRequest>();
 		answers.add(testsqr);
 		
-		when(this.questionRepository.getOne(question.getId())).thenReturn(question);
+		when(this.questionRepository.getById(question.getId())).thenReturn(question);
 		
 		String punteggio = surveyReplyRequestService.calculateScore(answers);
 		logger.info(" # # punteggio totalizzato: "+ punteggio);
@@ -163,7 +167,7 @@ public class SurveyReplyRequestServiceTest {
 		List<SingleQuestionReplyRequest> answers = new ArrayList<SingleQuestionReplyRequest>();
 		answers.add(testsqr);
 		
-		when(this.questionRepository.getOne(question.getId())).thenReturn(question);
+		when(this.questionRepository.getById(question.getId())).thenReturn(question);
 		
 		String punteggio = surveyReplyRequestService.calculateScore(answers);
 		logger.info(" # # punteggio totalizzato: "+ punteggio);

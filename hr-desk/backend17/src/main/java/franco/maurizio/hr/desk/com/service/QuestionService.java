@@ -1,6 +1,7 @@
 package franco.maurizio.hr.desk.com.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,6 +65,21 @@ public class QuestionService {
 		} catch (Exception e) {
 			return null ;
 		}
+	}
+	
+	public Optional<Question> getById(Long id) {
+		logger.debug("getById -START");
+		return questionRepository.findById(id);
+	}
+	
+	public boolean deleteById(Long id) {
+		logger.debug("deleteById -START");
+		Optional<Question> optionalEntityToDelete = questionRepository.findById(id) ;
+		if (optionalEntityToDelete.isPresent()) {
+			questionRepository.deleteById(id);
+			return true ;
+		}
+		else return false ;
 	}
 	
 	/**

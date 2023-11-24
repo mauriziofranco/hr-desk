@@ -8,7 +8,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 public class CeReProBackendConfiguration {
 
 	@Bean(name = "messageSource")
-	public ReloadableResourceBundleMessageSource messageSource() {
+	ReloadableResourceBundleMessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageBundle =
 				new ReloadableResourceBundleMessageSource();
 		messageBundle.setBasename("classpath:messages");

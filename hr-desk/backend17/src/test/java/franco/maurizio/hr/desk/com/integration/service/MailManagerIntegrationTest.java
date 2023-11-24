@@ -58,8 +58,8 @@ public class MailManagerIntegrationTest {
 	@Test
 	void testSendSimpleMailSentOk(){		
 		logger.info("testSendSimpleMailSentOk - START");
-		boolean sent = false ;
-//		sent = MailUtility.sendSimpleMail("maurizio.franco@ymail.com", "cerepro.hr.backend integration test", "cerepro.hr.backend integration test - DESCRIPTION");
+//		boolean sent = false ;
+		boolean sent = MailUtility.sendSimpleMail("maurizio.franco@ymail.com", "cerepro.hr.backend integration test", "cerepro.hr.backend integration test - DESCRIPTION");
 		logger.info("testSendSimpleMailSentOk - END - sent: " + sent);
 		assertTrue(sent);
 		

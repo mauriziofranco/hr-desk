@@ -43,8 +43,8 @@ public class QuestionController {
 	@Value( "${error.question.creation.fails.message:Unable to create new question.}" )
 	private String QUESTION_CREATION_FAILS_MESSAGE ;
 	
-	@Autowired
-	private QuestionRepository questionRepository;
+//	@Autowired
+//	private QuestionRepository questionRepository;
 
 	@Autowired
 	private QuestionService questionService;
@@ -63,7 +63,7 @@ public class QuestionController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<CeReProAbstractEntity> getQuestionById(@PathVariable final Long id) {
-		Optional<Question> optQ = questionRepository.findById(id);
+		Optional<Question> optQ = questionService.getById(id);
 		if (optQ.isEmpty()) {
 			return new ResponseEntity<>(new CustomErrorType("Question with id " + id + " not found"),
 					HttpStatus.NOT_FOUND); // code 404
@@ -116,15 +116,19 @@ public class QuestionController {
 	// delete an existing question
 	@DeleteMapping("/{id}")
 	public ResponseEntity<CeReProAbstractEntity> deleteQuestion(@PathVariable final Long id) {
-		Optional<Question> question = questionRepository.findById(id);
+		Optional<Question> question = questionService.getById(id);
 		if (question.isEmpty()) {
 			return new ResponseEntity<>(new CustomErrorType("Unable to delete. Question with id " + id + " not found."),
 					HttpStatus.NOT_FOUND); // code 404
 		}
 		List<SurveyQuestion> sqs = surveyQuestionRepository.findByQuestionId(id);
 		if (sqs.isEmpty()) {
-			questionRepository.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT); // code 204
+			if (questionService.deleteById(id)) {
+			    return new ResponseEntity<>(HttpStatus.NO_CONTENT); // code 204
+			} else {
+				return new ResponseEntity<>(new CustomErrorType("Unable to delete question with id " + id),
+						HttpStatus.INTERNAL_SERVER_ERROR); // code 500
+			}
 		} else {
 			return new ResponseEntity<>(
 					new CustomErrorType(

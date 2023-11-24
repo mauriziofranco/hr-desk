@@ -27,8 +27,8 @@ import franco.maurizio.hr.desk.com.backend.QuestionController;
 import franco.maurizio.hr.desk.com.persistence.entity.CeReProAbstractEntity;
 import franco.maurizio.hr.desk.com.persistence.entity.Question;
 import franco.maurizio.hr.desk.com.persistence.entity.SurveyQuestion;
-import franco.maurizio.hr.desk.com.persistence.repository.question.QuestionRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.surveyquestion.SurveyQuestionRepository;
+import franco.maurizio.hr.desk.com.service.QuestionService;
 
 /**
  * 
@@ -44,15 +44,18 @@ public class QuestionControllerTest {
 
 	@Spy
 	private QuestionController questionController;
+//	@Mock
+//	private QuestionRepository questionRepository;
 	@Mock
-	private QuestionRepository questionRepository;
+	QuestionService questionService;
 	@Mock
 	private SurveyQuestionRepository surveyQuestionRepository;
 
 	@BeforeEach
 	public void setup() {
 		questionController = new QuestionController();
-		ReflectionTestUtils.setField(questionController, "questionRepository", questionRepository);
+//		ReflectionTestUtils.setField(questionController, "questionRepository", questionRepository);
+		ReflectionTestUtils.setField(questionController, "questionService", questionService);
 		ReflectionTestUtils.setField(questionController, "surveyQuestionRepository", surveyQuestionRepository);
 	}
 
@@ -61,7 +64,7 @@ public class QuestionControllerTest {
 		logger.info("Test-getAllQuestions() ---- Start");
 		List<Question> questionList = new ArrayList<Question>();
 		questionList.add(new Question());
-		when(this.questionRepository.findAll()).thenReturn(questionList);
+		when(this.questionService.getAll()).thenReturn(questionList);
 		ResponseEntity<List<Question>> responseEntity = this.questionController.listAllQuestions();
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 		assertEquals(1, responseEntity.getBody().size());
@@ -73,7 +76,7 @@ public class QuestionControllerTest {
 		logger.info("Test-testGetQuestionById() ---- Start");
 		Question testQuestion = new Question (100L, "test", "tester", "ansa test", true) ;
 		Optional<Question> currOpt = Optional.of(testQuestion) ;
-		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
+		when(this.questionService.getById(100L)).thenReturn(currOpt);
 		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.getQuestionById(100L);
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 		assertEquals("tester", ((Question)responseEntity.getBody()).getDescription());
@@ -87,7 +90,7 @@ public class QuestionControllerTest {
 	public void testCreateQuestion() {
 		logger.info("Test-testCreateQuestion() ---- Start");
 		Question testQuestion = new Question (100L, "test", "tester", "ansa test", true) ;
-		when(this.questionRepository.save(testQuestion)).thenReturn(testQuestion);
+		when(this.questionService.insert(testQuestion)).thenReturn(testQuestion);
 		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.createQuestion(testQuestion);
 		assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
 		assertEquals("test", ((Question)responseEntity.getBody()).getLabel());
@@ -142,12 +145,14 @@ public class QuestionControllerTest {
 //	}
 	
 	@Test
-	public void testDeleteQuestion() {
+	public void testDeleteQuestionOK() {
 		logger.info("Test-testDeleteQuestion() ---- Start");
 		Question testQuestion = new Question (100L, "test", "tester", "ansa test", true) ;
 		Optional<Question> currOpt = Optional.of(testQuestion) ;
 		List<SurveyQuestion> surveyQuestionList = new ArrayList<SurveyQuestion>();
-		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
+		when(this.questionService.getById(100L)).thenReturn(currOpt);
+		when(this.questionService.deleteById(100L)).thenReturn(true);
+//		when(this.questionService.getById(100L)).thenReturn(currOpt);
 		when(this.surveyQuestionRepository.findByQuestionId(100L)).thenReturn(surveyQuestionList);
 		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.deleteQuestion(100L);
 		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
@@ -161,7 +166,7 @@ public class QuestionControllerTest {
 		Optional<Question> currOpt = Optional.of(testQuestion) ;
 		List<SurveyQuestion> surveyQuestionList = new ArrayList<SurveyQuestion>();
 		surveyQuestionList.add(new SurveyQuestion());
-		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
+		when(this.questionService.getById(100L)).thenReturn(currOpt);
 		when(this.surveyQuestionRepository.findByQuestionId(100L)).thenReturn(surveyQuestionList);
 		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.deleteQuestion(100L);
 		assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
@@ -172,7 +177,7 @@ public class QuestionControllerTest {
 	public void testDeleteInexistentQuestion() {
 		logger.info("Test-testDeleteInexistentQuestion() ---- Start");
 		Optional<Question> currOpt = Optional.empty() ;
-		when(this.questionRepository.findById(100L)).thenReturn(currOpt);
+		when(this.questionService.getById(100L)).thenReturn(currOpt);
 		ResponseEntity<CeReProAbstractEntity> responseEntity = this.questionController.deleteQuestion(100L);
 		assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
 		logger.info("Test-testDeleteInexistentQuestion() ---- End");
