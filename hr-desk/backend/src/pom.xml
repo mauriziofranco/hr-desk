@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>franco.maurizio</groupId>
-	<artifactId>hr-desk.backend</artifactId>
+	<artifactId>hr-desk.backend17</artifactId>
 	<version>0.3.8_j17</version>
 
 	<description>CeRePro is now HrDesk....</description>
@@ -28,7 +28,7 @@
 
 
 	<build>
-		<finalName>hr-desk.backend</finalName>
+		<finalName>hr-desk.backend17</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -277,7 +277,7 @@
 		<dependency>
 			<groupId>franco.maurizio</groupId>
 			<artifactId>hr-desk-persistence</artifactId>
-			<version>0.4.0_j17</version>
+			<version>0.3.5_j17</version>
 		</dependency>
 		<dependency>
 			<groupId>franco.maurizio</groupId>

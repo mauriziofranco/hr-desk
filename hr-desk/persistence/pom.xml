@@ -6,25 +6,25 @@
 
 
 	<groupId>franco.maurizio</groupId>
-	<artifactId>hr-desk.persistence</artifactId>
-	<version>0.4.3</version>
+	<artifactId>hr-desk-persistence</artifactId>
+	<version>0.4.0_j17</version>
 	<packaging>jar</packaging>
 
-	<name>hr-desk.persistence</name>
+	<name>hr-desk-persistence</name>
 	<description>persistence module for hr-desk project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.RELEASE</version>
+		<version>3.1.5</version>
 		<relativePath />
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>11</java.version>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 
 		<checkstyle-maven-plugin.version>3.1.1</checkstyle-maven-plugin.version>
 	</properties>
@@ -36,13 +36,27 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<configuration>
-							<skip>true</skip>
-						</configuration>
-					</execution>
-				</executions>
+				<configuration>
+<!--					NEED TO PRODUCE 2 jars(one executable and another one to use as dependency)-->
+		        	<classifier>exec</classifier>
+	            </configuration>
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<configuration>-->
+<!--							<skip>true</skip>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<goals>-->
+<!--							<goal>repackage</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<classifier>-aaa.jar</classifier>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -53,9 +67,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
 					<verbose>true</verbose>
+					<release>${java.version}</release>
 				</configuration>
 			</plugin>
 
@@ -171,6 +184,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
 				<exclusion>
@@ -184,27 +201,26 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>8.0.19</version>
+				</dependency>
 <!--		<dependency>-->
-<!--			<groupId>mysql</groupId>-->
-<!--			<artifactId>mysql-connector-java</artifactId>-->
-<!--			<version>8.0.19</version>-->
+<!--			<groupId>com.h2database</groupId>-->
+<!--			<artifactId>h2</artifactId>-->
+<!--			<scope>runtime</scope>-->
 <!--		</dependency>-->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
 		<!-- API, java.xml.bind module -->
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
 			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>2.3.2</version>
 		</dependency>
 		<!-- Runtime, com.sun.xml.bind module -->
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>2.3.2</version>
+			<version>4.0.4</version>
 		</dependency>
 		<dependency>
 			<!-- update Hibernate dependency on Javassist to 3.23.1 for Java 11
@@ -216,7 +232,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.26</version>
 			<!--			<scope>provided</scope>-->
 		</dependency>
 	</dependencies>
