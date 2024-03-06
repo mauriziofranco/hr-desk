@@ -23,8 +23,6 @@ import org.hibernate.validator.constraints.Length;
 
 public class CoursePage extends CeReProAbstractEntity {
 	
-	public final static String GENERIC_CANDIDATURE_CODE = "MIGEN01" ;
-	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name ="id")
