@@ -21,8 +21,7 @@ Single projects MailManager, Cerepro.Persistence, Cerepro.Backend and Cerepro.hr
 <h2>0.5</h2>
 # recover hsqdb compatibility
 # recover handleValidationError method into RestValidationHandler class
-# recover tests in backend module
-# recover tests in persistence module
+# 
 # mail properties have to been moved into application.properties so user can change it
 # JWT instead Basic Authentication
 # upgrade JDK to 21
@@ -59,7 +58,7 @@ For development we suggest to startup separately backend and frontend servers.
 So for the frontend, move into webapp directory, and execute(after npm install):
 npm start
 this startup the local server under the under the port 3000, so you can point from the browser with the following url:
-http://loaclhost:3000
+http://localhost:3000
 From default it points to backend microservices at http://localhost:8080/api/v1/ url
 
 to startup backend server, move into backend and execute:
