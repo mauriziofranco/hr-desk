@@ -28,6 +28,7 @@ import franco.maurizio.hr.desk.com.persistence.repository.PositionUserOwnerRepos
 import franco.maurizio.hr.desk.com.persistence.repository.UserRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.coursepage.CoursePageRepository;
 import franco.maurizio.hr.desk.com.persistence.repository.coursepage.CoursePageRepositoryCustom;
+import franco.maurizio.hr.desk.com.service.exception.PositionCodeNotFoundException;
 
 /**
  * 
@@ -210,19 +211,19 @@ public class CoursePageService {
 	 * Check if course_code exists into coursePage table If no, provides a default
 	 * value.
 	 * 
-	 * @return a String representative of a valid course page code
+	 * @return a String representative of a valid position code
 	 */
-	public String checkCoursePageCode(String code) {
+	public String checkCoursePageCode(String code) throws PositionCodeNotFoundException {
 		logger.info("checkCoursePageCode START - code: " + code);
 		if ((code == null) || (code.trim().length() == 0)) {
-			return CoursePage.GENERIC_CANDIDATURE_CODE;
+			throw new PositionCodeNotFoundException("Position code not found for given code: " + code) ;
+		} else {
+			CoursePage current = coursePageRepository.findByCode(code);
+			if (current != null)
+				return current.getCode();
+			else
+				throw new PositionCodeNotFoundException("Position code not found for given code: " + code) ;
 		}
-		CoursePage current = coursePageRepository.findByCode(code);
-		if (current != null)
-			return current.getCode();
-//        else return cpRepository.findByCode(CoursePage.GENERIC_CANDIDATURE_CODE).getCode() ;
-		else
-			return CoursePage.GENERIC_CANDIDATURE_CODE;
 	}
 
 	/**
