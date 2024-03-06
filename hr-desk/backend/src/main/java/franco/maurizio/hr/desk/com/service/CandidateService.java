@@ -37,6 +37,7 @@ import franco.maurizio.hr.desk.com.persistence.repository.candidate.CandidateRep
 import franco.maurizio.hr.desk.com.rest.request.candidate.RequestCandidateCustom;
 import franco.maurizio.hr.desk.com.rest.request.candidate.RequestUpdateCandidateCustom;
 import franco.maurizio.hr.desk.com.service.exception.CandidateNotFoundException;
+import franco.maurizio.hr.desk.com.service.exception.PositionCodeNotFoundException;
 import jakarta.persistence.NoResultException;
 
 /**
@@ -234,8 +235,9 @@ public class CandidateService {
 	 * than call CandidateService.insert method to persist the entity. 
 	 * 
 	 * @return Candidate, inserted entity
+	 * @throws PositionCodeNotFoundException 
 	 */
-	public Candidate createNewCandidate (RequestCandidateCustom requestCandidateCustom) {
+	public Candidate createNewCandidate (RequestCandidateCustom requestCandidateCustom) throws PositionCodeNotFoundException {
 		logger.info("createNewCandidate - START - with requestCandidateCustom {}", requestCandidateCustom);
 		
 		Candidate candidateToInsert = new Candidate () ;
